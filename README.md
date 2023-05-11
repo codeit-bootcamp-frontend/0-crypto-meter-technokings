@@ -1,2 +1,2 @@
-# Crytometer
+# Cryptometer
 거물급 투자자들만 사용하는 서비스  
