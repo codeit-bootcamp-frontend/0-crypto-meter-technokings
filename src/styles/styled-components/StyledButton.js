@@ -44,7 +44,7 @@ import {
   c3,
 } from "@/styles/typography";
 
-const SDiv = styled.div`
+const SButton = styled.button`
   /* flexbox 속성 */
   ${(props) => props.row && row}
   ${(props) => props.col && col}
@@ -98,7 +98,7 @@ const SDiv = styled.div`
 
   /* border 속성 */
   border-radius: ${(props) => props.br || 0}px;
-  ${(props) => props.bc && bc};
+  ${(props) => props.bc && bc}
   ${(props) => props.bd && bd}
 
   /* 나머지 속성 */
@@ -108,12 +108,9 @@ const SDiv = styled.div`
   height: ${(props) => (props.h ? `${props.h}px` : "auto")};
   min-height: ${(props) => (props.mh ? `${props.mh}%` : "auto")};
 
-  /* gap 속성 */
-  gap: ${(props) => (props.g ? `${props.g}px` : 0)};
-
   ${(props) => props.center && center}
   ${(props) => props.left && left}
   ${(props) => props.right && right}
 `;
 
-export default SDiv;
+export default SButton;

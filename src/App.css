@@ -39,6 +39,10 @@
   color-scheme: light;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   background-color: #f5f8f9;
   font-family: "Pretendard-Medium";
@@ -47,6 +51,8 @@ html {
 body {
   overflow: scroll;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 select {
@@ -54,6 +60,16 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+button {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
 }
 
 span {
