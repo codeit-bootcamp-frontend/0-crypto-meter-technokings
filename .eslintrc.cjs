@@ -26,6 +26,7 @@ module.exports = {
     "react-refresh/only-export-components": "warn",
     quotes: "off",
     "no-use-before-define": "off",
+    "comma-dangle": "off",
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
     "import/order": [
       "error",
