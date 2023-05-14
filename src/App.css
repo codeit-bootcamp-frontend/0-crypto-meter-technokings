@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "Pretendard-Black";
+  src: url("assets/fonts/Pretendard-Black.otf");
+}
+@font-face {
+  font-family: "Pretendard-Bold";
+  src: url("assets/fonts/Pretendard-Bold.otf");
+}
+@font-face {
+  font-family: "Pretendard-ExtraBold";
+  src: url("assets/fonts/Pretendard-ExtraBold.otf");
+}
+@font-face {
+  font-family: "Pretendard-ExtraLight";
+  src: url("assets/fonts/Pretendard-ExtraLight.otf");
+}
+@font-face {
+  font-family: "Pretendard-Light";
+  src: url("assets/fonts/Pretendard-Light.otf");
+}
+@font-face {
+  font-family: "Pretendard-Medium";
+  src: url("assets/fonts/Pretendard-Medium.otf");
+}
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("assets/fonts/Pretendard-Regular.otf");
+}
+@font-face {
+  font-family: "Pretendard-SemiBold";
+  src: url("assets/fonts/Pretendard-SemiBold.otf");
+}
+@font-face {
+  font-family: "Pretendard-Thin";
+  src: url("assets/fonts/Pretendard-Thin.otf");
+}
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #f5f8f9;
+  font-family: "Pretendard-Medium";
+}
+
+body {
+  overflow: scroll;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+select {
+  /*ios대응*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+button {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+}
+
+span {
+  font-family: "Pretendard-Medium";
+  display: inline-block;
+}
+
+.App {
+  text-align: center;
+}
