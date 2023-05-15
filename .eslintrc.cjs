@@ -25,6 +25,7 @@ module.exports = {
   },
   plugins: ["react-refresh"],
   rules: {
+    "react/prop-types": "off", // 임시로 추가
     "prettier/prettier": [
       "error",
       {
