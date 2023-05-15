@@ -1,96 +1,56 @@
 /* =========================== 인터페이스 구조/전역 상태 관리 =========================== */
-/** [인터페이스 구조]
- * - HOMEPAGE
- *    - HEADER
- *      - HEADER - smart
- *      - HEADER - dumb (~Presenter)
- *    - INPUTBOARD
- *      - INPUTBOARD - smart
- *      - INPUTBOARD - dumb (~Presenter)
- *    - CHART
- *      - CHART - smart
- *      - CHART - dumb (~Presenter)
- *    - TABLE
- *      - TABLE - smart
- *      - TABLE - dumb (~Presenter)
+/** [각 컴포넌트별 인터페이스 구조]
+ *   userStore: {},
+ *   coinStore: {},
+ *   props: {},
+ *   state: {},
+ *   func: {},
  */
 
-export const INTERFACE_RULES = {
-  globalState: {},
-  props: {},
-  state: {},
-  function: {},
-};
+// zustand로 관리한 전역 상태 store
+const coinListStore = {
+  /**
+   * 페이지 내 화폐 단위 (GET `/coins/markets?vs_currency={currency}`)
+   * GET 요청 axios 혹은 convert 함수 실행 후 coinCurrency 업데이트
+   */
+  coinCurrency: "krw" || "usd",
+  coinList: [],
+  coinListPageOffset: 0, // 페이지네이션 시 사용할 오프셋
 
-/* [전역 상태 관리] - zustand */
-export const IGlobalState = {
-  state: {
-    selectedCoinId: "", // 사용자가 선택한 코인의 id
-    setSelectedCoinId: () => {},
-    /**
-     * 1) GET `/coins/markets` 요청에 vs_currency로 다시 받아오거나
-     * 2) 유틸 함수로 전체 변환하거나
-     */
-    currency: "krw" || "usd", // 전체 페이지 내 화폐 단위
-    setCurrency: () => {}, // 화폐 단위로 새로 get을 요청하거나? 아니면 함수를 만들어서 별도로 변환해주거나?
-    currentPageOffSet: 0, // 페이지네이션 시 사용할 페이지 카운터
-    setCurrentPageOffSet: () => {},
-    coinList: [], // 사용자가 불러온 코인 리스트
-    setCoinList: () => {},
+  getCoinList: () => {
+    // GET `/coins/markets`
   },
-};
 
-/* =========================== HOMEPAGE =========================== */
-export const IHomePageState = {
-  state: {
-    historyDate: "dd-mm-yyyy", // 유저 입력 날짜 (입력 보드, 차트)
-    setHistoryDate: () => {},
-    inputAmount: 0, // 유저 입력 금액 (입력 보드, 차트)
-    setInputAmount: () => {},
-    calcAmount: 0, // 유저 계산 금액 (입력 보드, 차트)
-    setCalcAmount: () => {
-      /**
-       * 과거 가격과 현재 가격을 가지고 계산?
-       * GET `coins/${selectedCoinId}/history?date=${historyDate}`
-       * - response.data.market_data.current_price.krw
-       * - response.data.market_data.current_price.usd
-       */
-    },
-    historySearchDateList: [], // 유저 보드 검색 기록 (입력 보드, 차트)
-    setHistorySearchDataList: () => {},
+  set: () => {},
+};
+const userSelectStore = {
+  selectedCoinId: "", // 유저가 선택한 코인 id
+  historyDate: "", // 유저가 선택한 날짜 (for 입력보드, 차트)
+  userSearchedCoinList: [],
+  selectMoney: 0, // 유저 선택 금액 (for 입력보드, 차트)
+  /**
+   * 과거 가격과 현재 가격을 가지고 계산?
+   * GET `coins/${selectedCoinId}/history?date=${historyDate}`
+   * - response.data.market_data.current_price.krw
+   * - response.data.market_data.current_price.usd
+   */
+  selectMoneyToCalc: 0, // 유저 선택 금액을 계산한 금액 (for 입력보드, 차트)
+  isUpperSelectMoneyToCalc: false, // 계산 금액이 지금이라면 올랐는지 떨어졌는지
+
+  getUserCharData: () => {
+    // GET /coins/${selectedCoinId}/market_chart
   },
+
+  set: () => {},
 };
 
 /* =========================== HEADER =========================== */
 /* =========================== HEADER - smart =========================== */
-export const IHeader = {
-  props: {
-    changeHistoryDate: IHomePageState.state.setHistoryDate,
-    changeInputAmount: IHomePageState.state.setInputAmount,
-    changeCalcAmount: IHomePageState.state.setCalcAmount,
-    updateHistorySearchList: IHomePageState.state.setHistorySearchDataList,
-  },
+const IResetInputBoardButton = {
+  // 클릭 시, 모든 데이터 초기화 (년월일, 입력금액, 선택코인)
+  userStore: userSelectStore,
 };
-
-export const IResetInputBoardButton = {
-  // 클릭시, 데이터 초기화 (년월일, 입력금액, 선택코인)
-  globalState: {
-    selectedCoinId: IGlobalState.state.selectedCoinId,
-    setSelectedCoinId: IGlobalState.state.setSelectedCoinId,
-  },
-  props: {
-    changeHistoryDate: IHeader.props.changeHistoryDate,
-    changeCalcAmount: IHeader.props.changeCalcAmount,
-  },
-  function: {
-    handleResetInputData: () => {
-      IResetInputBoardButton.globalState.setSelectedCoinId();
-      IResetInputBoardButton.props.changeCalcAmount();
-      IResetInputBoardButton.props.changeHistoryDate();
-    },
-  },
-};
-export const IChangeCurrencyButton = {
+const IChangeCurrencyButton = {
   /**
    * 클릭 시, 화폐 단위 변경(krw <=> usd) : 입력보드, 차트, 테이블의 금액 단위, 검색기록
    *  - 입력 보드
@@ -104,272 +64,199 @@ export const IChangeCurrencyButton = {
    *    - 테이블 내 금액(가격, 총 시가, 24시간 거래량) : ₩ <=> $
    *    - 검색 기록 : 원 <=> $
    */
-  globalState: {
-    currency: IGlobalState.state.currency,
-    setCurrency: IGlobalState.state.setCurrency,
-  },
+  coinStore: coinListStore,
   state: {
     isToggle: true || false,
     setIsToggle: () => {},
   },
-  function: {
-    handleToggleCurrency: () => {
-      IChangeCurrencyButton.state.setIsToggle();
-    },
-    handleSelectCurrency: () => {
-      IChangeCurrencyButton.globalState.setCurrency();
-    },
-  },
 };
-export const IShowSearchHistoryButton = {
-  props: {
-    updateHistorySearchList: IHeader.props.updateHistorySearchList,
-  },
+const IShowSearchHistoryButton = {
+  userStore: userSelectStore,
   state: {
-    isDown: true || false,
-    setIsDown: () => {},
-    isHover: true || false,
-    setIsHover: () => {},
-  },
-  function: {
-    handleShowDropDown: () => {
-      IShowSearchHistoryButton.state.setIsDown();
-    },
-    handleClearAllSearchHistory: () => {
-      IShowSearchHistoryButton.props.updateHistorySearchList([]);
-    },
+    isClick: true || false,
+    setIsClick: () => {},
   },
 };
 
 /* =========================== HEADER - dumb =========================== */
-export const IResetInputBoardButtonPresenter = {
+const IResetInputBoardButtonContainer = {
   props: {
-    imgSrc: "",
-    handleResetInputData: IResetInputBoardButton.function.handleResetInputData,
-    styleProps: {},
+    handleClickResetButton: IResetInputBoardButton.userStore.set({
+      selectedCoinId: "",
+      historyDate: "",
+      selectMoney: 0,
+      selectMoneyToCalc: 0,
+      userSearchedCoinList: [],
+    }),
   },
 };
-export const IChangeCurrencyButtonPresenter = {
+const IChangeCurrencyButtonContainer = {
   props: {
-    imgSrc: "",
     isToggle: IChangeCurrencyButton.state.isToggle,
-    currency: IChangeCurrencyButton.globalState.currency,
-    handleSelectCurrency: IChangeCurrencyButton.function.handleSelectCurrency,
-    handleToggleCurrency: IChangeCurrencyButton.function.handleToggleCurrency,
-    styleProps: {},
+    currency: IChangeCurrencyButton.coinStore.coinCurrency,
+    handleClickChangeCurrency: IChangeCurrencyButton.coinStore.set({
+      coinCurrency: "krw" || "usd",
+    }),
+    handleClickToggleCurrency: IChangeCurrencyButton.state.setIsToggle,
   },
 };
-export const IShowSearchHistoryButtonPresenter = {
+const IShowSearchHistoryButtonContainer = {
   props: {
-    isDown: IShowSearchHistoryButton.state.isDown,
-    isHover: IShowSearchHistoryButton.state.isHover,
-    handleCheckHover: () => IShowSearchHistoryButton.state.setIsHover,
-    handleShowDropDown: IShowSearchHistoryButton.function.handleShowDropDown,
-    handleClearAllSearchHistory:
-      IShowSearchHistoryButton.function.handleClearAllSearchHistory,
-    styleProps: {},
+    isClick: IShowSearchHistoryButton.state.isClick,
+    handleClickDropDown: () => IShowSearchHistoryButton.state.setIsClick,
+    handleClickClearAllSearchHistory: IShowSearchHistoryButton.userStore.set({
+      userSearchedCoinList: [],
+    }),
   },
 };
 
 /* =========================== INPUTBOARD =========================== */
 /* =========================== INPUTBOARD - smart =========================== */
-export const IInputBoard = {
-  globalState: {
-    currentPageOffSet: IGlobalState.state.currentPageOffSet,
-    setCurrenPageOffSet: IGlobalState.state.setCurrentPageOffSet,
-    coinList: IGlobalState.state.coinList, // 무한 스크롤 시, 리스트 업데이트
-    setCoinList: IGlobalState.state.setCoinList,
-    selectedCoinId: IGlobalState.state.selectedCoinId, // 목록에서 코인 선택 시 업데이트
-    setSelectedCoinId: IGlobalState.state.setSelectedCoinId,
-  },
-  props: {
-    historyDate: IHomePageState.state.historyDate,
-    setHistoryDate: IHomePageState.state.setHistoryDate,
-    inputAmount: IHomePageState.state.inputAmount,
-    setInputAmount: IHomePageState.state.setInputAmount,
-    calcAmount: IHomePageState.state.calcAmount,
-    setCalcAmount: IHomePageState.state.setCalcAmount,
-    historySearchDateList: IHomePageState.state.historySearchDateList,
-    setHistorySearchDataList: IHomePageState.state.setHistorySearchDataList,
-  },
+const IInputBoard = {
+  userStore: userSelectStore,
+  coinStore: coinListStore,
   state: {
-    isDownInputDate: true || false,
-    setIsDownInputDate: () => {},
-    isDownCointList: true || false,
-    setIsDownCointList: () => {},
+    isClickToggleInputDate: true || false,
+    setIsClickToggleInputDate: () => {},
+    isClickToggleCoinList: true || false,
+    setIsClickToggleCoinList: () => {},
   },
-  function: {
-    handleChangeHistoryDate: () => {
-      IInputBoard.props.setHistoryDate();
+  func: {
+    handleClickUpdateCalcedMoney: () => {
+      IInputBoard.userStore.set({
+        selectMoneyToCalc: "여기에 계산된 값이 들어갑니다.",
+        userSearchedCoinList: "계산한 값을 이 배열에 추가합니다.",
+      });
     },
-    handleChangeAmount: () => {
-      IInputBoard.props.setInputAmount();
-    },
-    handleUpdateCalcAmount: () => {
-      IInputBoard.props.setCalcAmount();
-      IInputBoard.props.setHistorySearchDataList();
-    },
-    handleShowCoinList: () => {
-      IInputBoard.state.setIsDownCointList();
-    },
-    handleShowInputDate: () => {
-      IInputBoard.state.setIsDownInputDate();
-    },
-    handleInfiniteScrollLoadData: () => {
-      // 무한 스크롤 시, get 요청과 함께 PageOffSet 업데이트
-      IInputBoard.globalState.setCurrenPageOffSet();
+    handleScrollLoadData: () => {
+      // 스크롤 시, get 요청과 함께 PageOffSet 업데이트
+      IInputBoard.coinStore.set({
+        coinListPageOffset: "여기에 업데이트된 Offset이 들어갑니다.",
+      });
     },
   },
 };
-
 /* =========================== INPUTBOARD - dumb =========================== */
-export const IInputBoardPresenter = {
+const IInputBoardContainer = {
   // 참고 : https://www.npmjs.com/package/react-datepicker
   props: {
-    // date select button
-    isDownInputDate: IInputBoard.state.isDownInputDate,
-    handleShowInputDate: IInputBoard.function.handleShowInputDate,
-    date: IInputBoard.props.historyDate,
-    amount: IInputBoard.props.inputAmount,
-    handleChangeHistoryDate: IInputBoard.function.handleChangeHistoryDate,
-    // coinlist select button
-    isDownCointList: IInputBoard.state.isDownCointList,
-    handleShowCoinList: IInputBoard.function.handleShowCoinList,
-    // amount select button
-    handleChangeAmount: IInputBoard.function.handleChangeAmount,
-    // calcAmount submit button
-    handleUpdateCalcAmount: IInputBoard.function.handleUpdateCalcAmount,
-    handleInfiniteScrollLoadData:
-      IInputBoard.function.handleInfiniteScrollLoadData,
-    styleProps: {},
+    // 현재 통화단위
+    currency: IInputBoard.coinStore.coinCurrency,
+    // 날짜 선택 버튼
+    isClickToggleInputDate: IInputBoard.state.isClickToggleInputDate,
+    handleClickInputData: () => IInputBoard.state.setIsClickToggleInputDate,
+    userSelectDate: IInputBoard.userStore.historyDate,
+    userSelectMoney: IInputBoard.userStore.selectMoney,
+    handleClickChangeHistoryDate: () => {
+      IInputBoard.userStore.set({
+        historyDate: "선택한 날짜가 업데이트됩니다.",
+      });
+    },
+    // 코인 목록 선택 버튼
+    isClickToggleCoinList: IInputBoard.state.isClickToggleCoinList,
+    handleClickCoinList: () => IInputBoard.state.setIsClickToggleCoinList,
+    // 코인 구매 가격 선택 버튼
+    handleClickChangeMoney: () => {
+      IInputBoard.userStore.set({
+        selectMoney: "변경한 금액이 업데이트됩니다.",
+      });
+    },
+    // 그때 샀더라면 계산 버튼
+    handleClickUpdateCalcedMoney: IInputBoard.func.handleClickUpdateCalcedMoney,
+    handleScrollLoadData: IInputBoard.func.handleScrollLoadData,
   },
 };
 
 /* =========================== CHART =========================== */
 /* =========================== CHART - smart =========================== */
-export const IChart = {
-  globalState: {
-    selectedCoinId: IGlobalState.state.selectedCoinId,
-    currency: IGlobalState.state.currency,
-  },
-  props: {
-    historyDate: IHomePageState.state.historyDate,
-    inputAmount: IHomePageState.state.inputAmount,
-    calcAmount: IHomePageState.state.calcAmount,
-  },
+const IChart = {
+  coinStore: coinListStore,
+  userStore: userSelectStore,
   state: {
-    chartData: {},
-    setChartData: () => {
-      // GET `/coins/{selectedCoinId}/market_chart?vs_currency=krw&days=7`
-    },
-    isSelect: true || false,
-    setIsSelect: () => {},
+    isChartData: coinListStore.coinList.lenght !== 0,
+    currentChartDataIndex: 0,
+    setCurrentChartDataIndex: () => {},
+    chipButton: [true, false, false, false, false],
+    setChipButton: () => {},
+    userChartData: {}, // id값으로 GET 해와서 담기 (useEffect)
   },
-  function: {
-    handleShareMyChart: () => {
-      // 카카오만 key 필요
+  func: {
+    handleClickShareMyChart: () => {
+      // 카카오는 key 발급 필요?
     },
-    handleChangeChartData: () => {
-      IChart.state.setChartData();
-    },
-    handleClickButton: () => {
-      IChart.state.setIsSelect();
+    handleClickChangeChartData: () => {
+      IChart.state.setCurrentChartDataIndex();
+      IChart.state.setChipButton();
+      IChart.userStore.getUserCharData(); // 여기에 index에 맞는 기간 설정해서 GET 요청
     },
   },
 };
-
 /* =========================== CHART - dumb =========================== */
-export const IChartPresenter = {
+const IChartContainer = {
   props: {
-    isUpper: IChart.props.calcAmount > 0, // 그때 샀으면 올랐을텐데 => 초록색, 아니면 => 빨간색
-    chartWidth: 0, // https://recharts.org/en-US/examples/SimpleAreaChart
+    isChartData: IChart.state.isChartData, // false면 dummy data 보여주기
+    currentButton: IChart.state.currentButton,
+    currentChartDataIndex: IChart.state.currentChartDataIndex,
+    isUpper: IChart.userStore.isUpperSelectMoneyToCalc, // 그때 샀으면 올랐을텐데 => 초록색, 아니면 => 빨간색
+    chartWidth: 0, // https://recharts.org/en-US/examples/SimpleAreaChart 반응형에 맞게 넘겨주기
     chartHeight: 0,
-    chartData: IChart.state.chartData,
-    isSelect: IChart.state.isSelect,
-    handleChangeChartData: IChart.function.handleChangeChartData,
-    handleClickButton: IChart.function.handleClickButton,
-    handleShareMyChart: IChart.function.handleShareMyChart,
-    stylesProps: {},
+    chartData: IChart.state.userChartData,
+    handleClickChipButton: () => IChart.state.setChipButton,
+    handleClickShareMyChart: IChart.func.handleClickShareMyChart,
+    handleClickChangeChartData: IChart.func.handleClickChangeChartData,
   },
 };
 
 /* =========================== TABLE =========================== */
 /* =========================== TABLE - smart =========================== */
-export const ITable = {
-  globalState: {
-    setSelectedCoinId: IGlobalState.state.setSelectedCoinId,
-    currency: IGlobalState.state.currency,
-    currentPageOffSet: IGlobalState.state.currentPageOffSet,
-    setCurrentPageOffSet: IGlobalState.state.setCurrentPageOffSet,
-    coinList: IGlobalState.state.coinList,
-    setCoinList: IGlobalState.state.setCoinList,
-  },
+const ITable = {
+  coinStore: coinListStore,
+  userStore: userSelectStore,
   state: {
-    isDesc: true || false, // 오름차순인지 내림차순인지 체크 state
+    isDesc: true || false, // 오름차순인지 내림차순인지 체크
     setIsDesc: () => {},
     buttonList: [], // new Array(전체 데이터 길이).fill(false) && buttonList[currentPageIndex + 1]
     setButtonList: () => {},
     currentPageIndex: 0,
     setCurrentPageIndex: () => {},
   },
-  function: {
-    handleLoadNextData: () => {
-      // GET `/coins/markets`
-      // 하단에 버튼 클릭시 데이터 받아오고, 여기서 업데이트한 페이지 번호로 UI 지정
-    },
+  func: {
     handleClickPageButton: () => {
-      ITable.state.setButtonList();
-      ITable.globalState.setCurrentPageOffSet(); // currentPage를 buttonList의 index로 활용
+      // 하단에 버튼 클릭시 데이터 받아오고, 여기서 업데이트한 페이지 번호로 UI 지정
+      ITable.coinStore.getCoinList();
+      ITable.state.setCurrentPageIndex();
     },
     handleClickNextButton: () => {},
     handleClickPrevButton: () => {},
-    handleChangeSort: () => {
-      ITable.state.setIsDesc();
-    },
+    handleClickChangeSort: () => {},
   },
 };
-
 /* =========================== TABLE - dumb =========================== */
-export const ITablePresenter = {
+const ITableContainer = {
   props: {
-    coinList: ITable.globalState.coinList,
-    currency: ITable.globalState.currency,
+    coinList: ITable.coinStore.coinList,
+    currency: ITable.coinStore.coinCurrency,
     isDesc: ITable.state.isDesc,
-    handleChangeSort: ITable.function.handleChangeSort,
-    handleLoadNextData: ITable.function.handleLoadNextData,
-    buttonList: ITable.state.buttonList, // buttonList 를 기반으로 페이지 번호 UI 생성
-    handleClickPageButton: ITable.function.handleClickPageButton,
-    handleClickNextButton: ITable.function.handleClickNextButton,
-    handleClickPrevButton: ITable.function.handleClickPrevButton,
+    buttonList: ITable.state.buttonList,
+    currentPageIndx: ITable.state.currentPageIndex,
+    handleClickChangeSort: ITable.func.handleClickChangeSort,
+    handleClickNextButton: ITable.func.handleClickNextButton,
+    handleClickPrevButton: ITable.func.handleClickPrevButton,
   },
 };
 
-/** 만약 <table>를 사용한다면,
- *
- * <table>
- *  <tr onClick={handleChangeSort}> // 이벤트 위임
- *    <th>순위</th>
- *    <th>화폐이름/이미지</th>
- *    <th>가격</th>
- *    <th>총 시가</th>
- *    <th>24시간 거래량</th>
- *    <th>1시간 변동폭</th>
- *    <th>24시간 변동폭</th>
- *    <th>7일 변동폭</th>
- *  </tr>
- *  {coinList?.map(coin => {
- *    return (
- *      <tr>
- *        <td>{coin.market_cap_rank}</td>
- *        <td>{coin.name, coin.image}</td>
- *        <td>{coin.current_price}</td>
- *        <td>{coin.fully-diluted_valuation}</td>
- *        <td>{coin.total_volu}</td>
- *        <td>{coin.price_change_percentage_1h_in_currency}</td>
- *        <td>{coin.price_change_percentage_24h_in_currency}</td>
- *        <td>{coin.price_change_percentage_7d_in_currency}</td>
- *      </tr>
- *    )
- *  })}
- * </table>
- */
+// export는 무시해주세요.
+export {
+  IResetInputBoardButton,
+  IChangeCurrencyButton,
+  IShowSearchHistoryButton,
+  IResetInputBoardButtonContainer,
+  IChangeCurrencyButtonContainer,
+  IShowSearchHistoryButtonContainer,
+  IInputBoard,
+  IInputBoardContainer,
+  IChart,
+  IChartContainer,
+  ITable,
+  ITableContainer,
+};
