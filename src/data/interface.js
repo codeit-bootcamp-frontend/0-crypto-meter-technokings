@@ -10,8 +10,9 @@
 // zustand로 관리한 전역 상태 store
 const coinListStore = {
   /**
-   * 페이지 내 화폐 단위 (GET `/coins/markets?vs_currency={currency}`)
-   * GET 요청 axios 혹은 convert 함수 실행 후 coinCurrency 업데이트
+   * 페이지 내 화폐 단위 변경 2가지 선택지
+   * - GET 요청 (GET `/coins/markets?vs_currency={currency}`)
+   * - convert 함수 실행 후 coinCurrency 업데이트
    */
   coinCurrency: "krw" || "usd",
   coinList: [],
