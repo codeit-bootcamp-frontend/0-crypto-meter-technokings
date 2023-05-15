@@ -7,7 +7,7 @@ const white = css`
 `;
 
 const green = css`
-  color: ${colors.primary};
+  color: ${colors.green};
 `;
 
 const red = css`
