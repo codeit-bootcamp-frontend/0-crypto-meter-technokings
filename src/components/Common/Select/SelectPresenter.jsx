@@ -6,7 +6,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { DropdownHandleIcon } from "@components";
+import DropdownHandleIcon from "@components/SVGComponents/DropdownHandleIcon";
 import colors from "@styles/colors";
 import SDiv from "@styles/micro-components/StyledDiv";
 import SText from "@styles/micro-components/StyledText";

@@ -14,9 +14,7 @@ import ShareIcon from "@components/SVGComponents/ShareIcon";
 
 // 공통 컴포넌트
 import Dropdown from "@components/Common/Dropdown/Dropdown";
-import DropdownList from "@components/Common/Dropdown/DropdownList";
-import DropdownListItem from "@components/Common/Dropdown/DropdownListItem";
-import DropdownPresenter from "@components/Common/Dropdown/DropdownPresenter";
+import Select from "@components/Common/Select/Select";
 
 export {
   CloseIcon,
@@ -31,7 +29,5 @@ export {
   RestoreIcon,
   ShareIcon,
   Dropdown,
-  DropdownPresenter,
-  DropdownList,
-  DropdownListItem,
+  Select,
 };
