@@ -3,8 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { colors, SButton, SText } from "@styles";
-
-import { g1, g5 } from "../../styles/text.style";
+import { g1, g5 } from "@styles/text.style";
 
 const SelectDurationChipContainer = ({ duration, onClick, isClicked }) => {
   return (
