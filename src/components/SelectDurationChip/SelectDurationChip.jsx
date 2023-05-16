@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
 import SelectDurationChipContainer from "./SelectDurationChipContainer";
 
-const SelectDurationChip = ({ duration = "전체", onClick }) => {
-  const [isClicked, setIsClicked] = useState(true);
+const SelectDurationChip = ({
+  duration = "전체",
+  onClick,
+  isClicked = false,
+}) => {
   return (
     <SelectDurationChipContainer
       duration={duration}
