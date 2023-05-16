@@ -5,6 +5,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
     "airbnb",
   ],
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
@@ -24,7 +25,21 @@ module.exports = {
   },
   plugins: ["react-refresh"],
   rules: {
+    "react/prop-types": "off", // 임시로 추가
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
+    "react/function-component-definition": [
+      2,
+      { namedComponents: "arrow-function" },
+    ],
     "react-refresh/only-export-components": "warn",
+    "linebreak-style": ["error", "unix", "windows"],
     quotes: "off",
     "no-use-before-define": "off",
     "comma-dangle": "off",
