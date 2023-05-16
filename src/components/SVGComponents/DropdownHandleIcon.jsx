@@ -49,7 +49,7 @@ S.Svg = styled.svg`
   display: -webkit-flex;
   display: flex;
   ${(props) => props.rotate === "true" && rotate}
-  transition: transform 0.5s ease-in;
+  transition: transform 0.3s ease-in-out;
 `;
 
 export default DropdownHandleIcon;
