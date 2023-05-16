@@ -9,13 +9,13 @@ import styled, { css } from "styled-components";
 import colors from "@/styles/colors";
 import SDiv from "@/styles/micro-components/StyledDiv";
 import SText from "@/styles/micro-components/StyledText";
-import { DropdownHandleIcon } from "@components";
 
 import DropdownList from "./DropdownList";
+import DropdownHandleIcon from "../../SVGComponents/DropdownHandleIcon";
 
 const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
   return (
-    <S.DropdownPresenter>
+    <S.DropdownWrapper>
       <S.DropdownHead
         bd={`1px solid ${colors.gray6}`}
         br={12}
@@ -26,12 +26,9 @@ const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
       >
         <SDiv row sb>
           <SDiv row g={10}>
-            <S.ImagePresenter w={30} h={30} disableSelect>
-              <S.Image
-                src={selectedValue.image}
-                alt={`${selectedValue.name}`}
-              />
-            </S.ImagePresenter>
+            <S.ImageWrapper w={30} h={30} disableSelect>
+              <img src={selectedValue.image} alt={`${selectedValue.name}`} />
+            </S.ImageWrapper>
             <SDiv ct>
               <SText b1 white disableSelect>
                 {selectedValue.name}
@@ -44,13 +41,13 @@ const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
         </SDiv>
       </S.DropdownHead>
       {isOpen && <DropdownList isOpen={isOpen} options={options} />}
-    </S.DropdownPresenter>
+    </S.DropdownWrapper>
   );
 };
 
 const S = {};
 
-S.DropdownPresenter = styled(SDiv)`
+S.DropdownWrapper = styled(SDiv)`
   position: relative;
 `;
 
@@ -66,16 +63,16 @@ S.DropdownHead = styled(SDiv)`
   }
 `;
 
-S.ImagePresenter = styled(SDiv)`
+S.ImageWrapper = styled(SDiv)`
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
   @media only screen and (max-width: 375px) {
     width: 24px;
     height: 24px;
   }
-`;
-
-S.Image = styled.img`
-  width: 100%;
-  height: 100%;
 `;
 
 const lighterBorder = css`
