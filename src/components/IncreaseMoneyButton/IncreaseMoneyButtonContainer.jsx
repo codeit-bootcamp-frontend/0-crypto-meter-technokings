@@ -14,14 +14,20 @@ const IncreaseMoneyButtonContainer = ({ money }) => {
       pd="6px 12px 6px 12px"
       bd={`1px solid ${colors.gray3}`}
     >
-      <SText b3 g1>
+      <S.ButtonText b3 g1>
         {`${money.toLocaleString("ko-KR")}원`}
-      </SText>
+      </S.ButtonText>
     </S.Button>
   );
 };
 
 const S = {};
+
+S.ButtonText = styled(SText)`
+  @media only screen and (max-width: 375px) {
+    font-size: 12px;
+  }
+`;
 
 S.Button = styled(SButton)`
   &:active {
