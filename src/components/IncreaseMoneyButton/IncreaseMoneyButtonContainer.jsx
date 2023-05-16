@@ -1,20 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 import styled from "styled-components";
 
 import { colors, SButton, SText } from "@styles";
 
 const IncreaseMoneyButtonContainer = ({ money }) => {
-  const [isActive, setIsActive] = useState(false);
-
-  const handlePointerDown = () => {
-    setIsActive(true);
-  };
-
-  const handlePointerUp = () => {
-    setIsActive(false);
-  };
-
   return (
     <S.Button
       col
@@ -22,9 +12,7 @@ const IncreaseMoneyButtonContainer = ({ money }) => {
       br={23}
       h={30}
       pd="6px 12px 6px 12px"
-      isActive={isActive}
-      onPointerDown={handlePointerDown}
-      onPointerUp={handlePointerUp}
+      bd={`1px solid ${colors.gray3}`}
     >
       <SText b3 g1>
         {`${money.toLocaleString("ko-KR")}원`}
@@ -36,10 +24,10 @@ const IncreaseMoneyButtonContainer = ({ money }) => {
 const S = {};
 
 S.Button = styled(SButton)`
-  background-color: ${(props) => {
-    return props.isActive && colors.green;
-  }};
-  border: 1px solid ${(props) => (props.isActive ? colors.green : colors.gray3)};
+  &:active {
+    background-color: ${colors.green};
+    border: 1px solid ${colors.green};
+  }
 `;
 
 export default IncreaseMoneyButtonContainer;
