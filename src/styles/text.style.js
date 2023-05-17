@@ -56,8 +56,8 @@ const g1 = css`
 
 const h1 = css`
   font-family: "Pretendard-Bold";
-  font-size: 3rem;
-  letter-spacing: -0.0187rem;
+  font-size: 4.8rem;
+  letter-spacing: -0.03rem;
 
   @media only screen and (max-width: 375px) {
     font-size: 2rem;
@@ -66,69 +66,69 @@ const h1 = css`
 
 const h2 = css`
   font-family: "Pretendard-SemiBold";
-  font-size: 2.25rem;
-  letter-spacing: -0.0187rem;
+  font-size: 3.6rem;
+  letter-spacing: -0.03rem;
 
   @media only screen and (max-width: 375px) {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
   }
 `;
 
 const h3 = css`
   font-family: "Pretendard-Bold";
-  font-size: 1.625rem;
-  letter-spacing: -0.0187rem;
+  font-size: 2.6rem;
+  letter-spacing: -0.03rem;
 
   @media only screen and (max-width: 375px) {
-    font-size: 1.25rem;
+    font-size: 2rem;
   }
 `;
 
 const h4 = css`
   font-family: "Pretendard-Bold";
-  font-size: 1.25rem;
-  letter-spacing: -0.0187rem;
+  font-size: 2rem;
+  letter-spacing: -0.03rem;
 
   @media only screen and (max-width: 375px) {
-    font-size: 1.125rem;
+    font-size: 1.8rem;
   }
 `;
 
 const s1 = css`
   font-family: "Pretendard-SemiBold";
-  font-size: 1.125rem;
-  letter-spacing: -0.0187rem;
+  font-size: 1.8rem;
+  letter-spacing: -0.03rem;
 
   @media only screen and (max-width: 375px) {
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
 `;
 
 const s2 = css`
   font-family: "Pretendard-SemiBold";
-  font-size: 0.9375rem;
-  letter-spacing: -0.0187rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.03rem;
 
   @media only screen and (max-width: 375px) {
-    font-size: 0.875rem;
+    font-size: 1.4rem;
   }
 `;
 
 const s3 = css`
   font-family: "Pretendard-SemiBold";
-  font-size: 0.875rem;
-  letter-spacing: -0.0187rem;
+  font-size: 1.4rem;
+  letter-spacing: -0.03rem;
 `;
 
 const b1 = css`
   font-family: "Pretendard-Medium";
   font-style: normal;
   font-weight: normal;
-  font-size: 1.0625rem;
-  letter-spacing: -0.0187rem;
+  font-size: 1.7rem;
+  letter-spacing: -0.03rem;
 
   @media only screen and (max-width: 375px) {
-    font-size: 0.9375rem;
+    font-size: 1.5rem;
   }
 `;
 
@@ -136,11 +136,11 @@ const b2 = css`
   font-family: "Pretendard-Medium";
   font-style: normal;
   font-weight: normal;
-  font-size: 0.9375rem;
-  letter-spacing: -0.0187rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.03rem;
 
   @media only screen and (max-width: 375px) {
-    font-size: 0.8125rem;
+    font-size: 1.3rem;
   }
 `;
 
@@ -148,36 +148,36 @@ const b3 = css`
   font-family: "Pretendard-Medium";
   font-style: normal;
   font-weight: normal;
-  font-size: 0.875rem;
-  letter-spacing: -0.0187rem;
+  font-size: 1.4rem;
+  letter-spacing: -0.03rem;
 
   @media only screen and (max-width: 375px) {
-    font-size: 0.8125rem;
+    font-size: 1.3rem;
   }
 `;
 
 const c1 = css`
   font-family: "Pretendard-Medium";
-  font-size: 1rem;
-  letter-spacing: -0.0187rem;
+  font-size: 1.6rem;
+  letter-spacing: -0.03rem;
 
   @media only screen and (max-width: 375px) {
-    font-size: 0.8125rem;
+    font-size: 1.3rem;
   }
 `;
 
 const c2 = css`
   font-family: "Pretendard-Regular";
-  font-size: 0.875rem;
+  font-size: 1.4rem;
 
   @media only screen and (max-width: 375px) {
-    font-size: 0.625rem;
+    font-size: 0.1rem;
   }
 `;
 
 const c3 = css`
   font-family: "Pretendard-Medium";
-  font-size: 0.75rem;
+  font-size: 1.2rem;
 `;
 
 export {
