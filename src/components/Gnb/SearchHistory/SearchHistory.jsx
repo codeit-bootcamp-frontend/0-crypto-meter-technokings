@@ -54,6 +54,56 @@ const MOCK_HISTORY = [
     before: { date: new Date(2022, 10, 4), money: 10000 },
     after: { date: new Date(2022, 10, 4), money: 20000 },
   },
+  {
+    id: 6,
+    coin: {
+      name: "Bitcoin",
+      image:
+        "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+    },
+    before: { date: new Date(2022, 10, 4), money: 10000 },
+    after: { date: new Date(2022, 10, 4), money: 20000 },
+  },
+  {
+    id: 7,
+    coin: {
+      name: "Ethereum",
+      image:
+        "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
+    },
+    before: { date: new Date(2022, 10, 4), money: 20000 },
+    after: { date: new Date(2022, 10, 4), money: 20000 },
+  },
+  {
+    id: 8,
+    coin: {
+      name: "Tether",
+      image:
+        "https://assets.coingecko.com/coins/images/325/large/Tether.png?1668148663",
+    },
+    before: { date: new Date(2022, 10, 4), money: 30000 },
+    after: { date: new Date(2022, 10, 4), money: 50 },
+  },
+  {
+    id: 9,
+    coin: {
+      name: "BNB",
+      image:
+        "https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1644979850",
+    },
+    before: { date: new Date(2022, 10, 4), money: 10000 },
+    after: { date: new Date(2022, 10, 4), money: 20000 },
+  },
+  {
+    id: 10,
+    coin: {
+      name: "Bitcoin",
+      image:
+        "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+    },
+    before: { date: new Date(2022, 10, 4), money: 10000 },
+    after: { date: new Date(2022, 10, 4), money: 20000 },
+  },
 ];
 
 const SearchHistory = () => {
