@@ -42,6 +42,7 @@ const S = {};
 S.MainWrapper = styled(SDiv)`
   position: absolute;
   overflow: scroll;
+  z-index: 10;
 
   width: 100%;
   max-height: 255px;

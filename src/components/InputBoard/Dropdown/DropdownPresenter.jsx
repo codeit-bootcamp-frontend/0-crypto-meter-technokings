@@ -49,6 +49,8 @@ const S = {};
 
 S.DropdownWrapper = styled(SDiv)`
   position: relative;
+
+  width: 100%;
 `;
 
 S.DropdownHead = styled(SDiv)`

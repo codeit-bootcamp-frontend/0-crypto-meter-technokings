@@ -4,9 +4,10 @@ import styled from "styled-components";
 
 import { colors, SButton, SText } from "@styles";
 
-const IncreaseMoneyButton = ({ money = 100000 }) => {
+const IncreaseMoneyButton = ({ money = 10000 }) => {
   return (
     <S.Button
+      type="button"
       col
       ct
       br={23}
