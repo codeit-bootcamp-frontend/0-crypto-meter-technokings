@@ -17,7 +17,7 @@ import IncreaseMoneyButton from "@components/IncreaseMoneyButton/IncreaseMoneyBu
 import PriceChange from "@components/PriceChange/PriceChange";
 import SearchHistoryButton from "@components/SearchHistoryButton/SearchHistoryButton";
 import SelectDurationChip from "@components/SelectDurationChip/SelectDurationChip";
-import Dropdown from "@components/Common/Dropdown/Dropdown";
+import Dropdown from "@components/InputBoard/Dropdown/Dropdown";
 import Select from "@components/Common/Select/Select";
 
 export {

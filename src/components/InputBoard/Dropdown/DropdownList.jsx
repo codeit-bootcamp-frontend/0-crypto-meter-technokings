@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 import colors from "@/styles/colors";
 import SDiv from "@/styles/micro-components/StyledDiv";
-import DropdownListItem from "@components/Common/Dropdown/DropdownListItem";
+import DropdownListItem from "@components/InputBoard/Dropdown/DropdownListItem";
 
 const DropdownList = ({ options = [] }) => {
   // const optionList = options ?? DUMMY_OPTIONS;
