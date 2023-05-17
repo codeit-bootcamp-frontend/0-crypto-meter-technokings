@@ -9,14 +9,14 @@ import colors from "@/styles/colors";
 import SDiv from "@/styles/micro-components/StyledDiv";
 import DropdownListItem from "@components/InputBoard/Dropdown/DropdownListItem";
 
-const DropdownList = ({ options = [] }) => {
+const DropdownList = ({ options = [], onClick }) => {
   // const optionList = options ?? DUMMY_OPTIONS;
   return (
     <S.MainWrapper pd="10px" g8 bg={colors.gray8} br={12} mgt={4}>
       <SDiv col ast g={2}>
         {/* Todo: SearchInput 컴포넌트 추가 */}
         {options.map((item) => (
-          <DropdownListItem key={item.id} option={item} />
+          <DropdownListItem key={item.id} option={item} onClick={onClick} />
         ))}
       </SDiv>
     </S.MainWrapper>
@@ -47,6 +47,19 @@ S.MainWrapper = styled(SDiv)`
   width: 100%;
   max-height: 255px;
   min-height: 55px;
+
+  @media only screen and (max-width: 768px) {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    margin: 0;
+    width: 80%;
+    max-width: 600px;
+    max-height: 50%;
+
+    transform: translateX(-50%) translateY(-50%);
+  }
 `;
 
 export default DropdownList;

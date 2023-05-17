@@ -138,7 +138,7 @@ S.BoardWrapper = styled(SDiv)`
     @media only screen and (max-width: 768px) {
       display: ${(props) => (props.isOpen ? "flex" : "none")};
       position: fixed;
-      bottom: ${(props) => (props.isOpen ? "-556px" : "0")};
+      bottom: 0;
       left: 0;
       z-index: 10;
 
@@ -146,8 +146,6 @@ S.BoardWrapper = styled(SDiv)`
       gap: 0px;
       border-radius: 24px 24px 0 0;
       padding: 64px 54px 56px 54px;
-      transform: ${(props) => (props.isOpen ? "translateY(-556px)" : "")};
-      transition: ${(props) => (props.isOpen ? "transform 0.3s ease" : "")};
 
       background-color: ${colors.white};
     }
@@ -172,7 +170,7 @@ S.Overlay = styled.div`
     z-index: 1;
     inset: 0;
 
-    width: 100vh;
+    width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
   }

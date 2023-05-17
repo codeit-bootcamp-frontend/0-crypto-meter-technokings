@@ -23,6 +23,7 @@ const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
   }, [mediaQuery]);
   return (
     <S.DropdownWrapper>
+      <S.Overlay className="dropdown-overlay" show={isOpen} onClick={onClick} />
       <S.DropdownHead
         bd={`1px solid ${colors.gray6}`}
         br={12}
@@ -56,7 +57,9 @@ const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
           </SDiv>
         </SDiv>
       </S.DropdownHead>
-      {isOpen && <DropdownList isOpen={isOpen} options={options} />}
+      {isOpen && (
+        <DropdownList isOpen={isOpen} options={options} onClick={onClick} />
+      )}
     </S.DropdownWrapper>
   );
 };
@@ -83,6 +86,21 @@ S.DropdownHead = styled(SDiv)`
 
     padding: 19px 20px 20px 25px;
     ${(props) => props.isOpen && darkerBorder}
+  }
+`;
+
+S.Overlay = styled.div`
+  display: none;
+
+  @media only screen and (max-width: 768px) {
+    display: ${(props) => (props.show ? "block" : "none")};
+    position: fixed;
+    z-index: 3;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
   }
 `;
 
