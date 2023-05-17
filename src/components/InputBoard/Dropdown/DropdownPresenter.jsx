@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
@@ -12,8 +12,15 @@ import SText from "@/styles/micro-components/StyledText";
 
 import DropdownList from "./DropdownList";
 import DropdownHandleIcon from "../../SVGComponents/DropdownHandleIcon";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
+  const { mediaQuery } = useMediaQuery(768);
+  const [isTablet, setIsTablet] = useState(mediaQuery.matches);
+
+  useEffect(() => {
+    setIsTablet(mediaQuery.matches);
+  }, [mediaQuery]);
   return (
     <S.DropdownWrapper>
       <S.DropdownHead
@@ -30,13 +37,22 @@ const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
               <img src={selectedValue.image} alt={`${selectedValue.name}`} />
             </S.ImageWrapper>
             <SDiv ct>
-              <SText b1 white disableSelect>
+              <S.LabelText b1 white disableSelect>
                 {selectedValue.name}
-              </SText>
+              </S.LabelText>
             </SDiv>
           </SDiv>
           <SDiv ct>
-            <DropdownHandleIcon rotate={isOpen.toString()} />
+            {isTablet ? (
+              <DropdownHandleIcon
+                w={12}
+                h={12}
+                fill={colors.black}
+                rotate={isOpen.toString()}
+              />
+            ) : (
+              <DropdownHandleIcon rotate={isOpen.toString()} />
+            )}
           </SDiv>
         </SDiv>
       </S.DropdownHead>
@@ -58,10 +74,21 @@ S.DropdownHead = styled(SDiv)`
 
   cursor: pointer;
 
+  @media only screen and (max-width: 768px) {
+    ${(props) => props.isOpen && darkerBorder}
+  }
+
   @media only screen and (max-width: 375px) {
     height: 63px;
 
     padding: 19px 20px 20px 25px;
+    ${(props) => props.isOpen && darkerBorder}
+  }
+`;
+
+S.LabelText = styled(SText)`
+  @media only screen and (max-width: 768px) {
+    color: ${colors.gray9};
   }
 `;
 
@@ -79,6 +106,10 @@ S.ImageWrapper = styled(SDiv)`
 
 const lighterBorder = css`
   border-color: ${colors.gray1};
+`;
+
+const darkerBorder = css`
+  border-color: ${colors.black};
 `;
 
 DropdownPresenter.propTypes = {

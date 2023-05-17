@@ -6,7 +6,7 @@ import InputBoardPresenter from "./InputBoardPresenter";
 const InputBoard = () => {
   const subscribedUserInput = {
     // TODO: zustand userInput store에서 구독할 상태들
-    selectedCoinId: "bitcoin",
+    selectedCoinId: "Bitcoin",
     historyDate: "",
     selectMoney: 0,
     selectMoneyToCalc: 0,
@@ -17,6 +17,7 @@ const InputBoard = () => {
   };
   const handleClickSubmit = (e) => {
     e.preventDefault();
+    // TOOD: selectMoney 기반으로 계산해서 store에 update
   };
   const { selectedCoinId, historyDate, selectMoney, selectMoneyToCalc } =
     subscribedUserInput;
