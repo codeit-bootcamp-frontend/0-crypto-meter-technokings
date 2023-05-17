@@ -44,6 +44,7 @@
 }
 
 html {
+  font-size: 62.5%;
   background-color: #f5f8f9;
   font-family: "Pretendard-Medium";
 }
@@ -53,6 +54,8 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+
+  font-size: 1.6rem;
 }
 
 select {
