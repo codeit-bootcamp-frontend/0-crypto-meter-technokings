@@ -1,12 +1,12 @@
 import React from "react";
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import MainLogo from "@components/SVGComponents/MainLogo";
-import { SDiv, SText, colors } from "@styles";
+import { RestoreIcon, MainLogo } from "@components";
+import { SDiv, SText } from "@styles";
 import Select from "./Select/Select";
 import GnbButton from "./GnbButton";
-import { RestoreIcon } from "@components";
+import SearchHistory from "./SearchHistory/SearchHistory";
 
 const GnbPresenter = ({ isHistoryOpen, onResetClick, onHistoryClick }) => {
   return (
@@ -23,6 +23,7 @@ const GnbPresenter = ({ isHistoryOpen, onResetClick, onHistoryClick }) => {
             <SText b3>검색기록</SText>
           </GnbButton>
         </S.ButtonWrapper>
+        {isHistoryOpen && <SearchHistory />}
       </S.GnbWrapper>
     </header>
   );
@@ -30,7 +31,9 @@ const GnbPresenter = ({ isHistoryOpen, onResetClick, onHistoryClick }) => {
 
 const S = {};
 
-S.GnbWrapper = styled(SDiv)``;
+S.GnbWrapper = styled(SDiv)`
+  position: relative;
+`;
 
 S.ButtonWrapper = styled(SDiv)``;
 

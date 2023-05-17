@@ -1,4 +1,7 @@
 /* eslint-disable import/order */
+// 페이지 구성 컴포넌트
+import Gnb from "@components/Gnb/Gnb";
+
 // SVG Components
 import CloseIcon from "@components/SVGComponents/CloseIcon";
 import DropdownHandleIcon from "@components/SVGComponents/DropdownHandleIcon";
@@ -34,4 +37,5 @@ export {
   PriceChange,
   SelectDurationChip,
   Dropdown,
+  Gnb,
 };
