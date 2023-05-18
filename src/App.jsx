@@ -1,9 +1,14 @@
 import React from "react";
 
 import "./App.css";
+import { Gnb } from "@components";
 
 const App = () => {
-  return <>CryptoMeter</>;
+  return (
+    <>
+      <Gnb />
+    </>
+  );
 };
 
 export default App;
