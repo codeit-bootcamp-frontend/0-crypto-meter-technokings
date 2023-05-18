@@ -43,6 +43,8 @@ module.exports = {
     quotes: "off",
     "no-use-before-define": "off",
     "comma-dangle": "off",
+    "object-curly-newline": "off",
+    "operator-linebreak": "off",
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
     "import/order": [
       "error",

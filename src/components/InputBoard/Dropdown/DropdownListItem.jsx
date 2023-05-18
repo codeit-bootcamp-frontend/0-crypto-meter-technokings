@@ -9,9 +9,17 @@ import SDiv from "@/styles/micro-components/StyledDiv";
 import colors from "@styles/colors";
 import SText from "@styles/micro-components/StyledText";
 
-const DropdownListItem = ({ option }) => {
+const DropdownListItem = ({ option, onClick }) => {
   return (
-    <S.ItemWrapper row act g={10} h={46} pd="8px 0px 8px 10px;" br={6}>
+    <S.ItemWrapper
+      row
+      act
+      g={10}
+      h={46}
+      pd="8px 0px 8px 10px;"
+      br={6}
+      onClick={onClick}
+    >
       <S.ImageWrapper w={30} h={30} disableSelect>
         <img src={option.image} alt={`${option.name} logo`} />
       </S.ImageWrapper>

@@ -43,6 +43,10 @@
   box-sizing: border-box;
 }
 
+*:focus {
+  outline: none;
+}
+
 html {
   font-size: 62.5%;
   background-color: #f5f8f9;
@@ -86,6 +90,17 @@ button {
 span {
   font-family: "Pretendard-Medium";
   display: inline-block;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* Chrome, safari */
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
 }
 
 .App {

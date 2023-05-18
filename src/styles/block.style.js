@@ -119,6 +119,10 @@ const right = css`
   text-align: right;
 `;
 
+const full = css`
+  width: 100%;
+`;
+
 export {
   mg,
   pd,
@@ -146,4 +150,5 @@ export {
   center,
   left,
   right,
+  full,
 };

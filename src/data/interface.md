@@ -107,9 +107,30 @@ response.data.market_data.current_price.krw,
 ```js
 const coinListStore = create((set) => ({
   coinCurrency: "krw" || "usd",
-  coinList: [ pageNum: [], ... ],
+  coinList: { coinCurrency_pageNum: [{}, {}, {}], ... },
+  dropdownCoinOptionList: [],
+  // {
+  //   "krw_1" : [
+  //     {
+  //       id: "bitcoin",
+  //       ...
+  //     },
+  //     {...},
+  //     ...
+  //   ],
+  //   "usd_1" : [],
+  //   "krw_2" ; [],
+  //   ...
+  // }
+  // coinList 사용 시: coinList[`${coinCurrency}_${pageNum}`]
+  // 1. store coinList에 `${coinCurrency}_${pageNum}` 가 key값으로 있는지 확인
+  // 2. 있으면 그대로 사용
+  // 3. 없으면 store의 getCoinList 호출하고 리턴 결과를 사용
   getCoinList: () => {
     // GET /coins/markets
+  },
+  getDropdownList: ()=>{
+    // coinList중 처음에 불러운 6페이지 데이터를 하나의 배열로 병합하여 반환
   },
   getCoinListLength: () => {
     // GET /global/
