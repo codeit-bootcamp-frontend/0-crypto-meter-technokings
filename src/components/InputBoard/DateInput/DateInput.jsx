@@ -4,7 +4,8 @@ import styled, { css } from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { SDiv, SText, colors } from "@styles";
-import { DropdownHandleIcon } from "@components";
+
+import DropdownHandleIcon from "../../SVGComponents/DropdownHandleIcon";
 
 const DateInput = ({ isOpen, onChange, selectedDate }) => {
   const { mediaQuery } = useMediaQuery(768);
@@ -14,7 +15,7 @@ const DateInput = ({ isOpen, onChange, selectedDate }) => {
     setIsTablet(mediaQuery.matches);
   }, [mediaQuery]);
   return (
-    <S.InputWrapper type="date">
+    <S.InputWrapper type="date" onChange={onChange}>
       <SDiv row sb>
         <SDiv ct>
           <S.LabelText b1 white disableSelect>
