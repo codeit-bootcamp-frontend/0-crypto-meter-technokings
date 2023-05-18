@@ -1,8 +1,10 @@
+import React from "react";
+
+import styled from "styled-components";
+
 import { SButton, colors } from "@styles";
 import { lightgreen } from "@styles/block.style";
 import { g8, green } from "@styles/text.style";
-import React from "react";
-import styled from "styled-components";
 
 const GnbButton = ({ children, onClick, isHistoryOpen }) => {
   return (

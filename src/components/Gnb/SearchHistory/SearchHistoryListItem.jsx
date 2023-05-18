@@ -1,7 +1,9 @@
+import React from "react";
+
+import styled from "styled-components";
+
 import { SDiv, SText, colors } from "@styles";
 import { green, red } from "@styles/text.style";
-import React from "react";
-import styled from "styled-components";
 
 const SearchHistoryListItem = ({ record }) => {
   const { coin, before, after } = record;
@@ -20,16 +22,16 @@ const SearchHistoryListItem = ({ record }) => {
       <S.TextWrapper col g={6}>
         <SText b3 g5>
           {`만약 ${beforeTime.getFullYear()}년 ${beforeTime.getMonth()}월 ${beforeTime.getDate()}일에 `}
-          <SText s3>{`${beforeMoney}원`}</SText>으로
+          <SText s3>{`${beforeMoney}원`}</SText>
+          으로
         </SText>
         <SText b2 black>
           {`${
             coin.name
           }을 샀다면, ${afterTime.getFullYear()}년 ${afterTime.getMonth()}월 ${afterTime.getDate()}일에는 `}
-          <S.MoneyText
-            s2
-            isMoneyIncreased={isMoneyIncreased}
-          >{`${afterMoney}원`}</S.MoneyText>{" "}
+          <S.MoneyText s2 isMoneyIncreased={isMoneyIncreased}>
+            {`${afterMoney}원 `}
+          </S.MoneyText>
           입니다.
         </SText>
       </S.TextWrapper>
