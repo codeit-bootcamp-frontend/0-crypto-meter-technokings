@@ -2,9 +2,9 @@
 /* eslint-disable arrow-body-style */
 import React, { useState } from "react";
 
-import DropdownPresenter from "@components/Common/Dropdown/DropdownPresenter";
+import DropdownPresenter from "@components/InputBoard/Dropdown/DropdownPresenter";
 
-const DUMMY_OPTIONS = [
+export const DUMMY_OPTIONS = [
   {
     id: "bitcoin",
     name: "Bitcoin",
@@ -61,11 +61,10 @@ const DUMMY_OPTIONS = [
   },
 ];
 
-const Dropdown = () => {
+const Dropdown = ({ options }) => {
   // isOpen 상태 빼고 전부 InputBoard에서 Dropdown한테 props로 넘기기
   const selectedCoinId = "bitcoin";
   const [isOpen, setIsOpen] = useState(false);
-  const options = DUMMY_OPTIONS;
   const selectedCoinInfo = options.find((option) => {
     return option.id === selectedCoinId;
   });

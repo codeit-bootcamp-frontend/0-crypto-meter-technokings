@@ -27,6 +27,7 @@ import {
   center,
   left,
   right,
+  full,
 } from "@/styles/block.style";
 import {
   h1,
@@ -108,6 +109,7 @@ const SButton = styled.button`
   ${(props) => props.flex && flex}
 
   width: ${(props) => (props.w ? `${props.w}px` : "auto")};
+  ${(props) => props.full && full}
   height: ${(props) => (props.h ? `${props.h}px` : "auto")};
   min-height: ${(props) => (props.mh ? `${props.mh}%` : "auto")};
 

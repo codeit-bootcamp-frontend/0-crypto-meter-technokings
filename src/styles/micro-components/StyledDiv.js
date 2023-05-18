@@ -27,6 +27,7 @@ import {
   center,
   left,
   right,
+  full,
 } from "@/styles/block.style";
 
 const SDiv = styled.div`
@@ -77,6 +78,7 @@ const SDiv = styled.div`
   ${(props) => props.flex && flex}
 
   width: ${(props) => (props.w ? `${props.w}px` : "auto")};
+  ${(props) => props.full && full}
   height: ${(props) => (props.h ? `${props.h}px` : "auto")};
   min-height: ${(props) => (props.mh ? `${props.mh}%` : "auto")};
 
