@@ -12,7 +12,7 @@ import SelectListItem from "./SelectListItem";
 
 const SelectList = ({ options }) => {
   return (
-    <SDiv
+    <S.SelectListWrapper
       col
       ast
       pd="4px"
@@ -25,7 +25,7 @@ const SelectList = ({ options }) => {
       {options.map((item) => (
         <SelectListItem key={item.value} option={item} />
       ))}
-    </SDiv>
+    </S.SelectListWrapper>
   );
 };
 
