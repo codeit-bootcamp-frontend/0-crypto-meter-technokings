@@ -5,9 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import SDiv from "@/styles/micro-components/StyledDiv";
-import colors from "@styles/colors";
-import SText from "@styles/micro-components/StyledText";
+import { SDiv, SText, colors } from "@styles";
 
 const DropdownListItem = ({ option, onClick }) => {
   return (

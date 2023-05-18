@@ -5,9 +5,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import colors from "@/styles/colors";
-import SDiv from "@/styles/micro-components/StyledDiv";
-import DropdownListItem from "@components/InputBoard/Dropdown/DropdownListItem";
+import { SDiv, colors } from "@styles";
+
+import DropdownListItem from "./DropdownListItem";
 
 const DropdownList = ({ options = [], onClick }) => {
   // const optionList = options ?? DUMMY_OPTIONS;

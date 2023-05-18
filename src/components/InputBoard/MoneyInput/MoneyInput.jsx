@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
+
 import styled, { css } from "styled-components";
 
-import { SDiv, SText, colors } from "@styles";
-import { b1, white } from "@styles/text.style";
-import { disableSelect } from "@styles/block.style";
 import formatMoneyToString from "@/utils/formatMoney";
+import { SDiv, SText, colors } from "@styles";
+import { disableSelect } from "@styles/block.style";
+import { b1, white } from "@styles/text.style";
 
 const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
   const selectedCurrency = {
@@ -33,7 +34,7 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
             setShowInput(false);
           }}
           show={showInput}
-        ></S.Input>
+        />
         <SDiv
           onClick={() => {
             setShowInput(true);
