@@ -2,9 +2,8 @@ import React from "react";
 
 import "./App.css";
 
-import InputBoard from "@components/InputBoard/InputBoard";
-
 import { Gnb } from "@components";
+import InputBoard from "@components/InputBoard/InputBoard";
 
 const App = () => {
   return (
