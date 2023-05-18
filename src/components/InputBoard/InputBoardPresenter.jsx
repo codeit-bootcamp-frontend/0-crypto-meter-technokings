@@ -1,15 +1,16 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from "react";
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { SDiv, SButton, SText, colors } from "@styles";
-import { SHeading2 } from "@styles";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import { SDiv, SButton, SText, colors, SHeading2 } from "@styles";
 
-import Dropdown from "./Dropdown/Dropdown";
-import { FilterIcon, IncreaseMoneyButton } from "@components";
-import useMediaQuery from "/src/hooks/useMediaQuery";
 import DateInput from "./DateInput/DateInput";
+import Dropdown from "./Dropdown/Dropdown";
 import MoneyInput from "./MoneyInput/MoneyInput";
+import IncreaseMoneyButton from "../IncreaseMoneyButton/IncreaseMoneyButton";
+import FilterIcon from "../SVGComponents/FilterIcon";
 
 const INCREASE_MONEY_UNITS = [5000, 10000, 50000, 100000];
 
@@ -55,7 +56,8 @@ const InputBoardPresenter = ({
           <SText white mgb={7}>
             {historyDate || "0000년 00월 00일"}
           </SText>
-          에<S.Br second />
+          에
+          <S.Br second />
           <SText white mgb={7}>
             {selectMoney || "0"}
           </SText>
@@ -77,7 +79,7 @@ const InputBoardPresenter = ({
           <S.InputArea col g={25} full className="GI">
             <DateInput isOpen={false} selectedDate="2022년 10월 12일" />
             <SDiv col act g={12}>
-              <MoneyInput selectedMoney={"15000"} isOpen={false} />
+              <MoneyInput selectedMoney="15000" isOpen={false} />
               <S.IncreaseButtonListWrapper row sb full>
                 {INCREASE_MONEY_UNITS.map((unit) => (
                   <IncreaseMoneyButton

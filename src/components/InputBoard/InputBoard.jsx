@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 
 import { DUMMY_OPTIONS } from "./Dropdown/Dropdown";
