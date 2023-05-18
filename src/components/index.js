@@ -1,4 +1,7 @@
 /* eslint-disable import/order */
+// 페이지 구성 컴포넌트
+import Gnb from "@components/Gnb/Gnb";
+
 // SVG Components
 import CloseIcon from "@components/SVGComponents/CloseIcon";
 import DropdownHandleIcon from "@components/SVGComponents/DropdownHandleIcon";
@@ -15,10 +18,8 @@ import ShareIcon from "@components/SVGComponents/ShareIcon";
 // 공통 컴포넌트
 import IncreaseMoneyButton from "@components/IncreaseMoneyButton/IncreaseMoneyButton";
 import PriceChange from "@components/PriceChange/PriceChange";
-import SearchHistoryButton from "@components/SearchHistoryButton/SearchHistoryButton";
 import SelectDurationChip from "@components/SelectDurationChip/SelectDurationChip";
 import Dropdown from "@components/Common/Dropdown/Dropdown";
-import Select from "@components/Common/Select/Select";
 
 export {
   CloseIcon,
@@ -34,8 +35,7 @@ export {
   ShareIcon,
   IncreaseMoneyButton,
   PriceChange,
-  SearchHistoryButton,
   SelectDurationChip,
   Dropdown,
-  Select,
+  Gnb,
 };
