@@ -1,6 +1,9 @@
-import { SDiv, colors } from "@styles";
 import React from "react";
+
 import styled from "styled-components";
+
+import { SDiv, colors } from "@styles";
+
 import SearchHistoryListItem from "./SearchHistoryListItem";
 
 const SearchHistoryList = ({ history }) => {

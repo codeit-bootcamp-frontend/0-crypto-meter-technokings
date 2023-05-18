@@ -6,13 +6,11 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import colors from "@/styles/colors";
-import SDiv from "@/styles/micro-components/StyledDiv";
-import SText from "@/styles/micro-components/StyledText";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import DropdownHandleIcon from "@components/SVGComponents/DropdownHandleIcon";
+import { colors, SDiv, SText } from "@styles";
 
 import DropdownList from "./DropdownList";
-import DropdownHandleIcon from "../../SVGComponents/DropdownHandleIcon";
-import useMediaQuery from "@/hooks/useMediaQuery";
 
 const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
   const { mediaQuery } = useMediaQuery(768);

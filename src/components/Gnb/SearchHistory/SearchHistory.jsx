@@ -1,6 +1,9 @@
-import { SButton, SDiv, SHeading4, SText, colors } from "@styles";
 import React from "react";
+
 import styled from "styled-components";
+
+import { SButton, SDiv, SHeading4, SText, colors } from "@styles";
+
 import SearchHistoryList from "./SearchHistoryList";
 
 const MOCK_HISTORY = [

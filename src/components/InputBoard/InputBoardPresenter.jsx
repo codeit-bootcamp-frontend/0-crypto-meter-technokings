@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
+import FilterIcon from "@components/SVGComponents/FilterIcon";
 import { SDiv, SButton, SText, colors, SHeading2 } from "@styles";
 
 import DateInput from "./DateInput/DateInput";
 import Dropdown from "./Dropdown/Dropdown";
 import IncreaseMoneyButton from "./IncreaseMoneyButton/IncreaseMoneyButton";
 import MoneyInput from "./MoneyInput/MoneyInput";
-import FilterIcon from "../SVGComponents/FilterIcon";
 
 const INCREASE_MONEY_UNITS = [5000, 10000, 50000, 100000];
 

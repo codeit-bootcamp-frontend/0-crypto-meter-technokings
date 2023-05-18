@@ -2,11 +2,13 @@ import React from "react";
 
 import styled from "styled-components";
 
-import { RestoreIcon, MainLogo } from "@components";
+import MainLogo from "@components/SVGComponents/MainLogo";
+import RestoreIcon from "@components/SVGComponents/RestoreIcon";
 import { SDiv, SText } from "@styles";
-import Select from "./Select/Select";
+
 import GnbButton from "./GnbButton";
 import SearchHistory from "./SearchHistory/SearchHistory";
+import Select from "./Select/Select";
 
 const GnbPresenter = ({ isHistoryOpen, onResetClick, onHistoryClick }) => {
   return (

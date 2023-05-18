@@ -19,7 +19,9 @@ const SelectPresenter = ({ isOpen, options, selectedOption, onClick }) => {
       <S.SelectHead
         col
         ct
-        pd="11px 10px 11px 15px"
+        h={40}
+        pdl={15}
+        pdr={10}
         br={12}
         bd={`1px solid ${colors.gray3}`}
         onClick={onClick}

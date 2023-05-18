@@ -2,7 +2,7 @@
 /* eslint-disable arrow-body-style */
 import React, { useState } from "react";
 
-import DropdownPresenter from "@components/InputBoard/Dropdown/DropdownPresenter";
+import DropdownPresenter from "./DropdownPresenter";
 
 export const DUMMY_OPTIONS = [
   {

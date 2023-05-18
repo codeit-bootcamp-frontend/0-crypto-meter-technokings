@@ -3,9 +3,8 @@ import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
+import DropdownHandleIcon from "@components/SVGComponents/DropdownHandleIcon";
 import { SDiv, SText, colors } from "@styles";
-
-import DropdownHandleIcon from "../../SVGComponents/DropdownHandleIcon";
 
 const DateInput = ({ isOpen, onChange, selectedDate }) => {
   const { mediaQuery } = useMediaQuery(768);
