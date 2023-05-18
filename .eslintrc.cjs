@@ -39,7 +39,7 @@ module.exports = {
       { namedComponents: "arrow-function" },
     ],
     "react-refresh/only-export-components": "warn",
-    "linebreak-style": ["error", "unix", "windows"],
+    "linebreak-style": "off",
     quotes: "off",
     "no-use-before-define": "off",
     "comma-dangle": "off",
