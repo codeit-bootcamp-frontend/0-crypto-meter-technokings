@@ -5,7 +5,7 @@ const useMediaQuery = (breakpoint) => {
    * 주어진 breakpoint 보다 화면이 작을 경우 match 를 true 로 초기화 시킨다
    */
   const [mediaQuery, setMediaQuery] = useState({
-    matches: window.innerWidth < breakpoint ? true : false,
+    matches: window.innerWidth < breakpoint
     media: "",
   });
 
