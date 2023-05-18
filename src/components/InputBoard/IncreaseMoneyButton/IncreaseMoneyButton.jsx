@@ -15,9 +15,9 @@ const IncreaseMoneyButton = ({ money = 10000 }) => {
       pd="6px 12px 6px 12px"
       bd={`1px solid ${colors.gray3}`}
     >
-      <S.ButtonText b3 white disableSelect>{`${money.toLocaleString(
-        "ko-KR"
-      )}원`}</S.ButtonText>
+      <S.ButtonText b3 white disableSelect>
+        {`${money.toLocaleString("ko-KR")}원`}
+      </S.ButtonText>
     </S.Button>
   );
 };

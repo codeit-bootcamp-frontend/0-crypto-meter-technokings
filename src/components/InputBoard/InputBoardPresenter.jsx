@@ -8,8 +8,8 @@ import { SDiv, SButton, SText, colors, SHeading2 } from "@styles";
 
 import DateInput from "./DateInput/DateInput";
 import Dropdown from "./Dropdown/Dropdown";
+import IncreaseMoneyButton from "./IncreaseMoneyButton/IncreaseMoneyButton";
 import MoneyInput from "./MoneyInput/MoneyInput";
-import IncreaseMoneyButton from "../IncreaseMoneyButton/IncreaseMoneyButton";
 import FilterIcon from "../SVGComponents/FilterIcon";
 
 const INCREASE_MONEY_UNITS = [5000, 10000, 50000, 100000];

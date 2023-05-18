@@ -17,7 +17,7 @@ import RestoreIcon from "@components/SVGComponents/RestoreIcon";
 import ShareIcon from "@components/SVGComponents/ShareIcon";
 
 // 공통 컴포넌트
-import IncreaseMoneyButton from "@components/IncreaseMoneyButton/IncreaseMoneyButton";
+import IncreaseMoneyButton from "@components/InputBoard/IncreaseMoneyButton/IncreaseMoneyButton";
 import PriceChange from "@components/PriceChange/PriceChange";
 import SelectDurationChip from "@components/SelectDurationChip/SelectDurationChip";
 import Dropdown from "@components/InputBoard/Dropdown/Dropdown";
