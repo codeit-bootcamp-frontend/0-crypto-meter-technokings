@@ -1,12 +1,15 @@
 import React from "react";
 
 import "./App.css";
-import { SDiv, colors } from "@styles";
+
 import InputBoard from "@components/InputBoard/InputBoard";
+
+import { Gnb } from "@components";
 
 const App = () => {
   return (
     <>
+      <Gnb />
       <InputBoard />
     </>
   );

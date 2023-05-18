@@ -102,6 +102,9 @@ const SButton = styled.button`
   ${(props) => props.bc && bc}
   ${(props) => props.bd && bd}
 
+  /* gap 속성 */
+  gap: ${(props) => (props.g ? `${props.g}px` : 0)};
+
   /* 나머지 속성 */
   ${(props) => props.flex && flex}
 
