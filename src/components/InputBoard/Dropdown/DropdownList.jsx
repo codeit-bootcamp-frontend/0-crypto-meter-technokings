@@ -41,12 +41,24 @@ const S = {};
 
 S.MainWrapper = styled(SDiv)`
   position: absolute;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   z-index: 10;
 
   width: 100%;
   max-height: 255px;
   min-height: 55px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: ${colors.gray2};
+  }
 
   @media only screen and (max-width: 768px) {
     position: fixed;
