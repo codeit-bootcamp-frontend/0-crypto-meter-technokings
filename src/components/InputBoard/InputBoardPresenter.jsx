@@ -77,7 +77,10 @@ const InputBoardPresenter = ({
           }}
         >
           <S.InputArea col g={25} full className="GI">
-            <DateInput isOpen={false} selectedDate="2022년 10월 12일" />
+            <DateInput
+              defaultDate={new Date("1995-11-21")}
+              onChangeDate={() => {}}
+            />
             <SDiv col act g={12}>
               <MoneyInput selectedMoney="15000" isOpen={false} />
               <S.IncreaseButtonListWrapper row sb full>
