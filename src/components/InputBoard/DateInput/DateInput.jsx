@@ -10,13 +10,46 @@ import { disableSelect } from "@styles/block.style";
 import { b1, g9, white } from "@styles/text.style";
 import "react-datepicker/dist/react-datepicker.css";
 
-const DateInput = ({ defaultDate, onChangeDate }) => {
+/**
+ * 자식과 부모 노드를 넘겨서 넘겨준 부모 노드의 자식이 맞는지 리턴하는 함수입니다.
+ * @param {string} parentClassName 부모 노드의 클래스 명
+ * @param {DOMObject} child 자식노드
+ * @returns {boolean} 자식노드가 부모 노드의 자존이 맞는지 리턴
+ */
+const isDescendant = (parentClassName, child) => {
+  const parent = document.querySelector(`.${parentClassName}`);
+  let node = child.parentNode;
+  while (node != null) {
+    if (node === parent) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
+};
+
+const DateInput = ({ selectedDate, onChange }) => {
   const { mediaQuery } = useMediaQuery(768);
   const [isTablet, setIsTablet] = useState(mediaQuery.matches);
-  const [displayDate, setDisplayDate] = useState(defaultDate);
   const [isOpen, setIsOpen] = useState(false);
   const datePickerRef = useRef(null);
-  const handleClickInputWrapper = () => {
+
+  const isUnavailableClick = (e) => {
+    if (
+      isDescendant("react-datepicker__header", e.target) ||
+      e.target.classList.contains("react-datepicker__navigation-icon") ||
+      e.target.classList.contains("react-datepicker__navigation") ||
+      e.target.classList.contains("react-datepicker__day--disabled")
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleClickInputWrapper = (e) => {
+    // datepicker UI 내에서 header와 navigation을 클릭했을 때는 isOpen상태를 바꾸면 안됨
+    if (isUnavailableClick(e)) return;
+    // isOpen 상태를 토글하고, isOpen에 따라 datepicker에 focus, blur를 부여
     setIsOpen((prev) => !prev);
     if (datePickerRef.current) {
       if (isOpen) {
@@ -26,6 +59,7 @@ const DateInput = ({ defaultDate, onChangeDate }) => {
       datePickerRef.current.setFocus();
     }
   };
+
   useEffect(() => {
     setIsTablet(mediaQuery.matches);
   }, [mediaQuery]);
@@ -36,13 +70,11 @@ const DateInput = ({ defaultDate, onChangeDate }) => {
         <S.DatePickerWrapper>
           <DatePicker
             ref={datePickerRef}
-            selected={displayDate}
+            selected={selectedDate}
             dateFormat="yyyy년 MM월 dd일"
-            onChange={(date) => {
-              // Date object : Wed May 17 2023 21:16:54 GMT+0900 (한국 표준시) 형식
-              setDisplayDate(date);
-              onChangeDate(date);
-            }}
+            onChange={onChange}
+            minDate={new Date("2013-04-28")}
+            maxDate={new Date()}
           />
         </S.DatePickerWrapper>
         <SDiv ct>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
+import formatDateToString from "@/utils/formatDate";
 import FilterIcon from "@components/SVGComponents/FilterIcon";
 import { SDiv, SButton, SText, colors, SHeading2 } from "@styles";
 
@@ -19,7 +20,8 @@ const InputBoardPresenter = ({
   historyDate,
   selectMoney,
   dropdownCoinOptionList,
-  handleClickSubmit,
+  onSubmit,
+  onChangeDate,
 }) => {
   const [isOpen, setIsOpen] = useState(false); // form 모달이 열렸는지
   const { mediaQuery } = useMediaQuery(768); // 미디어쿼리 변화 감지
@@ -54,12 +56,12 @@ const InputBoardPresenter = ({
           <SText mgb={7}> 내가 만약&nbsp;</SText>
           <S.Br first />
           <SText white mgb={7}>
-            {historyDate || "0000년 00월 00일"}
+            {formatDateToString(historyDate) || "0000년 00월 00일"}
           </SText>
           에
           <S.Br second />
           <SText white mgb={7}>
-            {selectMoney || "0"}
+            {selectMoney || 0}
           </SText>
           원으로&nbsp;
           <S.Br third />
@@ -72,14 +74,16 @@ const InputBoardPresenter = ({
           }}
         />
         <form
-          onSubmit={() => {
+          onSubmit={(e) => {
+            e.preventDefault();
             setIsOpen(false);
+            onSubmit(e);
           }}
         >
           <S.InputArea col g={25} full className="GI">
             <DateInput
-              defaultDate={new Date("1995-11-21")}
-              onChangeDate={() => {}}
+              selectedDate={historyDate} // TODO: historyDate를 받아온다.
+              onChange={onChangeDate}
             />
             <SDiv col act g={12}>
               <MoneyInput selectedMoney="15000" isOpen={false} />
@@ -104,8 +108,9 @@ const InputBoardPresenter = ({
               br={35}
               white
               type="submit"
-              onClick={(e) => {
-                handleClickSubmit(e);
+              onSubmit={(e) => {
+                e.preventDefault();
+                onSubmit(e);
                 setIsOpen(false);
               }}
             >
