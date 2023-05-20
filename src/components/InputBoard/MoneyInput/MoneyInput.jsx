@@ -15,7 +15,21 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
   };
   const [inputValue, setInputValue] = useState(selectedMoney);
   const [showInput, setShowInput] = useState(true);
+  const inputRef = useRef(null);
 
+  useEffect(() => {
+    if (showInput) {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }
+  }, [showInput]);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+  }, []);
   return (
     <S.InputWrapper isOpen={isOpen}>
       <SDiv row sb>
@@ -34,6 +48,7 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
             setShowInput(false);
           }}
           show={showInput}
+          ref={inputRef}
         />
         <SDiv
           onClick={() => {
