@@ -71,6 +71,7 @@ const Dropdown = ({ options }) => {
   return (
     <DropdownPresenter
       isOpen={isOpen}
+      setIsOpen={setIsOpen}
       onClick={() => {
         setIsOpen((prev) => !prev);
       }}

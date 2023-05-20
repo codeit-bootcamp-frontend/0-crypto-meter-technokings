@@ -1,26 +1,36 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
+import useOutsideClick from "@/hooks/useOutsideClick";
 import DropdownHandleIcon from "@components/SVGComponents/DropdownHandleIcon";
 import { colors, SDiv, SText } from "@styles";
 
 import DropdownList from "./DropdownList";
 
-const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
+const DropdownPresenter = ({
+  isOpen,
+  setIsOpen,
+  onClick,
+  selectedValue,
+  options,
+}) => {
   const { mediaQuery } = useMediaQuery(1200);
   const [isTablet, setIsTablet] = useState(mediaQuery.matches);
-
+  const dropdownRef = useRef(null);
   useEffect(() => {
     setIsTablet(mediaQuery.matches);
   }, [mediaQuery]);
+  useOutsideClick(dropdownRef, () => {
+    setIsOpen(false);
+  });
   return (
-    <S.DropdownWrapper>
+    <S.DropdownWrapper ref={dropdownRef}>
       <S.Overlay className="dropdown-overlay" show={isOpen} onClick={onClick} />
       <S.DropdownHead
         bd={`1px solid ${colors.gray6}`}
