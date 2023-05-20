@@ -2,9 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 
 import styled, { css } from "styled-components";
 
-import formatMoneyToString from "@/utils/formatMoney";
 import { SDiv, SText, colors } from "@styles";
-import { disableSelect } from "@styles/block.style";
 import { b1, white } from "@styles/text.style";
 
 const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
@@ -15,7 +13,21 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
   };
   const [inputValue, setInputValue] = useState(selectedMoney);
   const [showInput, setShowInput] = useState(true);
+  const inputRef = useRef(null);
 
+  useEffect(() => {
+    if (showInput) {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }
+  }, [showInput]);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+  }, []);
   return (
     <S.InputWrapper isOpen={isOpen}>
       <SDiv row sb>
@@ -23,7 +35,7 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
           type="number"
           min="1"
           ct
-          placeholder={Number(selectedMoney).toLocaleString()}
+          placeholder={new Intl.NumberFormat().format(selectedMoney)}
           onChange={(e) => {
             setInputValue(e.target.value);
           }}
@@ -34,16 +46,16 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
             setShowInput(false);
           }}
           show={showInput}
+          ref={inputRef}
         />
-        <SDiv
+        <S.InputValueWrapper
           onClick={() => {
             setShowInput(true);
           }}
+          show={!showInput}
         >
-          <S.InputValue b1 white show={!showInput}>
-            {Number(inputValue).toLocaleString()}
-          </S.InputValue>
-        </SDiv>
+          {new Intl.NumberFormat().format(inputValue)}
+        </S.InputValueWrapper>
         <SDiv ct>
           <S.LabelText b1 white disableSelect>
             {`${selectedCurrency.name} (${selectedCurrency.symbol})`}
@@ -72,11 +84,11 @@ S.InputWrapper = styled.div`
   border-radius: 12px;
   padding: 26px 20px 22px 25px;
   height: 74px;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     ${(props) => props.isOpen && darkerBorder}
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     height: 63px;
 
     padding: 19px 20px 20px 25px;
@@ -85,7 +97,7 @@ S.InputWrapper = styled.div`
 `;
 
 S.LabelText = styled(SText)`
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     color: ${colors.gray9};
   }
 `;
@@ -101,17 +113,24 @@ S.Input = styled.input`
     color: ${colors.gray6};
   }
   padding: 0;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     color: ${colors.gray9};
   }
 `;
 
-S.InputValue = styled(SText)`
+S.InputValueWrapper = styled(SDiv)`
   display: ${(props) => (props.show ? "inline-block" : "none")};
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+
+  width: 80%;
+
   cursor: text;
-  @media only screen and (max-width: 768px) {
+
+  ${b1}
+  ${white}
+  @media only screen and (max-width: 1200px) {
     color: ${colors.gray9};
   }
 `;
-
 export default MoneyInput;

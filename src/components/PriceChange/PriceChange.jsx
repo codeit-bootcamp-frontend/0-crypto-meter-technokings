@@ -21,7 +21,7 @@ const S = {};
 
 S.DivText = styled(SText)`
   ${(props) => (props.isDesc ? red : green)}
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 13px;
   }
 `;

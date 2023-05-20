@@ -28,7 +28,7 @@ const S = {};
 S.Svg = styled.svg`
   display: none;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -38,7 +38,7 @@ S.Svg = styled.svg`
     height: 32px;
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     width: 30px;
     height: 30px;
   }

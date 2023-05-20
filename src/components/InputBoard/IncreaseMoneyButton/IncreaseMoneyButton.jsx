@@ -25,10 +25,10 @@ const IncreaseMoneyButton = ({ money = 10000 }) => {
 const S = {};
 
 S.ButtonText = styled(SText)`
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     color: ${colors.gray8};
   }
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 12px;
   }
 `;
@@ -41,7 +41,7 @@ S.Button = styled(SButton)`
   &:active > span {
     color: ${colors.white};
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     border-color: ${colors.gray7};
   }
 `;

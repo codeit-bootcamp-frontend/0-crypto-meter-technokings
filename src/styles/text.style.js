@@ -59,7 +59,7 @@ const h1 = css`
   font-size: 4.8rem;
   letter-spacing: -0.03rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 2rem;
   }
 `;
@@ -69,7 +69,7 @@ const h2 = css`
   font-size: 3.6rem;
   letter-spacing: -0.03rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 2.4rem;
   }
 `;
@@ -79,7 +79,7 @@ const h3 = css`
   font-size: 2.6rem;
   letter-spacing: -0.03rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 2rem;
   }
 `;
@@ -89,7 +89,7 @@ const h4 = css`
   font-size: 2rem;
   letter-spacing: -0.03rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 1.8rem;
   }
 `;
@@ -99,7 +99,7 @@ const s1 = css`
   font-size: 1.8rem;
   letter-spacing: -0.03rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 1.6rem;
   }
 `;
@@ -109,7 +109,7 @@ const s2 = css`
   font-size: 1.5rem;
   letter-spacing: -0.03rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 1.4rem;
   }
 `;
@@ -127,7 +127,7 @@ const b1 = css`
   font-size: 1.7rem;
   letter-spacing: -0.03rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 1.5rem;
   }
 `;
@@ -139,7 +139,7 @@ const b2 = css`
   font-size: 1.5rem;
   letter-spacing: -0.03rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 1.3rem;
   }
 `;
@@ -151,7 +151,7 @@ const b3 = css`
   font-size: 1.4rem;
   letter-spacing: -0.03rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 1.3rem;
   }
 `;
@@ -161,7 +161,7 @@ const c1 = css`
   font-size: 1.6rem;
   letter-spacing: -0.03rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 1.3rem;
   }
 `;
@@ -170,7 +170,7 @@ const c2 = css`
   font-family: "Pretendard-Regular";
   font-size: 1.4rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 0.1rem;
   }
 `;

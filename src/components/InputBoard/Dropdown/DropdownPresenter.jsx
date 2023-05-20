@@ -1,26 +1,36 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
+import useOutsideClick from "@/hooks/useOutsideClick";
 import DropdownHandleIcon from "@components/SVGComponents/DropdownHandleIcon";
 import { colors, SDiv, SText } from "@styles";
 
 import DropdownList from "./DropdownList";
 
-const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
-  const { mediaQuery } = useMediaQuery(768);
+const DropdownPresenter = ({
+  isOpen,
+  setIsOpen,
+  onClick,
+  selectedValue,
+  options,
+}) => {
+  const { mediaQuery } = useMediaQuery(1200);
   const [isTablet, setIsTablet] = useState(mediaQuery.matches);
-
+  const dropdownRef = useRef(null);
   useEffect(() => {
     setIsTablet(mediaQuery.matches);
   }, [mediaQuery]);
+  useOutsideClick(dropdownRef, () => {
+    setIsOpen(false);
+  });
   return (
-    <S.DropdownWrapper>
+    <S.DropdownWrapper ref={dropdownRef}>
       <S.Overlay className="dropdown-overlay" show={isOpen} onClick={onClick} />
       <S.DropdownHead
         bd={`1px solid ${colors.gray6}`}
@@ -75,11 +85,11 @@ S.DropdownHead = styled(SDiv)`
 
   cursor: pointer;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     ${(props) => props.isOpen && darkerBorder}
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     height: 63px;
 
     padding: 19px 20px 20px 25px;
@@ -90,7 +100,7 @@ S.DropdownHead = styled(SDiv)`
 S.Overlay = styled.div`
   display: none;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     display: ${(props) => (props.show ? "block" : "none")};
     position: fixed;
     z-index: 3;
@@ -103,7 +113,7 @@ S.Overlay = styled.div`
 `;
 
 S.LabelText = styled(SText)`
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     color: ${colors.gray9};
   }
 `;
@@ -114,7 +124,7 @@ S.ImageWrapper = styled(SDiv)`
     height: 100%;
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     width: 24px;
     height: 24px;
   }
