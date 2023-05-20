@@ -50,15 +50,14 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
           show={showInput}
           ref={inputRef}
         />
-        <SDiv
+        <S.InputValueWrapper
           onClick={() => {
             setShowInput(true);
           }}
+          show={!showInput}
         >
-          <S.InputValue b1 white show={!showInput}>
-            {Number(inputValue).toLocaleString()}
-          </S.InputValue>
-        </SDiv>
+          {Number(inputValue).toLocaleString()}
+        </S.InputValueWrapper>
         <SDiv ct>
           <S.LabelText b1 white disableSelect>
             {`${selectedCurrency.name} (${selectedCurrency.symbol})`}
@@ -121,12 +120,19 @@ S.Input = styled.input`
   }
 `;
 
-S.InputValue = styled(SText)`
+S.InputValueWrapper = styled(SDiv)`
   display: ${(props) => (props.show ? "inline-block" : "none")};
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+
+  width: 250px;
+
   cursor: text;
+
+  ${b1}
+  ${white}
   @media only screen and (max-width: 768px) {
     color: ${colors.gray9};
   }
 `;
-
 export default MoneyInput;
