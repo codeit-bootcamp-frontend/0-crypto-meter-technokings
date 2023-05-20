@@ -22,8 +22,8 @@ import CoinChartCustomTooltip from "./CoinChartCustomTooltip";
 
 const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
   // 반응형에 따라 그래프의 축 데이터들의 css를 다루고자 사용했습니다.
-  const { mediaQuery: mobileMediaQuery } = useMediaQuery(375);
-  const { mediaQuery: tabletMediaQuery } = useMediaQuery(768);
+  const { mediaQuery: mobileMediaQuery } = useMediaQuery(768);
+  const { mediaQuery: tabletMediaQuery } = useMediaQuery(1200);
   const [isMobile, setIsMobile] = useState(mobileMediaQuery.matches);
   const [isTablet, setIsTablet] = useState(tabletMediaQuery.matches);
 

@@ -24,7 +24,7 @@ const InputBoardPresenter = ({
   onChangeDate,
 }) => {
   const [isOpen, setIsOpen] = useState(false); // form 모달이 열렸는지
-  const { mediaQuery } = useMediaQuery(768); // 미디어쿼리 변화 감지
+  const { mediaQuery } = useMediaQuery(1200); // 미디어쿼리 변화 감지
   const [isTablet, setIsTablet] = useState(mediaQuery.matches); // 태블릿 사이즈 이하인지
 
   const handleClickIncreaseMoney = () => {
@@ -145,7 +145,7 @@ S.BoardWrapper = styled(SDiv)`
     flex-direction: column;
     gap: 189px;
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1200px) {
       display: ${(props) => (props.isOpen ? "flex" : "none")};
       position: fixed;
       bottom: 0;
@@ -160,12 +160,12 @@ S.BoardWrapper = styled(SDiv)`
       background-color: ${colors.white};
     }
 
-    @media only screen and (max-width: 375px) {
+    @media only screen and (max-width: 768px) {
       padding: 44px 24px 48px 24px;
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     width: 100%;
     padding: 36px;
   }
@@ -174,7 +174,7 @@ S.BoardWrapper = styled(SDiv)`
 S.Overlay = styled.div`
   display: none;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     display: ${(props) => (props.show ? "block" : "none")};
     position: fixed;
     z-index: 1;
@@ -188,11 +188,11 @@ S.Overlay = styled.div`
 
 S.Br = styled.br`
   /* InputBoard 태블릿에서 띄어쓰기 변화 대응 */
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     ${(props) => props.first && `display: none;`}
     ${(props) => props.third && `display: none;`}
   }
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     ${(props) => props.first && `display: block;`}
     ${(props) => props.third && `display: block;`}
   }
@@ -200,30 +200,30 @@ S.Br = styled.br`
 
 S.IncreaseButtonListWrapper = styled(SDiv)`
   justify-content: space-around;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     justify-content: flex-start;
     gap: 8px;
   }
 `;
 
 S.InputArea = styled(SDiv)`
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     margin-bottom: 68px;
   }
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     margin-bottom: 56px;
   }
 `;
 S.BoardBody = styled(SDiv)``;
 S.SubmitArea = styled(SDiv)``;
 S.SubmitButton = styled(SButton)`
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     background-color: ${colors.gray9};
   }
 `;
 
 S.SubmitButtonText = styled(SText)`
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     color: ${colors.white};
   }
 `;
@@ -236,7 +236,7 @@ S.FilterIconWrapper = styled(SDiv)`
 
   cursor: pointer;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     display: block;
   }
 `;

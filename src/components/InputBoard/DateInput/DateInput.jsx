@@ -31,7 +31,7 @@ const isDescendant = (parentClassName, child) => {
 };
 
 const DateInput = ({ selectedDate, onChange }) => {
-  const { mediaQuery } = useMediaQuery(768);
+  const { mediaQuery } = useMediaQuery(1200);
   const [isTablet, setIsTablet] = useState(mediaQuery.matches);
   const [isOpen, setIsOpen] = useState(false);
   const datePickerRef = useRef(null);
@@ -127,11 +127,11 @@ S.InputWrapper = styled.div`
   padding: 26px 20px 22px 25px;
   height: 74px;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     ${(props) => props.isOpen && darkerBorder}
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     height: 63px;
 
     padding: 19px 20px 20px 25px;
@@ -140,7 +140,7 @@ S.InputWrapper = styled.div`
 `;
 
 S.LabelText = styled(SText)`
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     color: ${colors.gray9};
   }
 `;
@@ -153,7 +153,7 @@ S.DatePickerWrapper = styled(SDiv)`
     background: transparent;
     border: none;
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1200px) {
       ${g9}
     }
   }

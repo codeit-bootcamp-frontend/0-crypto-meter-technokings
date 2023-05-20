@@ -71,13 +71,13 @@ const S = {};
 
 S.ChartWrapper = styled(SDiv)`
   max-width: ${(props) => (props.maxW ? `${props.maxW}px` : "auto")};
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     margin-top: 48px;
     height: 298px;
   }
 `;
 S.ChipWrapper = styled(SDiv)`
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     justify-content: flex-start;
   }
 `;

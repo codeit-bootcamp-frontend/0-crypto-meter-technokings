@@ -89,10 +89,10 @@ S.ChartWrapper = styled(SDiv)`
 S.Inner = styled(SDiv)`
   position: ${(props) => (props.pos ? `${props.pos}` : "static")};
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     marign: 36px 36px 0px;
   }
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     margin: 32px 20px 0px;
   }
 `;

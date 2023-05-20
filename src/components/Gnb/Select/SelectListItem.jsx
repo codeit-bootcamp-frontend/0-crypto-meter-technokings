@@ -50,7 +50,7 @@ S.ItemWrapper = styled(SDiv)`
 `;
 
 S.Label = styled(SText)`
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     display: none;
   }
 `;

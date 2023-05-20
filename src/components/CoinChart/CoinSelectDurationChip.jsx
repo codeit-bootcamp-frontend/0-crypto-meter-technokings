@@ -38,7 +38,7 @@ const S = {};
 
 S.ButtonText = styled(SText)`
   ${(props) => (props.isClicked ? g1 : g5)}
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 12px;
   }
 `;

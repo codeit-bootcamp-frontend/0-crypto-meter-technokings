@@ -93,12 +93,12 @@ const S = {};
 S.Header = styled(SDiv)`
   border-bottom: 1px solid ${colors.gray9};
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     padding-bottom: 1.8rem;
   }
 `;
 S.LogoWrapper = styled(SDiv)`
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     width: ${(props) => (props.mobW ? `${props.mobW}px` : "auto")};
     height: ${(props) => (props.mobH ? `${props.mobH}px` : "auto")};
   }
@@ -112,12 +112,12 @@ S.LogoText = styled(SText)`
   font-weight: 700;
   line-height: 3.1rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     line-height: 2.4rem;
   }
 `;
 S.IconWrapper = styled(SDiv)`
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     gap: 23px;
   }
 `;
@@ -156,7 +156,7 @@ S.ShareButton = styled(SButton)`
     display: block;
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     width: ${(props) => (props.mobW ? `${props.mobW}px` : "auto")};
     height: ${(props) => (props.mobH ? `${props.mobH}px` : "auto")};
   }

@@ -13,7 +13,7 @@ import { colors, SDiv, SText } from "@styles";
 import DropdownList from "./DropdownList";
 
 const DropdownPresenter = ({ isOpen, onClick, selectedValue, options }) => {
-  const { mediaQuery } = useMediaQuery(768);
+  const { mediaQuery } = useMediaQuery(1200);
   const [isTablet, setIsTablet] = useState(mediaQuery.matches);
 
   useEffect(() => {
@@ -75,11 +75,11 @@ S.DropdownHead = styled(SDiv)`
 
   cursor: pointer;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     ${(props) => props.isOpen && darkerBorder}
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     height: 63px;
 
     padding: 19px 20px 20px 25px;
@@ -90,7 +90,7 @@ S.DropdownHead = styled(SDiv)`
 S.Overlay = styled.div`
   display: none;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     display: ${(props) => (props.show ? "block" : "none")};
     position: fixed;
     z-index: 3;
@@ -103,7 +103,7 @@ S.Overlay = styled.div`
 `;
 
 S.LabelText = styled(SText)`
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     color: ${colors.gray9};
   }
 `;
@@ -114,7 +114,7 @@ S.ImageWrapper = styled(SDiv)`
     height: 100%;
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     width: 24px;
     height: 24px;
   }

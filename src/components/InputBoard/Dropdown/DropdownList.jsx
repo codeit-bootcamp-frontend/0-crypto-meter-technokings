@@ -60,7 +60,7 @@ S.MainWrapper = styled(SDiv)`
     background-color: ${colors.gray2};
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     position: fixed;
     top: 50%;
     left: 50%;

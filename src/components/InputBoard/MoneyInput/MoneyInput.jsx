@@ -84,11 +84,11 @@ S.InputWrapper = styled.div`
   border-radius: 12px;
   padding: 26px 20px 22px 25px;
   height: 74px;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     ${(props) => props.isOpen && darkerBorder}
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     height: 63px;
 
     padding: 19px 20px 20px 25px;
@@ -97,7 +97,7 @@ S.InputWrapper = styled.div`
 `;
 
 S.LabelText = styled(SText)`
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     color: ${colors.gray9};
   }
 `;
@@ -113,7 +113,7 @@ S.Input = styled.input`
     color: ${colors.gray6};
   }
   padding: 0;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     color: ${colors.gray9};
   }
 `;
@@ -129,7 +129,7 @@ S.InputValueWrapper = styled(SDiv)`
 
   ${b1}
   ${white}
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     color: ${colors.gray9};
   }
 `;

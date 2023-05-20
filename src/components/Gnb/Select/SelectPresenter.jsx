@@ -61,21 +61,21 @@ S.SelectHead = styled(SDiv)`
   width: 90px;
 
   cursor: pointer;
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     width: fit-content;
     padding: 12px 12px 12px 16px;
   }
 `;
 
 S.Label = styled(SText)`
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     display: none;
   }
 `;
 
 S.LabelWrapper = styled(SDiv)`
   width: 100%;
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: 768px) {
     gap: 8px;
   }
 `;
