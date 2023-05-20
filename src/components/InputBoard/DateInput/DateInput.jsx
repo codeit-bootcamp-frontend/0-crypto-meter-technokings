@@ -4,10 +4,12 @@ import DatePicker from "react-datepicker";
 import styled, { css } from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
+import useOutsideClick from "@/hooks/useOutsideClick";
 import DropdownHandleIcon from "@components/SVGComponents/DropdownHandleIcon";
 import { SDiv, SText, colors } from "@styles";
 import { disableSelect } from "@styles/block.style";
 import { b1, g9, white } from "@styles/text.style";
+
 import "react-datepicker/dist/react-datepicker.css";
 
 /**
@@ -33,13 +35,17 @@ const DateInput = ({ selectedDate, onChange }) => {
   const [isTablet, setIsTablet] = useState(mediaQuery.matches);
   const [isOpen, setIsOpen] = useState(false);
   const datePickerRef = useRef(null);
+  const inputWrapperRef = useRef(null);
 
   const isUnavailableClick = (e) => {
     if (
       isDescendant("react-datepicker__header", e.target) ||
       e.target.classList.contains("react-datepicker__navigation-icon") ||
+      e.target.classList.contains("react-datepicker__header") ||
+      e.target.classList.contains("react-datepicker__week") ||
       e.target.classList.contains("react-datepicker__navigation") ||
-      e.target.classList.contains("react-datepicker__day--disabled")
+      e.target.classList.contains("react-datepicker__day--disabled") ||
+      e.target.classList.contains("react-datepicker__triangle")
     ) {
       return true;
     }
@@ -47,8 +53,12 @@ const DateInput = ({ selectedDate, onChange }) => {
   };
 
   const handleClickInputWrapper = (e) => {
-    // datepicker UI 내에서 header와 navigation을 클릭했을 때는 isOpen상태를 바꾸면 안됨
+    // datepicker UI 내에서 header와 navigation을 클릭했을 때는 isOpen이 토글되면 안됨
     if (isUnavailableClick(e)) return;
+    // 이미 open된 상태에서 input을 클릭했을 때는 isOpen이 토글되면 안됨
+    if (isOpen && isDescendant("react-datepicker-wrapper", e.target)) {
+      return;
+    }
     // isOpen 상태를 토글하고, isOpen에 따라 datepicker에 focus, blur를 부여
     setIsOpen((prev) => !prev);
     if (datePickerRef.current) {
@@ -64,8 +74,12 @@ const DateInput = ({ selectedDate, onChange }) => {
     setIsTablet(mediaQuery.matches);
   }, [mediaQuery]);
 
+  useOutsideClick(inputWrapperRef, () => {
+    setIsOpen(false);
+  });
+
   return (
-    <S.InputWrapper onClick={handleClickInputWrapper}>
+    <S.InputWrapper onClick={handleClickInputWrapper} ref={inputWrapperRef}>
       <SDiv row sb>
         <S.DatePickerWrapper>
           <DatePicker
@@ -142,6 +156,11 @@ S.DatePickerWrapper = styled(SDiv)`
     @media only screen and (max-width: 768px) {
       ${g9}
     }
+  }
+
+  .react-datepicker-popper {
+    padding-top: 0px !important;
+    top: 10px !important;
   }
 `;
 
