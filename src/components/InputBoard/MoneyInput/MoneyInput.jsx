@@ -35,7 +35,7 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
           type="number"
           min="1"
           ct
-          placeholder={Number(selectedMoney).toLocaleString()}
+          placeholder={new Intl.NumberFormat().format(selectedMoney)}
           onChange={(e) => {
             setInputValue(e.target.value);
           }}
@@ -54,7 +54,7 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
           }}
           show={!showInput}
         >
-          {Number(inputValue).toLocaleString()}
+          {new Intl.NumberFormat().format(inputValue)}
         </S.InputValueWrapper>
         <SDiv ct>
           <S.LabelText b1 white disableSelect>
@@ -123,7 +123,7 @@ S.InputValueWrapper = styled(SDiv)`
   overflow-x: hidden;
   text-overflow: ellipsis;
 
-  width: 250px;
+  width: 80%;
 
   cursor: text;
 
