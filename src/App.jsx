@@ -2,14 +2,14 @@ import React from "react";
 
 import "./App.css";
 
-import { InputBoard, Gnb } from "@components";
-import TableSection from "@components/TableSection/TableSection";
+import { Gnb, CoinChart, InputBoard, TableSection } from "@components";
 
 const App = () => {
   return (
     <>
       <Gnb />
       <InputBoard />
+      <CoinChart />
       <TableSection />
     </>
   );
