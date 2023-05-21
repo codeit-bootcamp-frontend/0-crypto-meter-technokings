@@ -1,14 +1,11 @@
 import React from "react";
 
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { SDiv, SText } from "@styles";
 
 const CoinHistoryUserSelect = ({
-  yyyy,
-  MM,
-  dd,
+  formattedDate,
   trimmedUserSelectMoney,
   trimmedUserSelectCalcMoney,
   toLocaleDate,
@@ -19,7 +16,7 @@ const CoinHistoryUserSelect = ({
   return (
     <S.HistoryWrapper mgt={36}>
       <S.TopText s1 black>
-        {`${yyyy}년 ${MM}월 ${dd}일에 ${trimmedUserSelectMoney}로 샀다면 오늘`}
+        {`${formattedDate}에 ${trimmedUserSelectMoney}로 샀다면 오늘`}
       </S.TopText>
       <S.MiddleText h1 mgt={8}>
         <SText mgr={4} g5={isGray} green={isGreen} red={!isGreen}>
@@ -32,18 +29,6 @@ const CoinHistoryUserSelect = ({
       </S.BottomText>
     </S.HistoryWrapper>
   );
-};
-
-CoinHistoryUserSelect.propTypes = {
-  yyyy: PropTypes.string.isRequired,
-  MM: PropTypes.string.isRequired,
-  dd: PropTypes.string.isRequired,
-  trimmedUserSelectMoney: PropTypes.string.isRequired,
-  trimmedUserSelectCalcMoney: PropTypes.string.isRequired,
-  toLocaleDate: PropTypes.string.isRequired,
-  toLocaleTime: PropTypes.string.isRequired,
-  isGray: PropTypes.bool.isRequired,
-  isGreen: PropTypes.bool.isRequired,
 };
 
 const S = {};

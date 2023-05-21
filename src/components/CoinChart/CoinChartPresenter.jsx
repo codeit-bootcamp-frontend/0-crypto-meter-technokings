@@ -1,6 +1,6 @@
+/* eslint-disable react/require-default-props */
 import React from "react";
 
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { SDiv } from "@styles";
@@ -12,9 +12,7 @@ import CoinHistoryUserSelect from "./CoinHistoryUserSelect";
 const CoinChartPresenter = ({
   coinName,
   coinImageUrl,
-  yyyy,
-  MM,
-  dd,
+  formattedDate,
   trimmedUserSelectMoney,
   trimmedUserSelectCalcMoney,
   toLocaleDate,
@@ -33,9 +31,7 @@ const CoinChartPresenter = ({
       <S.Inner pos="relative" mg="36px 48px 70px">
         <CoinChartHeader coinName={coinName} coinImageUrl={coinImageUrl} />
         <CoinHistoryUserSelect
-          yyyy={yyyy}
-          MM={MM}
-          dd={dd}
+          formattedDate={formattedDate}
           trimmedUserSelectMoney={trimmedUserSelectMoney}
           trimmedUserSelectCalcMoney={trimmedUserSelectCalcMoney}
           toLocaleDate={toLocaleDate}
@@ -53,31 +49,6 @@ const CoinChartPresenter = ({
     </S.ChartWrapper>
   );
 };
-
-CoinChartPresenter.propTypes = {
-  coinName: PropTypes.string.isRequired,
-  coinImageUrl: PropTypes.string.isRequired,
-  yyyy: PropTypes.string.isRequired,
-  MM: PropTypes.string.isRequired,
-  dd: PropTypes.string.isRequired,
-  trimmedUserSelectMoney: PropTypes.string.isRequired,
-  trimmedUserSelectCalcMoney: PropTypes.string.isRequired,
-  toLocaleDate: PropTypes.string.isRequired,
-  toLocaleTime: PropTypes.string.isRequired,
-  isGray: PropTypes.bool.isRequired,
-  isGreen: PropTypes.bool.isRequired,
-  coinCurrency: PropTypes.string.isRequired,
-  chartData: PropTypes.arrayOf(
-    PropTypes.shape({
-      areaValue: PropTypes.number.isRequired,
-      tickDate: PropTypes.string.isRequired,
-      tickPrice: PropTypes.string.isRequired,
-      xAxisDate: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onClickChip: PropTypes.func.isRequired,
-};
-
 const S = {};
 
 S.ChartWrapper = styled(SDiv)`

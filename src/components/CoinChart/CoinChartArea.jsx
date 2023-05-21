@@ -1,6 +1,6 @@
+/* eslint-disable react/require-default-props */
 import React, { useState } from "react";
 
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { SDiv } from "@styles";
@@ -42,21 +42,6 @@ const CoinChartArea = ({ coinCurrency, isGreen, chartData, onClickChip }) => {
     </S.ChartWrapper>
   );
 };
-
-CoinChartArea.propTypes = {
-  coinCurrency: PropTypes.string.isRequired,
-  isGreen: PropTypes.bool.isRequired,
-  chartData: PropTypes.arrayOf(
-    PropTypes.shape({
-      areaValue: PropTypes.number.isRequired,
-      tickDate: PropTypes.string.isRequired,
-      tickPrice: PropTypes.string.isRequired,
-      xAxisDate: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onClickChip: PropTypes.func.isRequired,
-};
-
 const S = {};
 
 S.ChartWrapper = styled(SDiv)`

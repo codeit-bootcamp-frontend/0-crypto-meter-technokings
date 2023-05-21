@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import createKaKaoShareButton from "@/services/kakao/share.kakao";
@@ -81,11 +80,6 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
       </S.IconWrapper>
     </S.Header>
   );
-};
-
-CoinChartHeader.propTypes = {
-  coinName: PropTypes.string.isRequired,
-  coinImageUrl: PropTypes.string.isRequired,
 };
 
 const S = {};

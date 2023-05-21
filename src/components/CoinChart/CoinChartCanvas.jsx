@@ -3,7 +3,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from "react";
 
-import PropTypes from "prop-types";
 import {
   Area,
   AreaChart,
@@ -138,18 +137,6 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
       </ResponsiveContainer>
     </SDiv>
   );
-};
-
-CoinChartCanvas.propTypes = {
-  isGreen: PropTypes.bool.isRequired,
-  chartData: PropTypes.arrayOf(
-    PropTypes.shape({
-      areaValue: PropTypes.number.isRequired,
-      tickDate: PropTypes.string.isRequired,
-      tickPrice: PropTypes.string.isRequired,
-      xAxisDate: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 };
 
 export default CoinChartCanvas;
