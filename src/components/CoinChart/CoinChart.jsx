@@ -81,6 +81,16 @@ const zustandCoinStore = {
  * @state chartData는 임시로 작성해둔 것이고 zustand로 바꾸면 사라질 state입니다.
  */
 const CoinChart = () => {
+  /**
+   userInputStore.selectedCoinInfo.id
+   userInputStore.selectedCoinInfo.name
+   userInputStore.selectedCoinInfo.imageUrl
+   userInputStore.selectedDate
+   userInputStore.selectedMoney
+   userInputStore.calculatedMoney
+   userInputStore.selectedCurrency
+   */
+
   const [chipQuery, setChipQuery] = useState("max");
   const [chartData, setChartData] = useState(
     zustandCoinStore.getCoinChart(
@@ -98,7 +108,6 @@ const CoinChart = () => {
         chipQuery
       )
     );
-
     // chipQuery가 변경될 때마다 api 요청
   }, [chipQuery]);
 
@@ -172,6 +181,7 @@ const CoinChart = () => {
     isGray,
     isGreen,
   } = tempFunction();
+
   return (
     <CoinChartPresenter
       coinName={zustandUserStore.coinName}

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import createKaKaoShareButton from "@/services/kakao/shareKaKao";
+import createKaKaoShareButton from "@/services/kakao/share.kakao";
 import FacebookLogo from "@components/SVGComponents/FacebookLogo";
 import KakaoLogo from "@components/SVGComponents/KakaoLogo";
 import ShareIcon from "@components/SVGComponents/ShareIcon";
