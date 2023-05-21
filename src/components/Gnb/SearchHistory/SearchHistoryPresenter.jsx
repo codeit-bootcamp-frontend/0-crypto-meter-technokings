@@ -7,6 +7,8 @@ import { SButton, SDiv, SHeading4, SText, colors } from "@styles";
 import SearchHistoryList from "./SearchHistoryList";
 
 const SearchHistoryPresenter = ({ history, onDelete }) => {
+  // Todo: zustand 화폐로 다루기
+  const currency = "krw";
   return (
     <S.SearchHistoryWrapper
       br={16}
@@ -33,10 +35,28 @@ S.SearchHistoryWrapper = styled(SDiv)`
   position: absolute;
   top: 76px;
   right: 56px;
+  z-index: 20;
+
+  @media only screen and (max-width: 1200px) {
+    right: 24px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    top: 64px;
+    right: 16px;
+    border-radius: 12px;
+    width: 343px;
+  }
 `;
 
 S.HistoryHeader = styled(SDiv)`
   border-bottom: 1px solid ${colors.gray2};
+
+  @media only screen and (max-width: 768px) {
+    height: 58px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 `;
 
 export default SearchHistoryPresenter;

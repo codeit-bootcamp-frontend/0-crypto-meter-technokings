@@ -2,12 +2,15 @@ import React from "react";
 
 import styled from "styled-components";
 
-import formatMoney from "@/utils/formatMoney";
+import formatMoneyToString from "@/utils/formatMoney";
 import { SDiv, SText, colors } from "@styles";
 
 import PriceChange from "./PriceChange/PriceChange";
 
 const TableRow = ({ data }) => {
+  // Todo: zustand로 화폐 다루기
+  const currency = "krw";
+
   const calculateTradedCoins = (totalVolume, currentPrice) => {
     if (totalVolume && currentPrice) {
       return Math.round(totalVolume / currentPrice);
@@ -39,18 +42,18 @@ const TableRow = ({ data }) => {
       </td>
       <td>
         <SText b3 g8>
-          {formatMoney(data.current_price, "krw", true)}
+          {formatMoneyToString(data.current_price, currency, true)}
         </SText>
       </td>
       <td>
         <SText b2 g8>
-          {formatMoney(data.fully_diluted_valuation, "krw", true)}
+          {formatMoneyToString(data.fully_diluted_valuation, currency, true)}
         </SText>
       </td>
       <td>
         <S.VolumeTextWrapper col g={4}>
           <SText right b2 g8>
-            {formatMoney(data.total_volume, "krw", true)}
+            {formatMoneyToString(data.total_volume, currency, true)}
           </SText>
           <SText right c3 g5>
             {Intl.NumberFormat().format(

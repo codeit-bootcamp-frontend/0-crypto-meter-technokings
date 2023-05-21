@@ -8,7 +8,7 @@ import SearchHistoryListItem from "./SearchHistoryListItem";
 
 const SearchHistoryList = ({ history }) => {
   return (
-    <S.HistoryListWrapper h={526}>
+    <S.HistoryListWrapper>
       {history.map((item) => (
         <SearchHistoryListItem key={item.id} record={item} />
       ))}
@@ -19,21 +19,29 @@ const SearchHistoryList = ({ history }) => {
 const S = {};
 
 S.HistoryListWrapper = styled(SDiv)`
-  overflow-y: scroll;
+  max-height: 526px;
+  overflow-y: auto;
 
   &::-webkit-scrollbar-button {
     width: 0;
     height: 0;
   }
+
   &::-webkit-scrollbar {
     width: 8px;
   }
+
   &::-webkit-scrollbar-track {
     background-color: transparent;
   }
+
   &::-webkit-scrollbar-thumb {
     border-radius: 20px;
     background-color: ${colors.gray2};
+  }
+
+  @media only screen and (max-width: 768px) {
+    max-height: 513px;
   }
 `;
 

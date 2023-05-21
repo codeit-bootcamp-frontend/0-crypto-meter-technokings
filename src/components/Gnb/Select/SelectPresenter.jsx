@@ -28,13 +28,19 @@ const SelectPresenter = ({ isOpen, options, selectedOption, onClick }) => {
         disableSelect
       >
         <S.LabelWrapper row sb act h={18}>
-          <SDiv>
+          <SDiv row act>
             <S.Label b3 g8 mgr={2}>
               {selectedOption.name}
             </S.Label>
+            <S.Label b3 g8>
+              (
+            </S.Label>
             <SText b3 g8>
-              {`(${selectedOption.symbol})`}
+              {`${selectedOption.symbol}`}
             </SText>
+            <S.Label b3 g8>
+              )
+            </S.Label>
           </SDiv>
           <DropdownHandleIcon
             w={12}
@@ -63,6 +69,7 @@ S.SelectHead = styled(SDiv)`
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     width: fit-content;
+    height: 42px;
     padding: 12px 12px 12px 16px;
   }
 `;

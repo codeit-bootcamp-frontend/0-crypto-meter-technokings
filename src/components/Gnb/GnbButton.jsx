@@ -31,6 +31,12 @@ S.Button = styled(SButton)`
     ${(props) => (props.isHistoryOpen ? colors.green : colors.gray3)};
   ${(props) => props.isHistoryOpen && lightgreen}
   ${(props) => (props.isHistoryOpen ? green : g8)}
+
+  @media only screen and (max-width: 768px) {
+    height: 42px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
 `;
 
 export default GnbButton;
