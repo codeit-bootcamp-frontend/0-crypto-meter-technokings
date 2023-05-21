@@ -20,14 +20,17 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
     );
   };
 
-  const handleClickCopyClipboard = () => {
+  const handleClickCopyClipboard = async () => {
     setCopied(true);
-    navigator.clipboard.writeText(window.location.href);
+
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(window.location.href);
+    }
 
     const timer = setTimeout(() => {
       setCopied(false);
       clearTimeout(timer);
-    }, 350);
+    }, 500);
   };
 
   useEffect(() => {
@@ -124,7 +127,7 @@ S.ShareButton = styled(SButton)`
     return (
       props.copied &&
       css`
-        &:before {
+        &::before {
           content: "copied!";
           position: absolute;
           top: -20px;
@@ -135,7 +138,7 @@ S.ShareButton = styled(SButton)`
           font-size: 10px;
           color: white;
         }
-        &:after {
+        &::after {
           content: "";
           position: absolute;
           top: -4.5px;
