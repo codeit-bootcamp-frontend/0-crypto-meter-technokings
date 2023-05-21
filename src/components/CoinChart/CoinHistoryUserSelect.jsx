@@ -9,8 +9,8 @@ const CoinHistoryUserSelect = ({
   yyyy,
   MM,
   dd,
-  trimdUserSelectMoney,
-  trimedUserSelectCalcMoney,
+  trimmedUserSelectMoney,
+  trimmedUserSelectCalcMoney,
   toLocaleDate,
   toLocaleTime,
   isGray,
@@ -19,11 +19,11 @@ const CoinHistoryUserSelect = ({
   return (
     <S.HistoryWrapper mgt={36}>
       <S.TopText s1 black>
-        {`${yyyy}년 ${MM}월 ${dd}일에 ${trimdUserSelectMoney} 로 샀다면 오늘`}
+        {`${yyyy}년 ${MM}월 ${dd}일에 ${trimmedUserSelectMoney} 로 샀다면 오늘`}
       </S.TopText>
       <S.MiddleText h1 mgt={8}>
         <SText mgr={4} g5={isGray} green={isGreen} red={!isGreen}>
-          {trimedUserSelectCalcMoney}
+          {trimmedUserSelectCalcMoney}
         </SText>
         입니다.
       </S.MiddleText>
@@ -38,8 +38,8 @@ CoinHistoryUserSelect.propTypes = {
   yyyy: PropTypes.string.isRequired,
   MM: PropTypes.string.isRequired,
   dd: PropTypes.string.isRequired,
-  trimdUserSelectMoney: PropTypes.string.isRequired,
-  trimedUserSelectCalcMoney: PropTypes.string.isRequired,
+  trimmedUserSelectMoney: PropTypes.string.isRequired,
+  trimmedUserSelectCalcMoney: PropTypes.string.isRequired,
   toLocaleDate: PropTypes.string.isRequired,
   toLocaleTime: PropTypes.string.isRequired,
   isGray: PropTypes.bool.isRequired,

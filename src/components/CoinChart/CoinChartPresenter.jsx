@@ -15,8 +15,8 @@ const CoinChartPresenter = ({
   yyyy,
   MM,
   dd,
-  trimdUserSelectMoney,
-  trimedUserSelectCalcMoney,
+  trimmedUserSelectMoney,
+  trimmedUserSelectCalcMoney,
   toLocaleDate,
   toLocaleTime,
   isGray,
@@ -36,8 +36,8 @@ const CoinChartPresenter = ({
           yyyy={yyyy}
           MM={MM}
           dd={dd}
-          trimdUserSelectMoney={trimdUserSelectMoney}
-          trimedUserSelectCalcMoney={trimedUserSelectCalcMoney}
+          trimmedUserSelectMoney={trimmedUserSelectMoney}
+          trimmedUserSelectCalcMoney={trimmedUserSelectCalcMoney}
           toLocaleDate={toLocaleDate}
           toLocaleTime={toLocaleTime}
           isGray={isGray}
@@ -60,8 +60,8 @@ CoinChartPresenter.propTypes = {
   yyyy: PropTypes.string.isRequired,
   MM: PropTypes.string.isRequired,
   dd: PropTypes.string.isRequired,
-  trimdUserSelectMoney: PropTypes.string.isRequired,
-  trimedUserSelectCalcMoney: PropTypes.string.isRequired,
+  trimmedUserSelectMoney: PropTypes.string.isRequired,
+  trimmedUserSelectCalcMoney: PropTypes.string.isRequired,
   toLocaleDate: PropTypes.string.isRequired,
   toLocaleTime: PropTypes.string.isRequired,
   isGray: PropTypes.bool.isRequired,

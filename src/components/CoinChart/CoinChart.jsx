@@ -109,11 +109,11 @@ const CoinChart = () => {
    */
   const tempFunction = () => {
     const [dd, MM, yyyy] = zustandUserStore.userSelectDate.split("-");
-    const trimdUserSelectMoney =
+    const trimmedUserSelectMoney =
       zustandCoinStore.coinCurrency === "usd"
         ? `$${zustandUserStore.userSelectMoney.toLocaleString("ko-KR")}`
         : `${zustandUserStore.userSelectMoney.toLocaleString("ko-KR")}원으`;
-    const trimedUserSelectCalcMoney =
+    const trimmedUserSelectCalcMoney =
       zustandCoinStore.coinCurrency === "usd"
         ? `$${
             Number.isInteger(zustandUserStore.userSelectCalcMoney)
@@ -152,8 +152,8 @@ const CoinChart = () => {
       dd,
       MM,
       yyyy,
-      trimdUserSelectMoney,
-      trimedUserSelectCalcMoney,
+      trimmedUserSelectMoney,
+      trimmedUserSelectCalcMoney,
       toLocaleDate,
       toLocaleTime,
       isGray,
@@ -165,14 +165,13 @@ const CoinChart = () => {
     dd,
     MM,
     yyyy,
-    trimdUserSelectMoney,
-    trimedUserSelectCalcMoney,
+    trimmedUserSelectMoney,
+    trimmedUserSelectCalcMoney,
     toLocaleDate,
     toLocaleTime,
     isGray,
     isGreen,
   } = tempFunction();
-
   return (
     <CoinChartPresenter
       coinName={zustandUserStore.coinName}
@@ -180,8 +179,8 @@ const CoinChart = () => {
       yyyy={yyyy}
       MM={MM}
       dd={dd}
-      trimdUserSelectMoney={trimdUserSelectMoney}
-      trimedUserSelectCalcMoney={trimedUserSelectCalcMoney}
+      trimmedUserSelectMoney={trimmedUserSelectMoney}
+      trimmedUserSelectCalcMoney={trimmedUserSelectCalcMoney}
       toLocaleDate={toLocaleDate}
       toLocaleTime={toLocaleTime}
       isGray={isGray}
