@@ -18,7 +18,7 @@ const userInputStore = {
   },
   selectedDate: new Date(),
   selectedMoney: 3500,
-  calculatedMoney: 3000,
+  calculatedMoney: -1,
   selectedCurrency: "usd",
 };
 
@@ -65,11 +65,15 @@ const CoinChart = () => {
 
       setChartData(responseChartData);
     };
-    getChartData(
-      userInputStore.selectedCoinInfo.id,
-      userInputStore.selectedCurrency,
-      DaysQuery
-    );
+
+    // 계산한 값이 없을 경우 데이터 요청을 하지 않도록 합니다.
+    if (userInputStore.calculatedMoney !== -1) {
+      getChartData(
+        userInputStore.selectedCoinInfo.id,
+        userInputStore.selectedCurrency,
+        DaysQuery
+      );
+    }
   }, [
     userInputStore.selectedCoinInfo.id,
     userInputStore.selectedCurrency,

@@ -3,7 +3,7 @@ import React from "react";
 
 import styled from "styled-components";
 
-import { SDiv } from "@styles";
+import { SDiv, SText } from "@styles";
 
 import CoinChartArea from "./CoinChartArea";
 import CoinChartHeader from "./CoinChartHeader";
@@ -23,8 +23,24 @@ const CoinChartPresenter = ({
   chartData,
   onClickChip,
 }) => {
-  if (!chartData) {
+  if (Object.keys(chartData).length === 0) {
     // TODOS: chartData가 없을 때, 보여줄 화면 UI 코드 작성
+    return (
+      <S.ChartWrapper flex full br={25} white>
+        <S.Inner pos="relative" mg="36px 48px 70px">
+          <S.NullText h1 black>
+            입력 보드에서 코인 정보를 입력해보세요!
+          </S.NullText>
+          <SDiv full pd="80px">
+            <img
+              src="/null_chart.png"
+              alt="null chart"
+              style={{ maxWidth: "100%", height: "auto", display: "block" }}
+            />
+          </SDiv>
+        </S.Inner>
+      </S.ChartWrapper>
+    );
   }
   return (
     <S.ChartWrapper col full br={25} white>
@@ -66,5 +82,13 @@ S.Inner = styled(SDiv)`
     margin: 32px 20px 0px;
   }
 `;
-
+S.NullText = styled(SText)`
+  font-size: 3.6rem;
+  position: absolute;
+  top: 36px;
+  left: -12px;
+  @media only screen and (max-width: 768px) {
+    left: 16px;
+  }
+`;
 export default CoinChartPresenter;
