@@ -9,7 +9,6 @@ import colors from "@/styles/colors";
 const MainLogo = () => {
   return (
     <S.Svg
-      width="186"
       height="33"
       viewBox="0 0 186 33"
       fill="none"
