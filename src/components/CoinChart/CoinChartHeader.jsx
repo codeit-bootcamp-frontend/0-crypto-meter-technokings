@@ -14,7 +14,6 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
   const [copied, setCopied] = useState(false);
 
   const handleClickShareFacebook = () => {
-    // TODO : meta 태그 작성
     window.open(
       "http://www.facebook.com/sharer.php?u=https://cryptometer-technokings.netlify.app"
     );
