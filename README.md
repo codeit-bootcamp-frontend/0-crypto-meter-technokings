@@ -61,6 +61,7 @@
 ![React18](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
 **State Management Tool**<br>
+<a href='https://github.com/pmndrs/zustand' target="_blank"><img alt='GitHub' src='https://file.notion.so/f/s/a57b792c-ff7f-4ced-a1ee-76b277a5976f/Frame_12.svg?id=f32b858d-f1a0-4d0f-8dfb-8442db56320e&table=block&spaceId=73dffc34-6628-4f9c-af7c-57c7f167f31e&expirationTimestamp=1684727819961&signature=d1bwSs24LcJtbeXicGuVhENZ0QfDEBAKL_OsB3SH9zE&downloadName=Frame+12.svg'/></a>
 
 **Collaboration Tool**<br>
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
