@@ -23,7 +23,7 @@ const CoinChartPresenter = ({
   isGreen,
   coinCurrency,
   chartData,
-  handleClickChangeChipQuery,
+  onClickChip,
 }) => {
   if (!chartData) {
     // TODOS: chartData가 없을 때, 보여줄 화면 UI 코드 작성
@@ -47,7 +47,7 @@ const CoinChartPresenter = ({
           isGreen={isGreen}
           coinCurrency={coinCurrency}
           chartData={chartData}
-          handleClickChangeChipQuery={handleClickChangeChipQuery}
+          onClickChip={onClickChip}
         />
       </S.Inner>
     </S.ChartWrapper>
@@ -75,7 +75,7 @@ CoinChartPresenter.propTypes = {
       xAxisDate: PropTypes.string.isRequired,
     })
   ).isRequired,
-  handleClickChangeChipQuery: PropTypes.func.isRequired,
+  onClickChip: PropTypes.func.isRequired,
 };
 
 const S = {};

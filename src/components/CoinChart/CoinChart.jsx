@@ -187,7 +187,7 @@ const CoinChart = () => {
       isGreen={isGreen}
       coinCurrency={zustandCoinStore.coinCurrency}
       chartData={chartData}
-      handleClickChangeChipQuery={(cq) => setChipQuery(cq)}
+      onClickChip={(cq) => setChipQuery(cq)}
     />
   );
 };

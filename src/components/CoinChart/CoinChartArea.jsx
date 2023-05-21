@@ -8,12 +8,7 @@ import { SDiv } from "@styles";
 import CoinChartCanvas from "./CoinChartCanvas";
 import SelectDurationChip from "./CoinSelectDurationChip";
 
-const CoinChartArea = ({
-  coinCurrency,
-  isGreen,
-  chartData,
-  handleClickChangeChipQuery,
-}) => {
+const CoinChartArea = ({ coinCurrency, isGreen, chartData, onClickChip }) => {
   // chip 버튼을 클릭하면, query에 맞게 UI로 보여줄 텍스트 데이터를 매칭했습니다.
   const queries = [
     ["max", "전체"],
@@ -39,7 +34,7 @@ const CoinChartArea = ({
               setChipAll(
                 Array.from({ length: chipAll.length }, (_, i) => i === idx)
               );
-              handleClickChangeChipQuery(queries[idx][0]);
+              onClickChip(queries[idx][0]);
             }}
           />
         ))}
@@ -64,7 +59,7 @@ CoinChartArea.propTypes = {
       xAxisDate: PropTypes.string.isRequired,
     })
   ).isRequired,
-  handleClickChangeChipQuery: PropTypes.func.isRequired,
+  onClickChip: PropTypes.func.isRequired,
 };
 
 const S = {};
