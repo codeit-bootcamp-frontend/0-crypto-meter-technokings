@@ -21,7 +21,6 @@ import colors from "@styles/colors";
 import CoinChartCustomTooltip from "./CoinChartCustomTooltip";
 
 const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
-  // 반응형에 따라 그래프의 축 데이터들의 css를 다루고자 사용했습니다.
   const { mediaQuery: mobileMediaQuery } = useMediaQuery(768);
   const { mediaQuery: tabletMediaQuery } = useMediaQuery(1200);
   const [isMobile, setIsMobile] = useState(mobileMediaQuery.matches);
@@ -41,6 +40,17 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
     }
   };
 
+  const getXAxisDx = (isTab, isMob) => {
+    if (!isMob && isTab) return 30;
+    if (isMob && isTab) return 8;
+    return 40;
+  };
+  const getXAxisTick = (isTab, isMob) => {
+    if (!isMob && isTab) return "12px";
+    if (isMob && isTab) return "8px";
+    return "14px";
+  };
+
   useEffect(() => {
     setIsMobile(mobileMediaQuery.matches);
   }, [mobileMediaQuery.matches]);
@@ -58,9 +68,6 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
             right: isMobile ? 0 : 20,
             left: isMobile ? 0 : 20,
             bottom: 20,
-          }}
-          onClick={() => {
-            // TODOS: (추가 기능할 만한 것) event 객체에서 해당 tick의 날짜, 가격 데이터를 사용할 수 있다.
           }}
         >
           <defs>
@@ -84,14 +91,14 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
           </defs>
           <CartesianGrid stroke={colors.gray2} vertical={false} />
           <XAxis
-            dx={isTablet ? 0 : 40}
+            dx={getXAxisDx(isTablet, isMobile)}
             dataKey="xAxisDate"
             interval={(chartData.length / 3.35) >> 0}
             domain={["auto", "auto"]}
             axisLine={false}
             tickLine={false}
             tick={{
-              fontSize: isTablet ? "8px" : "14px",
+              fontSize: `${getXAxisTick(isTablet, isMobile)}`,
               fontWeight: "400",
               display: "flex",
               color: `${colors.gray7}`,
@@ -104,7 +111,7 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
             axisLine={false}
             tickLine={false}
             tick={{
-              fontSize: isTablet ? "10px" : "14px",
+              fontSize: isTablet ? "12px" : "14px",
               fontWeight: "400",
               display: "flex",
               color: `${colors.gray7}`,
@@ -126,7 +133,6 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
             animationEasing="ease-in-out"
             animationDuration={1000}
             connectNulls
-            // TODOS: 그래프가 그려질 때, 다 그렸을 때 등 이벤트를 통해 추가 동작을 구현할 수 있습니다.
           />
         </AreaChart>
       </ResponsiveContainer>

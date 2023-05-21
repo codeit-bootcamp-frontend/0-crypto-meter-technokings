@@ -19,7 +19,7 @@ const CoinHistoryUserSelect = ({
   return (
     <S.HistoryWrapper mgt={36}>
       <S.TopText s1 black>
-        {`${yyyy}년 ${MM}월 ${dd}일에 ${trimmedUserSelectMoney} 로 샀다면 오늘`}
+        {`${yyyy}년 ${MM}월 ${dd}일에 ${trimmedUserSelectMoney}로 샀다면 오늘`}
       </S.TopText>
       <S.MiddleText h1 mgt={8}>
         <SText mgr={4} g5={isGray} green={isGreen} red={!isGreen}>
