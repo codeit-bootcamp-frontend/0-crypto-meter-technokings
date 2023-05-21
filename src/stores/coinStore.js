@@ -64,11 +64,15 @@ const coinStore = (set, get) => ({
    */
   getCoinListByPageNum: (pageNum, currency) => {
     const { coinDB } = get();
-    const paginationNum = Math.ceil(pageNum / 6);
-    const startIdx = ((pageNum - 1) % 6) * 30;
+    const paginationNum = Math.ceil(
+      pageNum / import.meta.env.VITE_PAGES_PER_PAGINATION
+    );
+    const startIdx =
+      ((pageNum - 1) % import.meta.env.VITE_PAGES_PER_PAGINATION) *
+      import.meta.env.VITE_COINS_PER_PAGE;
     const coinList = coinDB[`${currency}_${paginationNum}`].slice(
       startIdx,
-      startIdx + 30
+      startIdx + import.meta.env.VITE_COINS_PER_PAGE
     );
     return coinList;
   },
