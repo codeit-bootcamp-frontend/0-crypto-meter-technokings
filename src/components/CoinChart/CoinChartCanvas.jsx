@@ -32,7 +32,7 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
    * @param {number} areaValue
    * @returns {string} y축에 보여줄 가격 데이터를 가공해주는 함수입니다.
    */
-  const formTick = (value) => {
+  const getFormTick = (value) => {
     switch (coinCurrency) {
       case "usd":
         return (value >> 0).toLocaleString();
@@ -99,7 +99,7 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
           />
           <YAxis
             tickCount={6}
-            tickFormatter={formTick}
+            tickFormatter={getFormTick}
             domain={["auto", "auto"]}
             axisLine={false}
             tickLine={false}
