@@ -23,11 +23,12 @@ const userInputStore = {
 };
 
 const CoinChart = () => {
-  const [chipQuery, setChipQuery] = useState("max");
+  const [DaysQuery, setDaysQuery] = useState("max");
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
     const getChartData = async (coinId, currency, days) => {
+      // TODO: api 구축하면 교체하기
       const res = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}&x_cg_pro_api_key=CG-ReEFUZC8FpbDTSJ6AmbKy3m1`
       );
@@ -52,7 +53,7 @@ const CoinChart = () => {
 
         if (days === "max" || days === "365") xAxisDate = `${yyyy}년 ${MM}월`;
         else if (days === "31" || days === "7") xAxisDate = `${MM}월 ${dd}일`;
-        else xAxisDate = `${hh}시`;
+        else xAxisDate = hh < 13 ? `오전 ${hh}시` : `오후 ${hh}시`;
 
         return {
           areaValue,
@@ -67,12 +68,12 @@ const CoinChart = () => {
     getChartData(
       userInputStore.selectedCoinInfo.id,
       userInputStore.selectedCurrency,
-      chipQuery
+      DaysQuery
     );
   }, [
     userInputStore.selectedCoinInfo.id,
     userInputStore.selectedCurrency,
-    chipQuery,
+    DaysQuery,
   ]);
 
   /**
@@ -150,7 +151,7 @@ const CoinChart = () => {
       isGreen={isGreen}
       coinCurrency={userInputStore.selectedCurrency}
       chartData={chartData}
-      onClickChip={(cq) => setChipQuery(cq)}
+      onClickChip={(cq) => setDaysQuery(cq)}
     />
   );
 };

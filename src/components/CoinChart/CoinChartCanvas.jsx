@@ -41,7 +41,7 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
 
   const getXAxisDx = (isTab, isMob) => {
     if (!isMob && isTab) return 30;
-    if (isMob && isTab) return 8;
+    if (isMob && isTab) return 9;
     return 40;
   };
   const getXAxisTick = (isTab, isMob) => {
