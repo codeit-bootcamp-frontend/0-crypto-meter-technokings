@@ -8,7 +8,9 @@ const formatDateToString = (date, isQuery = false) => {
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
-  return isQuery ? `${day}-${month}-${year}` : `${year}년 ${month}월 ${day}일`;
+  return isQuery
+    ? `${day}-${String(month).padStart(2, "0")}-${year}`
+    : `${year}년 ${month}월 ${day}일`;
 };
 
 export default formatDateToString;
