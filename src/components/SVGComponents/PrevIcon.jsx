@@ -34,7 +34,7 @@ S.Svg = styled.svg`
   display: -webkit-flex;
   display: flex;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     width: 12px;
     height: 12px;
   }

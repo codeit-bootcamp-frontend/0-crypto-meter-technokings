@@ -129,9 +129,6 @@ const coinListStore = create((set) => ({
   getCoinList: () => {
     // GET /coins/markets
   },
-  getDropdownList: ()=>{
-    // coinList중 처음에 불러운 6페이지 데이터를 하나의 배열로 병합하여 반환
-  },
   getCoinListLength: () => {
     // GET /global/
   },
@@ -141,12 +138,12 @@ const coinListStore = create((set) => ({
 
 ```js
 const userSelectStore = create((set) => ({
-  selectedCoinId: "", // 유저가 선택한 코인 id
-  historyDate: "", // 유저가 선택한 날짜 (for 입력보드, 차트)
+  selectedCoinId: "", // 유저가 선택한 코인 id (for 입력보드)
+  historyDate: "", // 유저가 선택한 날짜 (for 입력보드, 차트) 밀리초
   selectMoney: 0, // 유저 선택 금액 (for 입력보드, 차트)
   selectMoneyToCalc: 0, // 유저 선택 금액을 계산한 금액 (for 입력보드, 차트)
   isUpperSelectMoneyToCalc: false, // 계산 금액이 지금이라면 올랐는지 떨어졌는지
-  getUserCharData: () => {
+  getUserChartData: () => {
     // GET /coins/:id/market_chart
   },
   getCoinHistory: () => {

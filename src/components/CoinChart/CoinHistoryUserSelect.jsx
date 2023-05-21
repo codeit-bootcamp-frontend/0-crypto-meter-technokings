@@ -49,7 +49,7 @@ CoinHistoryUserSelect.propTypes = {
 const S = {};
 
 S.HistoryWrapper = styled(SDiv)`
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     margin-top: 32px;
   }
 `;
@@ -59,7 +59,7 @@ S.TopText = styled(SText)`
   font-weight: 600;
   line-height: 2.4rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 1.5rem;
     line-height: 100%;
   }
@@ -70,7 +70,7 @@ S.MiddleText = styled(SText)`
   font-weight: 700;
   line-height: 5.8rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 3.2rem;
     line-height: 3.8rem;
   }
@@ -82,7 +82,7 @@ S.BottomText = styled(SText)`
   font-weight: 500;
   line-height: 1.9rem;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 768px) {
     font-size: 1.3rem;
     line-height: 1.8rem;
     margin-top: 0.8rem;
