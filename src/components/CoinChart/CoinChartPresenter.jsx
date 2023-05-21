@@ -29,8 +29,8 @@ const CoinChartPresenter = ({
     // TODOS: chartData가 없을 때, 보여줄 화면 UI 코드 작성
   }
   return (
-    <S.ChartWrapper col w={100} h={100} br={25} maxW={1379} maxH={733} white>
-      <S.Inner pos="relative" mg="36px 48px 0px">
+    <S.ChartWrapper col full br={25} white>
+      <S.Inner pos="relative" mg="36px 48px 70px">
         <CoinChartHeader coinName={coinName} coinImageUrl={coinImageUrl} />
         <CoinHistoryUserSelect
           yyyy={yyyy}
@@ -81,10 +81,9 @@ CoinChartPresenter.propTypes = {
 const S = {};
 
 S.ChartWrapper = styled(SDiv)`
-  width: ${(props) => (props.w ? `${props.w}%` : "auto")};
-  height: ${(props) => (props.h ? `${props.h}%` : "auto")};
-  max-height: ${(props) => (props.maxH ? `${props.maxH}px` : "auto")};
-  max-width: ${(props) => (props.maxW ? `${props.maxW}px` : "auto")};
+  height: 100%;
+  max-width: 1379px;
+  max-height: 733px;
 `;
 S.Inner = styled(SDiv)`
   position: ${(props) => (props.pos ? `${props.pos}` : "static")};
