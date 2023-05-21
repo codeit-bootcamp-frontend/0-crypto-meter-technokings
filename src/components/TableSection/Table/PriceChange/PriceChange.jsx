@@ -11,7 +11,7 @@ const PriceChange = ({ change }) => {
   return (
     <S.Div col ct w={66} h={22} br={4} isDesc={isDesc}>
       <S.DivText s3 isDesc={isDesc}>
-        {`${change.toFixed(2)}%`}
+        {change ? `${change.toFixed(2)}%` : "-"}
       </S.DivText>
     </S.Div>
   );

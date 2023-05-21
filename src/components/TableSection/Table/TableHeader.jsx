@@ -6,7 +6,10 @@ import OrderIcon from "@components/SVGComponents/OrderIcon";
 import { SButton, SDiv, SText } from "@styles";
 import { jed } from "@styles/block.style";
 
-const TableHeader = ({ colInfo }) => {
+const TableHeader = ({ colInfo, onSort, sortState }) => {
+  const handleSortButtonClick = () => {
+    onSort(colInfo.colKey);
+  };
   return (
     <th>
       <S.THeaderWrapper
@@ -19,8 +22,8 @@ const TableHeader = ({ colInfo }) => {
         <SText s3 black>
           {colInfo.colName}
         </SText>
-        <SButton>
-          <OrderIcon />
+        <SButton onClick={handleSortButtonClick}>
+          <OrderIcon sortState={sortState} />
         </SButton>
       </S.THeaderWrapper>
     </th>

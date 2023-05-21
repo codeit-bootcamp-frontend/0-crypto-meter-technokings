@@ -10,9 +10,10 @@ const TableSection = () => {
   return (
     <S.TableSectionWrapper
       col
-      g={32}
+      g={36}
       br={25}
-      w={1379}
+      mgl={24}
+      mgr={36}
       pd="36px 48px 60px 48px"
       white
     >
@@ -24,6 +25,8 @@ const TableSection = () => {
 
 const S = {};
 
-S.TableSectionWrapper = styled(SDiv)``;
+S.TableSectionWrapper = styled(SDiv)`
+  max-width: 1379px;
+`;
 
 export default TableSection;

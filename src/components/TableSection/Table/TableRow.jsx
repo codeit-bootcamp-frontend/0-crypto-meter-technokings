@@ -2,12 +2,19 @@ import React from "react";
 
 import styled from "styled-components";
 
-import formatTableMoney from "@/utils/formatTableMoney";
+import formatMoney from "@/utils/formatMoney";
 import { SDiv, SText, colors } from "@styles";
 
 import PriceChange from "./PriceChange/PriceChange";
 
 const TableRow = ({ data }) => {
+  const calculateTradedCoins = (totalVolume, currentPrice) => {
+    if (totalVolume && currentPrice) {
+      return Math.round(totalVolume / currentPrice);
+    }
+    return null;
+  };
+
   return (
     <S.BodyRow>
       <td>
@@ -32,23 +39,25 @@ const TableRow = ({ data }) => {
       </td>
       <td>
         <SText b3 g8>
-          {formatTableMoney(data.current_price, "krw")}
+          {formatMoney(data.current_price, "krw", true)}
         </SText>
       </td>
       <td>
         <SText b2 g8>
-          {formatTableMoney(data.fully_diluted_valuation, "krw")}
+          {formatMoney(data.fully_diluted_valuation, "krw", true)}
         </SText>
       </td>
       <td>
         <S.VolumeTextWrapper col g={4}>
-          <SText b2 g8>
-            {formatTableMoney(data.total_volume, "krw")}
+          <SText right b2 g8>
+            {formatMoney(data.total_volume, "krw", true)}
           </SText>
           <SText right c3 g5>
-            {`${formatTableMoney(
-              Math.round(data.total_volume / data.current_price)
-            )} ${data.symbol.toUpperCase()}`}
+            {Intl.NumberFormat().format(
+              calculateTradedCoins(data.total_volume, data.current_price)
+            )}
+            &nbsp;
+            {data.symbol.toUpperCase()}
           </SText>
         </S.VolumeTextWrapper>
       </td>
