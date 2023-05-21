@@ -49,8 +49,8 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
           id="kakao-link-btn"
           type="button"
           w={20.5}
-          mobW={15.5}
           h={20}
+          mobW={15.5}
           mobH={15}
         >
           <KakaoLogo />
@@ -58,8 +58,8 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
         <S.ShareButton
           type="button"
           w={20}
-          mobW={15}
           h={20}
+          mobW={15}
           mobH={15}
           onClick={handleClickShareFacebook}
         >
@@ -69,8 +69,8 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
           type="button"
           copied={copied}
           w={19}
-          mobW={14.5}
           h={18}
+          mobW={14.5}
           mobH={13.5}
           onClick={handleClickCopyClipboard}
         >
