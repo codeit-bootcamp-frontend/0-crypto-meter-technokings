@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SDiv } from "@styles";
+import { colors, SDiv } from "@styles";
 
 const CoinChartCustomTooltip = ({ active, payload, isMobile }) => {
   if (active && payload && payload.length) {
@@ -10,7 +10,7 @@ const CoinChartCustomTooltip = ({ active, payload, isMobile }) => {
         <p
           key="tickDate"
           style={{
-            color: "#A2A7B7",
+            color: `${colors.gray4}`,
             fontWeight: "500",
             fontSize: isMobile ? "10px" : "12px",
             lineHeight: isMobile ? "12px" : "14px",
@@ -30,7 +30,7 @@ const CoinChartCustomTooltip = ({ active, payload, isMobile }) => {
             display: "flex",
             alignItems: "center",
             letterSpacing: "-0.3px",
-            color: "#FFFFFF",
+            color: `${colors.white}`,
             margin: "0px",
           }}
         >

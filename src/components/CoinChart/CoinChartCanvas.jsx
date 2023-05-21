@@ -82,7 +82,7 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
               />
             </linearGradient>
           </defs>
-          <CartesianGrid stroke="#E7E9F0" vertical={false} />
+          <CartesianGrid stroke={colors.gray2} vertical={false} />
           <XAxis
             dx={isTablet ? 0 : 40}
             dataKey="xAxisDate"
@@ -112,7 +112,7 @@ const CoinChartCanvas = ({ coinCurrency, isGreen, chartData }) => {
           />
           <Tooltip
             cursor={{
-              stroke: "#262A38",
+              stroke: `${colors.gray8}`,
               strokeWidth: 1,
               strokeDasharray: "3 3",
             }}

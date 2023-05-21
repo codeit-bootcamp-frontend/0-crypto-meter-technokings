@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { SDiv } from "@styles";
+import { jst } from "@styles/block.style";
 
 import CoinChartCanvas from "./CoinChartCanvas";
 import SelectDurationChip from "./CoinSelectDurationChip";
@@ -73,7 +74,7 @@ S.ChartWrapper = styled(SDiv)`
 `;
 S.ChipWrapper = styled(SDiv)`
   @media only screen and (max-width: 768px) {
-    justify-content: flex-start;
+    ${jst}
   }
 `;
 
