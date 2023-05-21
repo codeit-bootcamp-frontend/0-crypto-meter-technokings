@@ -51,6 +51,8 @@ S.GnbWrapper = styled(SDiv)`
   @media only screen and (max-width: 1200px) {
     padding-left: 28px;
     padding-right: 24px;
+
+    background-color: ${colors.white};
   }
 
   @media only screen and (max-width: 768px) {

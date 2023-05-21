@@ -7,8 +7,12 @@ import PrevIcon from "@components/SVGComponents/PrevIcon";
 import { SButton, SDiv, SText, colors } from "@styles";
 import { b3, white } from "@styles/text.style";
 
-const Pagination = ({ pageNum, onChangePage, onPagination }) => {
-  const shownPageNums = [1, 2, 3, 4, 5, 6];
+const Pagination = ({ pageNum, onChangePage, onPagination, isMobile }) => {
+  // Todo: mobile일 때 페이지 넘버 다르게 구성, 끝페이지 처리, 페이지네이션
+  let shownPageNums = [1, 2, 3, 4, 5, 6];
+  if (isMobile) {
+    shownPageNums = [1, 2, 3, 4];
+  }
 
   return (
     <S.PaginationWrapper row act g={12} mg="0 auto">

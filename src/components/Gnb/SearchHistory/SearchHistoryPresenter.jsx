@@ -7,8 +7,6 @@ import { SButton, SDiv, SHeading4, SText, colors } from "@styles";
 import SearchHistoryList from "./SearchHistoryList";
 
 const SearchHistoryPresenter = ({ history, onDelete }) => {
-  // Todo: zustand 화폐로 다루기
-  const currency = "krw";
   return (
     <S.SearchHistoryWrapper
       br={16}
