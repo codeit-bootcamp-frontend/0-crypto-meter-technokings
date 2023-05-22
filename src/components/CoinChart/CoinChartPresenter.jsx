@@ -8,7 +8,6 @@ import { SDiv } from "@styles";
 import CoinChartArea from "./CoinChartArea";
 import CoinChartHeader from "./CoinChartHeader";
 import CoinHistoryUserSelect from "./CoinHistoryUserSelect";
-import DefaultChartImage from "./DefaultChartImage";
 
 const CoinChartPresenter = ({
   coinName,
@@ -24,9 +23,8 @@ const CoinChartPresenter = ({
   chartData,
   onClickChip,
 }) => {
-  if (Object.keys(chartData).length === 0) {
-    return <DefaultChartImage />;
-  }
+  // TODO: calculatedMoney === -1로 초기화 됐을 때 보여줄 loading animation 구현하기
+
   return (
     <S.ChartWrapper col full br={25} white>
       <S.Inner pos="relative">
