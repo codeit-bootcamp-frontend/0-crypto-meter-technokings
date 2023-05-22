@@ -26,7 +26,7 @@ const useMediaQuery = (breakpoint) => {
     return () => {
       mediaQueryList.removeEventListener("change", handleChangeMedia);
     };
-  }, []);
+  }, [breakpoint]);
 
   return {
     mediaQuery,
