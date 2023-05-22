@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
+import DROPDOWN_LIST from "@/data/dropdownList";
 import * as PAGE from "@/stores/mockData";
 import useUserInputStore from "@/stores/userInputStore";
 
@@ -56,35 +57,18 @@ const InputBoard = () => {
     selectedCurrency: state.selectedCurrency,
   }));
   const [tempUserSelect, setTempUserSelect] = useState(MOCK_USER_SELECT_STORE);
-  const [dropdownList, setDropdownList] = useState([]);
   const handleSubmit = (e) => {
     e.preventDefault();
     // TOOD: selectMoney, historyDate, 기반으로 계산해서 store에 update
-    const newMoney = tempUserSelect.selectMoney * 100; // TODO: 임시값, 추후에 api요청하고 차액을 계산
-    setTempUserSelect({
-      ...tempUserSelect,
-      selectedMoneyToCalc: newMoney,
-    });
+    // const newMoney = tempUserSelect.selectMoney * 100; // TODO: 임시값, 추후에 api요청하고 차액을 계산
+    // setTempUserSelect({
+    //   ...tempUserSelect,
+    //   selectedMoneyToCalc: newMoney,
+    // });
   };
   const increaseMoney = (inc) => {
-    setSelectedMoney(selectedMoney + inc);
+    setSelectedMoney(selectedMoney + Number(inc));
   };
-  useEffect(() => {
-    const getDropdownList = async () => {
-      const response = await getCoinsByPage(
-        1,
-        import.meta.VITE_COINS_PER_PAGE,
-        "krw"
-      );
-      return response.map((coinInfo) => ({
-        id: coinInfo.id,
-        name: coinInfo.name,
-        imageUrl: coinInfo.image,
-      }));
-    };
-
-    getDropdownList().then((coins) => setDropdownList(coins));
-  }, []);
 
   const InputBordPresenterProps = {
     selectedCoinInfo,
@@ -92,7 +76,7 @@ const InputBoard = () => {
     selectedMoney,
     selectedCurrency,
     selectMoneyToCalc: tempUserSelect.selectMoneyToCalc,
-    dropdownCoinOptionList: dropdownList,
+    dropdownCoinOptionList: DROPDOWN_LIST,
     onSubmit: handleSubmit,
     onChangeMoney: setSelectedMoney,
     onClickIncreaseMoney: increaseMoney,
