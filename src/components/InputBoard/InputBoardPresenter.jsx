@@ -25,6 +25,7 @@ const InputBoardPresenter = ({
   onSubmit,
   onChangeMoney,
   onClickIncreaseMoney,
+  onChangeDate,
 }) => {
   const [isOpen, setIsOpen] = useState(false); // form 모달이 열렸는지
   const { mediaQuery } = useMediaQuery(1200); // 미디어쿼리 변화 감지
@@ -79,10 +80,10 @@ const InputBoardPresenter = ({
             onSubmit(e);
           }}
         >
-          <S.InputArea col g={25} full className="GI">
+          <S.InputArea col g={25} full>
             <DateInput
               selectedDate={selectedDate} // TODO: historyDate를 받아온다.
-              onChange={() => {}}
+              onChange={onChangeDate}
             />
             <SDiv col act g={12}>
               <MoneyInput

@@ -1,18 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from "react";
+import React from "react";
 
 import DROPDOWN_LIST from "@/data/dropdownList";
 import * as PAGE from "@/stores/mockData";
 import useUserInputStore from "@/stores/userInputStore";
 
 import InputBoardPresenter from "./InputBoardPresenter";
-
-const MOCK_USER_SELECT_STORE = {
-  selectedCoinId: "bitcoin",
-  historyDate: new Date(),
-  selectMoney: 0,
-  selectMoneyToCalc: 0,
-};
 
 // eslint-disable-next-line no-unused-vars
 const mockAxiosMarkets = (currency, coinsPerPage, pageNum, order) => {
@@ -46,17 +39,18 @@ const InputBoard = () => {
   const {
     selectedCoinInfo,
     selectedDate,
+    setSelectedDate,
     selectedMoney,
     setSelectedMoney,
     selectedCurrency,
   } = useUserInputStore((state) => ({
     selectedCoinInfo: state.selectedCoinInfo,
     selectedDate: state.selectedDate,
+    setSelectedDate: state.setSelectedDate,
     selectedMoney: state.selectedMoney,
     setSelectedMoney: state.setSelectedMoney,
     selectedCurrency: state.selectedCurrency,
   }));
-  const [tempUserSelect, setTempUserSelect] = useState(MOCK_USER_SELECT_STORE);
   const handleSubmit = (e) => {
     e.preventDefault();
     // TOOD: selectMoney, historyDate, 기반으로 계산해서 store에 update
@@ -75,11 +69,11 @@ const InputBoard = () => {
     selectedDate,
     selectedMoney,
     selectedCurrency,
-    selectMoneyToCalc: tempUserSelect.selectMoneyToCalc,
     dropdownCoinOptionList: DROPDOWN_LIST,
     onSubmit: handleSubmit,
     onChangeMoney: setSelectedMoney,
     onClickIncreaseMoney: increaseMoney,
+    onChangeDate: setSelectedDate,
   };
   return <InputBoardPresenter {...InputBordPresenterProps} />;
 };

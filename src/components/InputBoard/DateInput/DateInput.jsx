@@ -86,7 +86,9 @@ const DateInput = ({ selectedDate, onChange }) => {
             ref={datePickerRef}
             selected={selectedDate}
             dateFormat="yyyy년 MM월 dd일"
-            onChange={onChange}
+            onChange={(date) => {
+              onChange(date);
+            }}
             minDate={new Date("2013-04-28")}
             maxDate={new Date()}
           />
