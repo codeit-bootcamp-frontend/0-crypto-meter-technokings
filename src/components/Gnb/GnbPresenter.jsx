@@ -5,7 +5,7 @@ import styled from "styled-components";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import MainLogo from "@components/SVGComponents/MainLogo";
 import RestoreIcon from "@components/SVGComponents/RestoreIcon";
-import { SDiv, SText, colors } from "@styles";
+import { SDiv, SText } from "@styles";
 
 import GnbButton from "./GnbButton";
 import SearchHistory from "./SearchHistory/SearchHistory";
@@ -52,8 +52,7 @@ S.GnbWrapper = styled(SDiv)`
   background-color: #f5f8f9;
   @media only screen and (max-width: 1200px) {
     padding: 0;
-
-    background-color: ${colors.white};
+    background-color: transparent;
   }
 
   @media only screen and (max-width: 768px) {
