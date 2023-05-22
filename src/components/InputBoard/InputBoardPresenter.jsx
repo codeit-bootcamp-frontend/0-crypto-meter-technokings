@@ -101,7 +101,10 @@ const InputBoardPresenter = ({
                 ))}
               </S.IncreaseButtonListWrapper>
             </SDiv>
-            <Dropdown options={dropdownCoinOptionList} />
+            <Dropdown
+              options={dropdownCoinOptionList}
+              selected={selectedCoinInfo}
+            />
           </S.InputArea>
           <S.SubmitArea ct>
             <S.SubmitButton

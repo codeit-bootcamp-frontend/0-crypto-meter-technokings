@@ -9,14 +9,20 @@ import { SDiv, colors } from "@styles";
 
 import DropdownListItem from "./DropdownListItem";
 
-const DropdownList = ({ options = [], onClick }) => {
-  // const optionList = options ?? DUMMY_OPTIONS;
+const DropdownList = ({ options = [], onClick, onSelectOption }) => {
   return (
     <S.MainWrapper pd="10px" g8 bg={colors.gray8} br={12} mgt={4}>
       <SDiv col ast g={2}>
         {/* Todo: SearchInput 컴포넌트 추가 */}
         {options.map((item) => (
-          <DropdownListItem key={item.id} option={item} onClick={onClick} />
+          <DropdownListItem
+            key={item.id}
+            option={item}
+            onClick={() => {
+              onClick();
+              onSelectOption(item);
+            }}
+          />
         ))}
       </SDiv>
     </S.MainWrapper>

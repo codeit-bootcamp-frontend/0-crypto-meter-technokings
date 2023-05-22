@@ -17,15 +17,18 @@ const DropdownPresenter = ({
   isOpen,
   setIsOpen,
   onClick,
+  onSelectOption,
   selectedValue,
   options,
 }) => {
   const { mediaQuery } = useMediaQuery(1200);
   const [isTablet, setIsTablet] = useState(mediaQuery.matches);
   const dropdownRef = useRef(null);
+
   useEffect(() => {
     setIsTablet(mediaQuery.matches);
   }, [mediaQuery]);
+
   useOutsideClick(dropdownRef, () => {
     setIsOpen(false);
   });
@@ -43,7 +46,7 @@ const DropdownPresenter = ({
         <SDiv row sb>
           <SDiv row g={10}>
             <S.ImageWrapper w={30} h={30} disableSelect>
-              <img src={selectedValue.image} alt={`${selectedValue.name}`} />
+              <img src={selectedValue.imageUrl} alt={`${selectedValue.name}`} />
             </S.ImageWrapper>
             <SDiv ct>
               <S.LabelText b1 white disableSelect>
@@ -66,7 +69,12 @@ const DropdownPresenter = ({
         </SDiv>
       </S.DropdownHead>
       {isOpen && (
-        <DropdownList isOpen={isOpen} options={options} onClick={onClick} />
+        <DropdownList
+          isOpen={isOpen}
+          options={options}
+          onClick={onClick}
+          onSelectOption={onSelectOption}
+        />
       )}
     </S.DropdownWrapper>
   );
