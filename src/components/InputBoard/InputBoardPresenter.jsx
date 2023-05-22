@@ -138,6 +138,7 @@ S.BoardWrapper = styled(SDiv)`
   position: relative;
 
   width: 445px;
+  max-height: 945px;
 
   form {
     width: 100%;
