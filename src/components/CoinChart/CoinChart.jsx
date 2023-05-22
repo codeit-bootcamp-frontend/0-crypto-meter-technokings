@@ -18,7 +18,7 @@ const userInputStore = {
   },
   selectedDate: new Date(),
   selectedMoney: 3500,
-  calculatedMoney: -1,
+  calculatedMoney: 3200,
   selectedCurrency: "usd",
 };
 

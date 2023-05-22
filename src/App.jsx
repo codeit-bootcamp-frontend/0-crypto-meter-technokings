@@ -1,11 +1,13 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 
 import "./App.css";
 
 import styled from "styled-components";
 
-import { Gnb, CoinChart, InputBoard, TableSection } from "@components";
+import { Gnb, DefaultChartImage, InputBoard, TableSection } from "@components";
 import { SDiv } from "@styles";
+
+const CoinChart = lazy(() => import("@components/CoinChart/CoinChart"));
 
 const App = () => {
   return (
@@ -16,7 +18,9 @@ const App = () => {
           <InputBoard />
         </S.InputWrapper>
         <S.ContentsWrapper col g={24}>
-          <CoinChart />
+          <Suspense fallback={<DefaultChartImage />}>
+            <CoinChart />
+          </Suspense>
           <TableSection />
         </S.ContentsWrapper>
       </S.Contents>
