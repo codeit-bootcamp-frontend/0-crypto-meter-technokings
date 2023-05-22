@@ -115,7 +115,7 @@ const userInputStore = (set, get) => ({
     futureDate,
     pastMoney,
     futureMoney,
-    coinName,
+    coinInfo,
     currency
   ) => {
     // records 가 null이면 빈 배열로 시작
@@ -123,14 +123,17 @@ const userInputStore = (set, get) => ({
     // 새로운 레코드 생성
     const newRecord = {
       id: storedRecords.length,
-      coinName,
-      past: {
-        date: formatDateToString(pastDate),
-        money: formatMoneyToString(Math.round(pastMoney), currency),
+      coinInfo: {
+        name: coinInfo.name,
+        imageUrl: coinInfo.imageUrl,
       },
-      future: {
-        date: formatDateToString(futureDate),
-        money: formatMoneyToString(Math.round(futureMoney), currency),
+      before: {
+        dateString: formatDateToString(pastDate),
+        moneyString: formatMoneyToString(Math.round(pastMoney), currency),
+      },
+      after: {
+        dateString: formatDateToString(futureDate),
+        moneyString: formatMoneyToString(Math.round(futureMoney), currency),
       },
       currency,
     };

@@ -57,9 +57,11 @@ const InputBoard = () => {
     setCalculatedMoney: state.setCalculatedMoney,
     saveRecord: state.saveRecord,
   }));
+
   const increaseMoney = (inc) => {
     setSelectedMoney(selectedMoney + Number(inc));
   };
+
   const handleSubmit = () => {
     calculateMoney().then((res) => {
       setCalculatedMoney(res);
@@ -68,7 +70,7 @@ const InputBoard = () => {
         new Date(),
         selectedMoney,
         res,
-        selectedCoinInfo.name,
+        selectedCoinInfo,
         selectedCurrency
       );
     });
