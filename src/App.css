@@ -53,6 +53,12 @@ html {
   font-family: "Pretendard-Medium";
 }
 
+@media only screen and (max-width: 1200px) {
+  html {
+    background-color: #ffffff;
+  }
+}
+
 body {
   overflow: scroll;
   overflow-x: hidden;
