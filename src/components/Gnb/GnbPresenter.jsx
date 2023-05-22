@@ -5,7 +5,7 @@ import styled from "styled-components";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import MainLogo from "@components/SVGComponents/MainLogo";
 import RestoreIcon from "@components/SVGComponents/RestoreIcon";
-import { SDiv, SText, colors } from "@styles";
+import { SDiv, SText } from "@styles";
 
 import GnbButton from "./GnbButton";
 import SearchHistory from "./SearchHistory/SearchHistory";
@@ -21,7 +21,7 @@ const GnbPresenter = ({ isHistoryOpen, onResetClick, onHistoryClick }) => {
 
   return (
     <S.Header>
-      <S.GnbWrapper row sb act h={100} pdl={57} pdr={60} bg={colors.background}>
+      <S.GnbWrapper row sb act h={100} pdl={57} pdr={60}>
         <MainLogo isMobile={isMobile} />
         <S.ButtonWrapper row g={16}>
           <GnbButton onClick={onResetClick} isHistoryOpen={false}>
@@ -42,23 +42,21 @@ const GnbPresenter = ({ isHistoryOpen, onResetClick, onHistoryClick }) => {
 const S = {};
 
 S.Header = styled.header`
+  width: 100%;
   position: sticky;
   top: 0;
   z-index: 30;
 `;
 
 S.GnbWrapper = styled(SDiv)`
+  background-color: #f5f8f9;
   @media only screen and (max-width: 1200px) {
-    padding-left: 28px;
-    padding-right: 24px;
-
-    background-color: ${colors.white};
+    padding: 0;
+    background-color: transparent;
   }
 
   @media only screen and (max-width: 768px) {
     height: 68px;
-    padding-left: 25px;
-    padding-right: 20px;
   }
 `;
 

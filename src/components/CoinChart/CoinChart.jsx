@@ -18,12 +18,12 @@ const userInputStore = {
   },
   selectedDate: new Date(),
   selectedMoney: 3500,
-  calculatedMoney: -1,
+  calculatedMoney: 3200,
   selectedCurrency: "usd",
 };
 
 const CoinChart = () => {
-  const [DaysQuery, setDaysQuery] = useState("max");
+  const [daysQuery, setDaysQuery] = useState("max");
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
@@ -71,13 +71,13 @@ const CoinChart = () => {
       getChartData(
         userInputStore.selectedCoinInfo.id,
         userInputStore.selectedCurrency,
-        DaysQuery
+        daysQuery
       );
     }
   }, [
     userInputStore.selectedCoinInfo.id,
     userInputStore.selectedCurrency,
-    DaysQuery,
+    daysQuery,
   ]);
 
   /**
