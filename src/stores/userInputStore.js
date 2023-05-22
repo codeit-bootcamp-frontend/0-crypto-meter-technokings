@@ -39,6 +39,9 @@ const userInputStore = (set, get) => ({
     imageUrl:
       "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
   },
+  setSelectedCoinInfo: (newCoinInfo) => {
+    set(() => ({ selectedCoinInfo: newCoinInfo }));
+  },
   // default: 5년 전 오늘 날짜
   selectedDate: (() => {
     const today = new Date();
@@ -47,9 +50,18 @@ const userInputStore = (set, get) => ({
     fiveYearsAgo.setFullYear(today.getFullYear() - 5);
     return fiveYearsAgo;
   })(),
-  selectedMoney: 1500,
+  setSelectedDate: (newDate) => {
+    set(() => ({ selectedDate: newDate }));
+  },
+  selectedMoney: 0,
+  setSelectedMoney: (newMoney) => {
+    set(() => ({ selectedoMoney: newMoney }));
+  },
   calculatedMoney: -1,
   selectedCurrency: "krw",
+  setSelectedCurrency: (newCurrency) => {
+    set(() => ({ selectedCurrency: newCurrency }));
+  },
   /**
    * @description userInputStore의 상태값들을 토대로 사용자가 입력한 금액이 지금은 얼마가 되었는지 계산
    */
