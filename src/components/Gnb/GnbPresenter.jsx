@@ -49,6 +49,7 @@ S.Header = styled.header`
 `;
 
 S.GnbWrapper = styled(SDiv)`
+  background-color: #f5f8f9;
   @media only screen and (max-width: 1200px) {
     padding-left: 28px;
     padding-right: 24px;
