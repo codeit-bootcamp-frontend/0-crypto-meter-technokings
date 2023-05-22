@@ -33,14 +33,6 @@ S.Svg = styled.svg`
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-<<<<<<< Updated upstream
-
-  @media only screen and (max-width: 768px) {
-    width: 12px;
-    height: 12px;
-  }
-=======
->>>>>>> Stashed changes
 `;
 
 export default PrevIcon;
