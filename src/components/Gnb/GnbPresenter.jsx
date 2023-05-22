@@ -21,7 +21,7 @@ const GnbPresenter = ({ isHistoryOpen, onResetClick, onHistoryClick }) => {
 
   return (
     <S.Header>
-      <S.GnbWrapper row sb act h={100} pdl={57} pdr={60} bg={colors.background}>
+      <S.GnbWrapper row sb act h={100} pdl={57} pdr={60}>
         <MainLogo isMobile={isMobile} />
         <S.ButtonWrapper row g={16}>
           <GnbButton onClick={onResetClick} isHistoryOpen={false}>
@@ -42,6 +42,7 @@ const GnbPresenter = ({ isHistoryOpen, onResetClick, onHistoryClick }) => {
 const S = {};
 
 S.Header = styled.header`
+  width: 100%;
   position: sticky;
   top: 0;
   z-index: 30;
