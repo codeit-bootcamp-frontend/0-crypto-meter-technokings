@@ -11,15 +11,13 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
     symbol: "₩",
     value: "krw",
   };
-  const [inputValue, setInputValue] = useState(selectedMoney);
+
   const [showInput, setShowInput] = useState(true);
   const inputRef = useRef(null);
 
   useEffect(() => {
-    if (showInput) {
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
+    if (showInput && inputRef.current) {
+      inputRef.current.focus();
     }
   }, [showInput]);
 
@@ -36,8 +34,9 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
           min="1"
           ct
           placeholder={new Intl.NumberFormat().format(selectedMoney)}
+          value={selectedMoney}
           onChange={(e) => {
-            setInputValue(e.target.value);
+            onChange(Number(e.target.value));
           }}
           onFocus={() => {
             setShowInput(true);
@@ -54,7 +53,7 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
           }}
           show={!showInput}
         >
-          {new Intl.NumberFormat().format(inputValue)}
+          {new Intl.NumberFormat().format(selectedMoney)}
         </S.InputValueWrapper>
         <SDiv ct>
           <S.LabelText b1 white disableSelect>

@@ -23,15 +23,12 @@ const InputBoardPresenter = ({
   selectedCurrency,
   dropdownCoinOptionList,
   onSubmit,
-  onChangeDate,
+  onChangeMoney,
+  onClickIncreaseMoney,
 }) => {
   const [isOpen, setIsOpen] = useState(false); // form 모달이 열렸는지
   const { mediaQuery } = useMediaQuery(1200); // 미디어쿼리 변화 감지
   const [isTablet, setIsTablet] = useState(mediaQuery.matches); // 태블릿 사이즈 이하인지
-
-  const handleClickIncreaseMoney = () => {
-    // TODO: zustand store의 selectedMoney를 increase하기
-  };
 
   useEffect(() => {
     if (!isTablet) {
@@ -85,17 +82,21 @@ const InputBoardPresenter = ({
           <S.InputArea col g={25} full className="GI">
             <DateInput
               selectedDate={selectedDate} // TODO: historyDate를 받아온다.
-              onChange={onChangeDate}
+              onChange={() => {}}
             />
             <SDiv col act g={12}>
-              <MoneyInput selectedMoney="15000" isOpen={false} />
+              <MoneyInput
+                selectedMoney={selectedMoney}
+                onChange={onChangeMoney}
+                isOpen={false}
+              />
               <S.IncreaseButtonListWrapper row sb full>
                 {INCREASE_MONEY_UNITS.map((unit) => (
                   <IncreaseMoneyButton
                     key={unit}
                     money={unit}
                     onClick={() => {
-                      handleClickIncreaseMoney(unit);
+                      onClickIncreaseMoney(unit);
                     }}
                   />
                 ))}

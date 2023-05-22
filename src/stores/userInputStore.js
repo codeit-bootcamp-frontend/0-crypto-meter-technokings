@@ -55,7 +55,7 @@ const userInputStore = (set, get) => ({
   },
   selectedMoney: 0,
   setSelectedMoney: (newMoney) => {
-    set(() => ({ selectedoMoney: newMoney }));
+    set(() => ({ selectedMoney: newMoney }));
   },
   calculatedMoney: -1,
   selectedCurrency: "krw",

@@ -44,15 +44,15 @@ const getCoinsByPage = async (pageNum, coinsPerPage, currency) => {
 const InputBoard = () => {
   const {
     selectedCoinInfo,
-    setSelectedCoinInfo,
     selectedDate,
     selectedMoney,
+    setSelectedMoney,
     selectedCurrency,
   } = useUserInputStore((state) => ({
     selectedCoinInfo: state.selectedCoinInfo,
-    setSelectedCoinInfo: state.setSelectedCoinInfo,
     selectedDate: state.selectedDate,
     selectedMoney: state.selectedMoney,
+    setSelectedMoney: state.setSelectedMoney,
     selectedCurrency: state.selectedCurrency,
   }));
   const [tempUserSelect, setTempUserSelect] = useState(MOCK_USER_SELECT_STORE);
@@ -66,19 +66,9 @@ const InputBoard = () => {
       selectedMoneyToCalc: newMoney,
     });
   };
-  // TODO: 아래 임시 세터 함수들 전부 zustand store의 set으로 구현
-  const handleChangeHistoryDate = (newDate) => {
-    setTempUserSelect({ ...tempUserSelect, historyDate: newDate });
+  const increaseMoney = (inc) => {
+    setSelectedMoney(selectedMoney + inc);
   };
-
-  const handleChangeSelectMoney = (newMoney) => {
-    setTempUserSelect({ ...tempUserSelect, selectMoney: newMoney });
-  };
-
-  const handleChangeSelectedCoin = (newCoinInfo) => {
-    setSelectedCoinInfo(newCoinInfo);
-  };
-
   useEffect(() => {
     const getDropdownList = async () => {
       const response = await getCoinsByPage(
@@ -104,9 +94,8 @@ const InputBoard = () => {
     selectMoneyToCalc: tempUserSelect.selectMoneyToCalc,
     dropdownCoinOptionList: dropdownList,
     onSubmit: handleSubmit,
-    onChangeMoney: handleChangeSelectMoney,
-    onChangeDate: handleChangeHistoryDate,
-    onChangeCoin: handleChangeSelectedCoin,
+    onChangeMoney: setSelectedMoney,
+    onClickIncreaseMoney: increaseMoney,
   };
   return <InputBoardPresenter {...InputBordPresenterProps} />;
 };
