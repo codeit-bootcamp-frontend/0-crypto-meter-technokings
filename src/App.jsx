@@ -34,6 +34,9 @@ S.AppWrapper = styled(SDiv)`
   width: 100%;
   max-width: calc(1379px + 445px + 24px);
   margin: 0 auto 46px;
+  @media only screen and (max-width: 1200px) {
+    max-width: calc(100% - 48px);
+  }
 `;
 
 S.Contents = styled(SDiv)`
@@ -51,7 +54,10 @@ S.Contents = styled(SDiv)`
 S.InputWrapper = styled(SDiv)`
   position: sticky;
   top: 100px;
-  z-index: 30px;
+  z-index: 30;
+  @media only screen and (max-width: 768px) {
+    top: 66px;
+  }
 `;
 
 S.ContentsWrapper = styled(SDiv)`
