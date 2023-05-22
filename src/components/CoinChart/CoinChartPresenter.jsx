@@ -29,7 +29,7 @@ const CoinChartPresenter = ({
   }
   return (
     <S.ChartWrapper col full br={25} white>
-      <S.Inner pos="relative" mg="36px 48px 70px">
+      <S.Inner pos="relative">
         <CoinChartHeader coinName={coinName} coinImageUrl={coinImageUrl} />
         <CoinHistoryUserSelect
           formattedDate={formattedDate}
@@ -60,12 +60,12 @@ S.ChartWrapper = styled(SDiv)`
 S.Inner = styled(SDiv)`
   position: ${(props) => (props.pos ? `${props.pos}` : "static")};
   max-width: ${(props) => (props.maxW ? `${props.maxW}px` : "none")};
-
+  margin: 36px 48px 70px;
   @media only screen and (max-width: 1200px) {
-    marign: 36px 36px 0px;
+    margin: 36px 12px 0;
   }
   @media only screen and (max-width: 768px) {
-    margin: 32px 20px 0px;
+    margin: 32px 12px 0;
   }
 `;
 

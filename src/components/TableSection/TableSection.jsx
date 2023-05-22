@@ -23,6 +23,7 @@ S.TableSectionWrapper = styled(SDiv)`
 
   @media only screen and (max-width: 1200px) {
     margin: 0;
+    padding: 36px 12px 60px;
     background-color: ${colors.white};
   }
 
