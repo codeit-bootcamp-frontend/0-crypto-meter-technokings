@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
 
+import useUserInputStore from "@/stores/userInputStore";
+
 import { DUMMY_OPTIONS } from "./Dropdown/Dropdown";
 import InputBoardPresenter from "./InputBoardPresenter";
 
@@ -17,6 +19,14 @@ const MOCK_COINLIST_STORE = {
 };
 
 const InputBoard = () => {
+  const { selectedCoinInfo, selectedDate, selectedMoney, selectedCurrency } =
+    useUserInputStore((state) => ({
+      selectedCoinInfo: state.selectedCoinInfo,
+      selectedDate: state.selectedDate,
+      selectedMoney: state.selectedMoney,
+      selectedCurrency: state.selectedCurrency,
+    }));
+
   const [tempUserSelect, setTempUserSelect] = useState(MOCK_USER_SELECT_STORE);
   // eslint-disable-next-line no-unused-vars
   const [tempCoinList, setTempCoinList] = useState(MOCK_COINLIST_STORE);
@@ -44,10 +54,10 @@ const InputBoard = () => {
   };
 
   const InputBordPresenterProps = {
-    selectedCoinId: tempUserSelect.selectedCoinId,
-    historyDate: tempUserSelect.historyDate,
-    selectMoney: tempUserSelect.selectMoney,
-    selectedCurrency: tempCoinList.coinCurrency,
+    selectedCoinInfo,
+    selectedDate,
+    selectedMoney,
+    selectedCurrency,
     selectMoneyToCalc: tempUserSelect.selectMoneyToCalc,
     dropdownCoinOptionList: tempCoinList.dropdownCoinOptionList,
     onSubmit: handleSubmit,

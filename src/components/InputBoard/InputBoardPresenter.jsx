@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 import formatDateToString from "@/utils/formatDate";
+import formatMoneyToString from "@/utils/formatMoney";
 import FilterIcon from "@components/SVGComponents/FilterIcon";
 import { SDiv, SButton, SText, colors, SHeading2 } from "@styles";
 
@@ -16,9 +17,10 @@ import MoneyInput from "./MoneyInput/MoneyInput";
 const INCREASE_MONEY_UNITS = [5000, 10000, 50000, 100000];
 
 const InputBoardPresenter = ({
-  selectedCoinId,
-  historyDate,
-  selectMoney,
+  selectedCoinInfo,
+  selectedDate,
+  selectedMoney,
+  selectedCurrency,
   dropdownCoinOptionList,
   onSubmit,
   onChangeDate,
@@ -56,16 +58,16 @@ const InputBoardPresenter = ({
           <SText mgb={7}> 내가 만약&nbsp;</SText>
           <S.Br first />
           <SText white mgb={7}>
-            {formatDateToString(historyDate) || "0000년 00월 00일"}
+            {formatDateToString(selectedDate)}
           </SText>
           에
           <S.Br second />
           <SText white mgb={7}>
-            {selectMoney || 0}
+            {formatMoneyToString(selectedMoney, selectedCurrency)}
           </SText>
-          원으로&nbsp;
+          으로&nbsp;
           <S.Br third />
-          <SText white>{selectedCoinId || "Bitcoin"}</SText>을 샀다면,
+          <SText white>{selectedCoinInfo.name}</SText>을 샀다면,
         </SHeading2>
         <S.Overlay
           show={isTablet && isOpen}
@@ -82,7 +84,7 @@ const InputBoardPresenter = ({
         >
           <S.InputArea col g={25} full className="GI">
             <DateInput
-              selectedDate={historyDate} // TODO: historyDate를 받아온다.
+              selectedDate={selectedDate} // TODO: historyDate를 받아온다.
               onChange={onChangeDate}
             />
             <SDiv col act g={12}>
