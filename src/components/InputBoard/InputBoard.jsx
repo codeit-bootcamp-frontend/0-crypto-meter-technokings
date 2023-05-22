@@ -43,6 +43,9 @@ const InputBoard = () => {
     selectedMoney,
     setSelectedMoney,
     selectedCurrency,
+    calculateMoney,
+    setCalculatedMoney,
+    saveRecord,
   } = useUserInputStore((state) => ({
     selectedCoinInfo: state.selectedCoinInfo,
     selectedDate: state.selectedDate,
@@ -50,18 +53,25 @@ const InputBoard = () => {
     selectedMoney: state.selectedMoney,
     setSelectedMoney: state.setSelectedMoney,
     selectedCurrency: state.selectedCurrency,
+    calculateMoney: state.calculateMoney,
+    setCalculatedMoney: state.setCalculatedMoney,
+    saveRecord: state.saveRecord,
   }));
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TOOD: selectMoney, historyDate, 기반으로 계산해서 store에 update
-    // const newMoney = tempUserSelect.selectMoney * 100; // TODO: 임시값, 추후에 api요청하고 차액을 계산
-    // setTempUserSelect({
-    //   ...tempUserSelect,
-    //   selectedMoneyToCalc: newMoney,
-    // });
-  };
   const increaseMoney = (inc) => {
     setSelectedMoney(selectedMoney + Number(inc));
+  };
+  const handleSubmit = () => {
+    calculateMoney().then((res) => {
+      setCalculatedMoney(res);
+      saveRecord(
+        selectedDate,
+        new Date(),
+        selectedMoney,
+        res,
+        selectedCoinInfo.name,
+        selectedCurrency
+      );
+    });
   };
 
   const InputBordPresenterProps = {

@@ -77,7 +77,7 @@ const InputBoardPresenter = ({
           onSubmit={(e) => {
             e.preventDefault();
             setIsOpen(false);
-            onSubmit(e);
+            onSubmit();
           }}
         >
           <S.InputArea col g={25} full>
@@ -117,7 +117,7 @@ const InputBoardPresenter = ({
               type="submit"
               onSubmit={(e) => {
                 e.preventDefault();
-                onSubmit(e);
+                onSubmit();
                 setIsOpen(false);
               }}
             >

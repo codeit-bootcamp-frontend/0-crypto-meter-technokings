@@ -58,6 +58,11 @@ const userInputStore = (set, get) => ({
     set(() => ({ selectedMoney: newMoney }));
   },
   calculatedMoney: -1,
+  setCalculatedMoney: (calcResult) => {
+    set(() => ({
+      calculatedMoney: calcResult,
+    }));
+  },
   selectedCurrency: "krw",
   setSelectedCurrency: (newCurrency) => {
     set(() => ({ selectedCurrency: newCurrency }));
@@ -72,7 +77,6 @@ const userInputStore = (set, get) => ({
         selectedMoney,
         selectedCoinInfo,
         selectedCurrency,
-        saveRecord,
       } = get();
       // API 요청을 통해 선택한 시점의 가격과 현재 가격을 가져옴
       const todayDate = new Date();
@@ -92,19 +96,7 @@ const userInputStore = (set, get) => ({
       ]);
       const [beforePrice, todayPrice] = coinPriceResponses;
       // calculatedMoney 를 계산: 오늘 가격 * (selectedMoney / 선택한 날짜의 가격)
-      const calculatedMoney = (
-        todayPrice *
-        (selectedMoney / beforePrice)
-      ).toFixed(2);
-      set({ calculatedMoney });
-      saveRecord(
-        selectedDate,
-        todayDate,
-        selectedMoney,
-        calculatedMoney,
-        selectedCoinInfo.name,
-        selectedCurrency
-      );
+      return (todayPrice * (selectedMoney / beforePrice)).toFixed(2);
     } catch (error) {
       throw new Error(error);
     }
