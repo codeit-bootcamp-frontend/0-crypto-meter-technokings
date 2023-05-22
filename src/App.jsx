@@ -1,9 +1,8 @@
 import React from "react";
 
 import "./App.css";
-import { Gnb } from "@components";
-import CoinChart from "@components/CoinChart/CoinChart";
-import InputBoard from "@components/InputBoard/InputBoard";
+
+import { Gnb, CoinChart, InputBoard, TableSection } from "@components";
 
 const App = () => {
   return (
@@ -11,6 +10,7 @@ const App = () => {
       <Gnb />
       <InputBoard />
       <CoinChart />
+      <TableSection />
     </>
   );
 };

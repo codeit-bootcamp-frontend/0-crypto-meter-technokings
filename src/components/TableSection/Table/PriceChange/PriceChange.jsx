@@ -5,13 +5,13 @@ import styled from "styled-components";
 import { colors, SDiv, SText } from "@styles";
 import { green, red } from "@styles/text.style";
 
-const PriceChange = ({ change = -0.03 }) => {
+const PriceChange = ({ change }) => {
   const isDesc = change < 0;
 
   return (
     <S.Div col ct w={66} h={22} br={4} isDesc={isDesc}>
       <S.DivText s3 isDesc={isDesc}>
-        {`${change}%`}
+        {change ? `${change.toFixed(2)}%` : "-"}
       </S.DivText>
     </S.Div>
   );

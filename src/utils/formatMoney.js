@@ -4,6 +4,7 @@
  * @returns {string} 화면에 보이는 금액 형식의 스트링으로 변환하여 리턴
  */
 const formatMoneyToString = (money, unit, isFrontDeco = false) => {
+  if (!money && money !== 0) return "-";
   const formattedMoney = new Intl.NumberFormat().format(money);
   if (unit === "krw") {
     return isFrontDeco ? `₩${formattedMoney}` : `${formattedMoney}원`;
