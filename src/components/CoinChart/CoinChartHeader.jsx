@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
+import createKaKaoShareButton from "@/services/kakao/share.kakao";
 import FacebookLogo from "@components/SVGComponents/FacebookLogo";
 import KakaoLogo from "@components/SVGComponents/KakaoLogo";
 import ShareIcon from "@components/SVGComponents/ShareIcon";
@@ -11,30 +11,29 @@ import colors from "@styles/colors";
 
 const CoinChartHeader = ({ coinName, coinImageUrl }) => {
   const [copied, setCopied] = useState(false);
-  const handleClickShareKaKao = () => {
-    // TODOS: 발급 받은 key로 기능 붙이기
-    // https://ellismin.com/2020/09/share-kakao/
-    // https://developers.kakao.com/console/app/910147/config/appKey
-  };
-  /**
-   * - 참고 : https://become-a-developer.tistory.com/63
-   * - meta 태그 작성 후 u에 우리 배포 url 입력하면 될 것 같습니다.
-   */
+
   const handleClickShareFacebook = () => {
-    window.open("http://www.facebook.com/sharer.php?u=www.naver.com");
+    window.open(
+      "http://www.facebook.com/sharer.php?u=https://cryptometer-technokings.netlify.app"
+    );
   };
-  /**
-   * - 우리 웹사이트의 주소를 복사해주는 클립보드입니다.
-   */
-  const handleClickCopyClipboard = () => {
+
+  const handleClickCopyClipboard = async () => {
     setCopied(true);
-    navigator.clipboard.writeText(window.location.href);
+
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(window.location.href);
+    }
 
     const timer = setTimeout(() => {
       setCopied(false);
       clearTimeout(timer);
-    }, 350);
+    }, 500);
   };
+
+  useEffect(() => {
+    createKaKaoShareButton();
+  }, []);
 
   return (
     <S.Header sb pdb={32}>
@@ -48,20 +47,20 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
       </SDiv>
       <S.IconWrapper act row g={24}>
         <S.ShareButton
+          id="kakao-link-btn"
           type="button"
           w={20.5}
-          mobW={15.5}
           h={20}
+          mobW={15.5}
           mobH={15}
-          onClick={handleClickShareKaKao}
         >
           <KakaoLogo />
         </S.ShareButton>
         <S.ShareButton
           type="button"
           w={20}
-          mobW={15}
           h={20}
+          mobW={15}
           mobH={15}
           onClick={handleClickShareFacebook}
         >
@@ -71,8 +70,8 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
           type="button"
           copied={copied}
           w={19}
-          mobW={14.5}
           h={18}
+          mobW={14.5}
           mobH={13.5}
           onClick={handleClickCopyClipboard}
         >
@@ -81,11 +80,6 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
       </S.IconWrapper>
     </S.Header>
   );
-};
-
-CoinChartHeader.propTypes = {
-  coinName: PropTypes.string.isRequired,
-  coinImageUrl: PropTypes.string.isRequired,
 };
 
 const S = {};
@@ -126,7 +120,7 @@ S.ShareButton = styled(SButton)`
     return (
       props.copied &&
       css`
-        &:before {
+        &::before {
           content: "copied!";
           position: absolute;
           top: -20px;
@@ -137,7 +131,7 @@ S.ShareButton = styled(SButton)`
           font-size: 10px;
           color: white;
         }
-        &:after {
+        &::after {
           content: "";
           position: absolute;
           top: -4.5px;

@@ -1,6 +1,5 @@
 import React from "react";
 
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { colors, SButton, SText } from "@styles";
@@ -26,12 +25,6 @@ const CoinSelectDurationChip = ({
       </S.ButtonText>
     </S.Button>
   );
-};
-
-CoinSelectDurationChip.propTypes = {
-  chipText: PropTypes.string.isRequired,
-  isClicked: PropTypes.bool.isRequired,
-  handleClickChipButton: PropTypes.func.isRequired,
 };
 
 const S = {};
