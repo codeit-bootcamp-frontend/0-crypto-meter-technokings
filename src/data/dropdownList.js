@@ -345,7 +345,7 @@ const DROPDOWN_LIST = [
     id: "flow",
     name: "Flow",
     imageUrl:
-      "https://assets.coingecko.com/coins/images/13446/la…94c0c7a8cda55cb1c936_Flow_Wordmark.png?1631696776",
+      "https://assets.coingecko.com/coins/images/13446/large/5f6294c0c7a8cda55cb1c936_Flow_Wordmark.png?1631696776",
   },
   {
     id: "havven",
@@ -771,7 +771,7 @@ const DROPDOWN_LIST = [
     id: "marumarunft",
     name: "marumaruNFT",
     imageUrl:
-      "https://assets.coingecko.com/coins/images/27672/la…e23f86-426d-4a0f-9d66-10da3d58baf5.png?1665158519",
+      "https://assets.coingecko.com/coins/images/27672/large/90e23f86-426d-4a0f-9d66-10da3d58baf5.png?1665158519",
   },
   {
     id: "liquity-usd",
