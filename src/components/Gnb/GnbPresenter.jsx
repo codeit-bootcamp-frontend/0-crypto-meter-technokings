@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
+import CURRENCY_OPTIONS from "@/data/currencyOptions";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import MainLogo from "@components/SVGComponents/MainLogo";
 import RestoreIcon from "@components/SVGComponents/RestoreIcon";
@@ -11,7 +12,13 @@ import GnbButton from "./GnbButton";
 import SearchHistory from "./SearchHistory/SearchHistory";
 import Select from "./Select/Select";
 
-const GnbPresenter = ({ isHistoryOpen, onResetClick, onHistoryClick }) => {
+const GnbPresenter = ({
+  isHistoryOpen,
+  onResetClick,
+  onHistoryClick,
+  selectedCurrency,
+  onSelectOption,
+}) => {
   const { mediaQuery: mobileMediaQuery } = useMediaQuery(768);
   const [isMobile, setIsMobile] = useState(mobileMediaQuery.matches);
 
@@ -28,7 +35,13 @@ const GnbPresenter = ({ isHistoryOpen, onResetClick, onHistoryClick }) => {
             <RestoreIcon />
             <S.Text b3>다시 계산하기</S.Text>
           </GnbButton>
-          <Select />
+          <Select
+            options={CURRENCY_OPTIONS}
+            selectedIdx={CURRENCY_OPTIONS.findIndex(
+              (option) => option.value === selectedCurrency
+            )}
+            onSelect={onSelectOption}
+          />
           <GnbButton onClick={onHistoryClick} isHistoryOpen={isHistoryOpen}>
             <SText b3>검색기록</SText>
           </GnbButton>

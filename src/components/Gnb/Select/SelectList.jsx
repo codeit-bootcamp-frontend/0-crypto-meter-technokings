@@ -10,7 +10,7 @@ import SDiv from "@styles/micro-components/StyledDiv";
 
 import SelectListItem from "./SelectListItem";
 
-const SelectList = ({ options }) => {
+const SelectList = ({ options, onSelect, onClick, selectedIdx }) => {
   return (
     <S.SelectListWrapper
       col
@@ -22,8 +22,14 @@ const SelectList = ({ options }) => {
       bd={`1px solid ${colors.gray3}`}
       bg={colors.gray1}
     >
-      {options.map((item) => (
-        <SelectListItem key={item.value} option={item} />
+      {options.map((item, idx) => (
+        <SelectListItem
+          key={item.value}
+          isSelected={idx === selectedIdx}
+          option={item}
+          onClick={onClick}
+          onSelect={onSelect}
+        />
       ))}
     </S.SelectListWrapper>
   );
