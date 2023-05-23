@@ -1,9 +1,10 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 
 import styled from "styled-components";
 
+import useOutsideClick from "@/hooks/useOutsideClick";
 import colors from "@/styles/colors";
 import SDiv from "@styles/micro-components/StyledDiv";
 
@@ -11,20 +12,8 @@ import SelectListItem from "./SelectListItem";
 
 const SelectList = ({ options, onSelect, onClick, selectedIdx }) => {
   const selectListRef = useRef(null);
-  const handleClick = (e) => {
-    if (selectListRef.current && !selectListRef.current.contains(e.target)) {
-      onClick();
-    }
-  };
-  useEffect(() => {
-    setTimeout(() => {
-      document.addEventListener("click", handleClick);
-    }, 0);
 
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  });
+  useOutsideClick(selectListRef, onClick);
   return (
     <S.SelectListWrapper
       ref={selectListRef}
