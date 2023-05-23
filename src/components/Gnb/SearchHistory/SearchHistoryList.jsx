@@ -1,17 +1,27 @@
+/* eslint-disable indent */
+/* eslint-disable react/jsx-indent */
 import React from "react";
 
 import styled from "styled-components";
 
-import { SDiv, colors } from "@styles";
+import { SDiv, SText, colors } from "@styles";
 
 import SearchHistoryListItem from "./SearchHistoryListItem";
 
 const SearchHistoryList = ({ history }) => {
   return (
     <S.HistoryListWrapper>
-      {history.map((item) => (
-        <SearchHistoryListItem key={item.id} record={item} />
-      ))}
+      {history.length > 0 ? (
+        history.map((item) => (
+          <SearchHistoryListItem key={item.id} record={item} />
+        ))
+      ) : (
+        <SDiv col ct h={81}>
+          <SText s1 g4>
+            검색 기록이 없습니다.
+          </SText>
+        </SDiv>
+      )}
     </S.HistoryListWrapper>
   );
 };
