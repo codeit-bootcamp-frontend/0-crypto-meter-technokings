@@ -39,9 +39,9 @@ const SearchHistoryPresenter = ({
         </S.FilterIconWrapper>
         <SHeading4>검색 기록</SHeading4>
         <SButton onClick={onDelete}>
-          <SText b3 g7>
+          <S.ClearText b3 g7>
             기록 지우기
-          </SText>
+          </S.ClearText>
         </SButton>
       </S.HistoryHeader>
       <SearchHistoryList history={history} />
@@ -81,5 +81,11 @@ S.HistoryHeader = styled(SDiv)`
 
 S.FilterIconWrapper = styled(SDiv)`
   position: relative;
+`;
+
+S.ClearText = styled(SText)`
+  &:hover {
+    filter: brightness(0.2);
+  }
 `;
 export default SearchHistoryPresenter;

@@ -5,10 +5,18 @@ import CURRENCY_OPTIONS from "@/data/currencyOptions";
 import SearchHistoryPresenter from "./SearchHistoryPresenter";
 
 const SearchHistory = ({ currency }) => {
-  const handleDeleteHistoryClick = () => {};
   const [showFilter, setShowFilter] = useState(false);
   const [selectedFilterList, setSelectedFilterList] = useState([currency]);
 
+  const handleDeleteHistoryClick = () => {
+    const history = JSON.parse(localStorage.getItem("records"));
+    if (!history) return;
+    const deleteResult = history.filter((record) => {
+      return !selectedFilterList.includes(record.currency);
+    });
+    setSelectedFilterList([currency]);
+    localStorage.setItem("records", JSON.stringify(deleteResult));
+  };
   const getFilteredHistory = useCallback(() => {
     if (!localStorage.getItem("records")) return [];
     return JSON.parse(localStorage.getItem("records")).filter(
