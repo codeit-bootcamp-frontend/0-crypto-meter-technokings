@@ -4,7 +4,13 @@ import styled from "styled-components";
 
 import { SDiv } from "@styles";
 
-const FilterOptionListItem = ({ option, onChange, checked }) => {
+const FilterOptionListItem = ({
+  selectedOptions,
+  option,
+  onChange,
+  checked,
+}) => {
+  const isAlwaysChecked = selectedOptions.length === 1 && checked;
   return (
     <SDiv col jct ast>
       <SDiv row act g={4}>
@@ -12,6 +18,7 @@ const FilterOptionListItem = ({ option, onChange, checked }) => {
           <input
             type="checkbox"
             id={option.value}
+            disabled={isAlwaysChecked}
             checked={checked}
             onChange={(e) => {
               onChange(e.target.value);
@@ -82,6 +89,13 @@ S.CheckBoxWrapper = styled(SDiv)`
   }
   input[type="checkbox"]:focus {
     outline: calc(2px / 2) dotted rgba(0, 0, 0, 0.25);
+  }
+  input[type="checkbox"]:disabled {
+    border: 2px solid #8b8b8b;
+  }
+  input[type="checkbox"]:disabled:after,
+  input[type="checkbox"]:disabled:before {
+    background: #8b8b8b;
   }
 `;
 

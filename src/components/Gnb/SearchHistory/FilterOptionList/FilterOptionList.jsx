@@ -16,6 +16,7 @@ const FilterOptionList = ({ selectedOptions, options, onChangeOption }) => {
       {options.map((option) => {
         return (
           <FilterOptionListItem
+            selectedOptions={selectedOptions}
             key={option.value}
             option={option}
             onChange={onChangeOption}
