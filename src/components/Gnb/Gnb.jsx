@@ -6,23 +6,21 @@ import GnbPresenter from "./GnbPresenter";
 
 const Gnb = () => {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-  const { selectedCurrency, setSelectedCurrency } = useUserInputStore(
+  const { selectedCurrency, setSelectedCurrency, resetAll } = useUserInputStore(
     (state) => ({
       selectedCurrency: state.selectedCurrency,
       setSelectedCurrency: state.setSelectedCurrency,
+      resetAll: state.resetAll,
     })
   );
   const handleHistoryClick = () => {
     setIsHistoryOpen((prev) => !prev);
   };
-  const handleResetClick = () => {
-    // todo: 전역 userStore 초기화
-  };
 
   return (
     <GnbPresenter
       isHistoryOpen={isHistoryOpen}
-      onResetClick={handleResetClick}
+      onResetClick={resetAll}
       onHistoryClick={handleHistoryClick}
       selectedCurrency={selectedCurrency}
       onSelectOption={setSelectedCurrency}

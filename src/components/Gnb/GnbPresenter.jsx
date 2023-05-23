@@ -33,7 +33,7 @@ const GnbPresenter = ({
         <S.ButtonWrapper row g={16}>
           <GnbButton onClick={onResetClick} isHistoryOpen={false}>
             <RestoreIcon />
-            <S.Text b3>다시 계산하기</S.Text>
+            <S.Text b3>초기화</S.Text>
           </GnbButton>
           <Select
             options={CURRENCY_OPTIONS}
