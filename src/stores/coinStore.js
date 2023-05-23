@@ -15,6 +15,15 @@ const coinStore = (set, get) => ({
     return false;
   },
   /**
+   * @param {number} pageNum 페이지 번호
+   * @param {string} currency 화폐단위
+   * @returns coinDB의 pageNum_currency 페이지(코인 리스트)를 반환
+   */
+  getPage: (pageNum, currency) => {
+    const { coinDB } = get();
+    return coinDB[`${currency}_${pageNum}`];
+  },
+  /**
    * @param {coinObject[]} coinList 180개 코인 객체가 담긴 배열
    * @param {number} pageNum coinDB에 저장할 페이지(180개 단위) 번호
    * @param {string} currency 화폐 단위
