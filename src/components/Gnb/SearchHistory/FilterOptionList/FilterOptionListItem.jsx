@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 
-import { SDiv } from "@styles";
+import { SDiv, SText, colors } from "@styles";
 
 const FilterOptionListItem = ({
   selectedOptions,
@@ -12,8 +12,8 @@ const FilterOptionListItem = ({
 }) => {
   const isAlwaysChecked = selectedOptions.length === 1 && checked;
   return (
-    <SDiv col jct ast>
-      <SDiv row act g={4}>
+    <S.ItemWrapper col jct ast h={24} br={4}>
+      <SDiv row act g={4} full>
         <S.CheckBoxWrapper jct act>
           <input
             type="checkbox"
@@ -25,15 +25,24 @@ const FilterOptionListItem = ({
             }}
             value={option.value}
           />
-          <span className="checkbox" />
         </S.CheckBoxWrapper>
-        <S.Label htmlFor={option.value}>{option.name}</S.Label>
+        <S.Label htmlFor={option.value}>
+          <SText g8 c1>
+            {`${option.name} (${option.symbol})`}
+          </SText>
+        </S.Label>
       </SDiv>
-    </SDiv>
+    </S.ItemWrapper>
   );
 };
 
 const S = {};
+
+S.ItemWrapper = styled(SDiv)`
+  &:hover {
+    background-color: ${colors.gray2};
+  }
+`;
 
 S.CheckBox = styled.input`
   margin: 4px;
@@ -44,6 +53,7 @@ S.CheckBox = styled.input`
 `;
 
 S.CheckBoxWrapper = styled(SDiv)`
+  --borderWidth: 2.5px;
   input[type="checkbox"] {
     -webkit-appearance: none;
     appearance: none;
@@ -52,53 +62,61 @@ S.CheckBoxWrapper = styled(SDiv)`
     font-size: 1.8em;
     border-radius: 0.125em;
     display: inline-block;
-    border: 2px solid #48c;
-    width: 13px;
-    height: 13px;
+    border: var(--borderWidth) solid #48c;
+    width: 18px;
+    height: 18px;
     position: relative;
+    cursor: pointer;
   }
   input[type="checkbox"]:before,
   input[type="checkbox"]:after {
     content: "";
     position: absolute;
     background: #48c;
-    width: calc(2px * 2);
-    height: 2px;
+    width: calc(var(--borderWidth) * 2);
+    height: var(--borderWidth);
     top: 50%;
     left: 10%;
     transform-origin: left center;
   }
   input[type="checkbox"]:before {
-    transform: rotate(45deg) translate(calc(2px / -2), calc(2px / -2)) scaleX(0);
+    transform: rotate(45deg)
+      translate(calc(var(--borderWidth) / -2), calc(var(--borderWidth) / -2))
+      scaleX(0);
     transition: transform 200ms ease-in 200ms;
   }
   input[type="checkbox"]:after {
-    width: calc(2px * 5);
-    transform: rotate(-45deg) translateY(calc(2px * 2)) scaleX(0);
+    width: calc(var(--borderWidth) * 5);
+    transform: rotate(-45deg) translateY(calc(var(--borderWidth) * 2)) scaleX(0);
     transform-origin: left center;
     transition: transform 200ms ease-in;
   }
   input[type="checkbox"]:checked:before {
-    transform: rotate(45deg) translate(calc(2px / -2), calc(2px / -2)) scaleX(1);
+    transform: rotate(45deg)
+      translate(calc(var(--borderWidth) / -2), calc(var(--borderWidth) / -2))
+      scaleX(1);
     transition: transform 200ms ease-in;
   }
   input[type="checkbox"]:checked:after {
-    width: calc(2px * 4);
-    transform: rotate(-45deg) translateY(calc(2px * 2)) scaleX(1);
+    width: calc(var(--borderWidth) * 4);
+    transform: rotate(-45deg) translateY(calc(var(--borderWidth) * 2)) scaleX(1);
     transition: transform 200ms ease-out 200ms;
   }
   input[type="checkbox"]:focus {
-    outline: calc(2px / 2) dotted rgba(0, 0, 0, 0.25);
+    outline: calc(var(--borderWidth) / 2) dotted rgba(0, 0, 0, 0.25);
   }
   input[type="checkbox"]:disabled {
-    border: 2px solid #8b8b8b;
+    border: var(--borderWidth) solid ${colors.gray3};
   }
   input[type="checkbox"]:disabled:after,
   input[type="checkbox"]:disabled:before {
-    background: #8b8b8b;
+    background: ${colors.gray3};
   }
 `;
 
-S.Label = styled.label``;
+S.Label = styled.label`
+  width: 80%;
+  cursor: pointer;
+`;
 
 export default FilterOptionListItem;

@@ -30,6 +30,7 @@ const SearchHistoryPresenter = ({
           <SelectFilterIcon fill={isFiltered ? "#0D6BFF" : colors.black} />
           {isFilterOpen && (
             <FilterOptionList
+              onClickOutside={onClickFilter}
               selectedOptions={selectedFilterList}
               options={CURRENCY_OPTIONS}
               onChangeOption={onChangeFilterOption}
