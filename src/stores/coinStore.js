@@ -23,6 +23,10 @@ const coinStore = (set, get) => ({
     const { coinDB } = get();
     return coinDB[`${currency}_${pageNum}`];
   },
+  getPageSlice: (pageNum, currency, startIdx, length) => {
+    const { coinDB } = get();
+    return coinDB[`${currency}_${pageNum}`].slice(startIdx, startIdx + length);
+  },
   /**
    * @param {coinObject[]} coinList 180개 코인 객체가 담긴 배열
    * @param {number} pageNum coinDB에 저장할 페이지(180개 단위) 번호
