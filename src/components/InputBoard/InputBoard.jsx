@@ -1,61 +1,92 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from "react";
+import React from "react";
 
-import { DUMMY_OPTIONS } from "./Dropdown/Dropdown";
+import DROPDOWN_LIST from "@/data/dropdownList";
+import * as PAGE from "@/stores/mockData";
+import useUserInputStore from "@/stores/userInputStore";
+
 import InputBoardPresenter from "./InputBoardPresenter";
 
-const MOCK_USER_SELECT_STORE = {
-  selectedCoinId: "bitcoin",
-  historyDate: new Date(),
-  selectMoney: 0,
-  selectMoneyToCalc: 0,
+// eslint-disable-next-line no-unused-vars
+const mockAxiosMarkets = (currency, coinsPerPage, pageNum, order) => {
+  // eslint-disable-next-line max-len
+  // 'BASE_URL/coins/markets?vs_currency=krw&order=market_cap_desc&per_page=180&page=2&sparkline=false&locale=en'
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // 파라미터 받은대로 요청 후 가져옴
+      resolve(PAGE[`${currency}_${pageNum}`]);
+    }, 500);
+  });
 };
-
-const MOCK_COINLIST_STORE = {
-  coinCurrency: "krw",
-  dropdownCoinOptionList: DUMMY_OPTIONS,
+/**
+ * @param {number} pageNum 페이지네이션 넘버 (180개 단위 페이지)
+ * @param {number} coinsPerPage 페이지 당 가져올 코인 갯수(180)
+ * @param {string} currency 선택한 화폐 단위
+ * @returns axios get 요청으로 가져온 180개 코인 리스트 반환
+ */
+// eslint-disable-next-line no-unused-vars
+const getCoinsByPage = async (pageNum, coinsPerPage, currency) => {
+  const response = await mockAxiosMarkets(
+    currency,
+    coinsPerPage,
+    pageNum,
+    "market_cap_desc"
+  );
+  return response;
 };
 
 const InputBoard = () => {
-  const [tempUserSelect, setTempUserSelect] = useState(MOCK_USER_SELECT_STORE);
-  // eslint-disable-next-line no-unused-vars
-  const [tempCoinList, setTempCoinList] = useState(MOCK_COINLIST_STORE);
+  const {
+    selectedCoinInfo,
+    selectedDate,
+    setSelectedDate,
+    selectedMoney,
+    setSelectedMoney,
+    selectedCurrency,
+    calculateMoney,
+    setCalculatedMoney,
+    saveRecord,
+  } = useUserInputStore((state) => ({
+    selectedCoinInfo: state.selectedCoinInfo,
+    selectedDate: state.selectedDate,
+    setSelectedDate: state.setSelectedDate,
+    selectedMoney: state.selectedMoney,
+    setSelectedMoney: state.setSelectedMoney,
+    selectedCurrency: state.selectedCurrency,
+    calculateMoney: state.calculateMoney,
+    setCalculatedMoney: state.setCalculatedMoney,
+    saveRecord: state.saveRecord,
+  }));
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TOOD: selectMoney, historyDate, 기반으로 계산해서 store에 update
-    const newMoney = tempUserSelect.selectMoney * 100; // TODO: 임시값, 추후에 api요청하고 차액을 계산
-    setTempUserSelect({
-      ...tempUserSelect,
-      selectedMoneyToCalc: newMoney,
+  const increaseMoney = (inc) => {
+    setSelectedMoney(selectedMoney + Number(inc));
+  };
+
+  const handleSubmit = () => {
+    calculateMoney().then((res) => {
+      setCalculatedMoney(res);
+      saveRecord(
+        selectedDate,
+        new Date(),
+        selectedMoney,
+        res,
+        selectedCoinInfo,
+        selectedCurrency
+      );
     });
-  };
-  // TODO: 아래 임시 세터 함수들 전부 zustand store의 set으로 구현
-  const handleChangeHistoryDate = (newDate) => {
-    setTempUserSelect({ ...tempUserSelect, historyDate: newDate });
-  };
-
-  const handleChangeSelectMoney = (newMoney) => {
-    setTempUserSelect({ ...tempUserSelect, selectMoney: newMoney });
-  };
-
-  const handleChangeSelectedCoin = (newCoinId) => {
-    setTempUserSelect({ ...tempUserSelect, selectedCoinId: newCoinId });
   };
 
   const InputBordPresenterProps = {
-    selectedCoinId: tempUserSelect.selectedCoinId,
-    historyDate: tempUserSelect.historyDate,
-    selectMoney: tempUserSelect.selectMoney,
-    selectedCurrency: tempCoinList.coinCurrency,
-    selectMoneyToCalc: tempUserSelect.selectMoneyToCalc,
-    dropdownCoinOptionList: tempCoinList.dropdownCoinOptionList,
+    selectedCoinInfo,
+    selectedDate,
+    selectedMoney,
+    selectedCurrency,
+    dropdownCoinOptionList: DROPDOWN_LIST,
     onSubmit: handleSubmit,
-    onChangeMoney: handleChangeSelectMoney,
-    onChangeDate: handleChangeHistoryDate,
-    onChangeCoin: handleChangeSelectedCoin,
+    onChangeMoney: setSelectedMoney,
+    onClickIncreaseMoney: increaseMoney,
+    onChangeDate: setSelectedDate,
   };
-
   return <InputBoardPresenter {...InputBordPresenterProps} />;
 };
 

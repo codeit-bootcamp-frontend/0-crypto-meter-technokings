@@ -1,39 +1,37 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from "react";
 
 import styled from "styled-components";
 
-import formatMoneyToString from "@/utils/formatMoney";
+import useUserInputStore from "@/stores/userInputStore";
 import { SDiv, SText, colors } from "@styles";
 import { green, red } from "@styles/text.style";
 
 const SearchHistoryListItem = ({ record }) => {
   // Todo: zustand 화폐로 다루기
-  const currency = "usd";
-  const { coin, before, after } = record;
-  const [beforeTime, afterTime] = [before.date, after.date];
+  const { selectedCurrency } = useUserInputStore((state) => ({
+    selectedCurrency: state.selectedCurrency,
+  }));
+  const { coinInfo, before, after } = record;
   const isMoneyIncreased = after.money - before.money >= 0;
-  const [beforeMoney, afterMoney] = [
-    formatMoneyToString(before.money, currency),
-    formatMoneyToString(after.money, currency),
-  ];
 
   return (
     <S.ItemWrapper row act g={12} h={81} mgl={24} mgr={24}>
       <S.ImageWrapper w={28} h={28}>
-        <img src={coin.image} alt={`${coin.name} logo`} />
+        <img src={coinInfo.imageUrl} alt={`${coinInfo.name} logo`} />
       </S.ImageWrapper>
       <S.TextWrapper col g={6}>
         <SText b3 g5>
-          {`만약 ${beforeTime.getFullYear()}년 ${beforeTime.getMonth()}월 ${beforeTime.getDate()}일에 `}
-          <SText s3>{beforeMoney}</SText>
-          <S.KRWText currency={currency}>으</S.KRWText>로
+          {`만약 ${before.dateString}에 `}
+          <SText s3>{before.moneyString}</SText>
+          <S.KRWText currency={selectedCurrency}>으</S.KRWText>로
         </SText>
         <S.Text b2 black>
-          {`${coin.name}을 샀다면, `}
+          {`${coinInfo.name}을 샀다면, `}
           <S.Br />
-          {`${afterTime.getFullYear()}년 ${afterTime.getMonth()}월 ${afterTime.getDate()}일에는 `}
+          {`${after.dateString}에는 `}
           <S.MoneyText s2 isMoneyIncreased={isMoneyIncreased}>
-            {afterMoney}
+            {after.moneyString}
           </S.MoneyText>
           &nbsp;입니다.
         </S.Text>

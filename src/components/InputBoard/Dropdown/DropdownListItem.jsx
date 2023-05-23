@@ -19,7 +19,7 @@ const DropdownListItem = ({ option, onClick }) => {
       onClick={onClick}
     >
       <S.ImageWrapper w={30} h={30} disableSelect>
-        <img src={option.image} alt={`${option.name} logo`} />
+        <img src={option.imageUrl} alt={`${option.name} logo`} />
       </S.ImageWrapper>
       <SText b1 white disableSelect>
         {option.name}

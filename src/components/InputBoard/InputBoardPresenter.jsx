@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 import formatDateToString from "@/utils/formatDate";
+import formatMoneyToString from "@/utils/formatMoney";
 import FilterIcon from "@components/SVGComponents/FilterIcon";
 import { SDiv, SButton, SText, colors, SHeading2 } from "@styles";
 
@@ -16,20 +17,19 @@ import MoneyInput from "./MoneyInput/MoneyInput";
 const INCREASE_MONEY_UNITS = [5000, 10000, 50000, 100000];
 
 const InputBoardPresenter = ({
-  selectedCoinId,
-  historyDate,
-  selectMoney,
+  selectedCoinInfo,
+  selectedDate,
+  selectedMoney,
+  selectedCurrency,
   dropdownCoinOptionList,
   onSubmit,
+  onChangeMoney,
+  onClickIncreaseMoney,
   onChangeDate,
 }) => {
   const [isOpen, setIsOpen] = useState(false); // form 모달이 열렸는지
   const { mediaQuery } = useMediaQuery(1200); // 미디어쿼리 변화 감지
   const [isTablet, setIsTablet] = useState(mediaQuery.matches); // 태블릿 사이즈 이하인지
-
-  const handleClickIncreaseMoney = () => {
-    // TODO: zustand store의 selectedMoney를 increase하기
-  };
 
   useEffect(() => {
     if (!isTablet) {
@@ -56,16 +56,16 @@ const InputBoardPresenter = ({
           <SText mgb={7}> 내가 만약&nbsp;</SText>
           <S.Br first />
           <SText white mgb={7}>
-            {formatDateToString(historyDate) || "0000년 00월 00일"}
+            {formatDateToString(selectedDate)}
           </SText>
           에
           <S.Br second />
           <SText white mgb={7}>
-            {selectMoney || 0}
+            {formatMoneyToString(selectedMoney, selectedCurrency)}
           </SText>
-          원으로&nbsp;
+          으로&nbsp;
           <S.Br third />
-          <SText white>{selectedCoinId || "Bitcoin"}</SText>을 샀다면,
+          <SText white>{selectedCoinInfo.name}</SText>을 샀다면,
         </SHeading2>
         <S.Overlay
           show={isTablet && isOpen}
@@ -77,29 +77,36 @@ const InputBoardPresenter = ({
           onSubmit={(e) => {
             e.preventDefault();
             setIsOpen(false);
-            onSubmit(e);
+            onSubmit();
           }}
         >
-          <S.InputArea col g={25} full className="GI">
+          <S.InputArea col g={25} full>
             <DateInput
-              selectedDate={historyDate} // TODO: historyDate를 받아온다.
+              selectedDate={selectedDate} // TODO: historyDate를 받아온다.
               onChange={onChangeDate}
             />
             <SDiv col act g={12}>
-              <MoneyInput selectedMoney="15000" isOpen={false} />
+              <MoneyInput
+                selectedMoney={selectedMoney}
+                onChange={onChangeMoney}
+                isOpen={false}
+              />
               <S.IncreaseButtonListWrapper row sb full>
                 {INCREASE_MONEY_UNITS.map((unit) => (
                   <IncreaseMoneyButton
                     key={unit}
                     money={unit}
                     onClick={() => {
-                      handleClickIncreaseMoney(unit);
+                      onClickIncreaseMoney(unit);
                     }}
                   />
                 ))}
               </S.IncreaseButtonListWrapper>
             </SDiv>
-            <Dropdown options={dropdownCoinOptionList} />
+            <Dropdown
+              options={dropdownCoinOptionList}
+              selected={selectedCoinInfo}
+            />
           </S.InputArea>
           <S.SubmitArea ct>
             <S.SubmitButton
@@ -110,7 +117,7 @@ const InputBoardPresenter = ({
               type="submit"
               onSubmit={(e) => {
                 e.preventDefault();
-                onSubmit(e);
+                onSubmit();
                 setIsOpen(false);
               }}
             >

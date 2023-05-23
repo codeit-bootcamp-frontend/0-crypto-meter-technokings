@@ -39,6 +39,9 @@ const userInputStore = (set, get) => ({
     imageUrl:
       "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
   },
+  setSelectedCoinInfo: (newCoinInfo) => {
+    set(() => ({ selectedCoinInfo: newCoinInfo }));
+  },
   // default: 5년 전 오늘 날짜
   selectedDate: (() => {
     const today = new Date();
@@ -47,9 +50,23 @@ const userInputStore = (set, get) => ({
     fiveYearsAgo.setFullYear(today.getFullYear() - 5);
     return fiveYearsAgo;
   })(),
-  selectedMoney: 1500,
+  setSelectedDate: (newDate) => {
+    set(() => ({ selectedDate: newDate }));
+  },
+  selectedMoney: 0,
+  setSelectedMoney: (newMoney) => {
+    set(() => ({ selectedMoney: newMoney }));
+  },
   calculatedMoney: -1,
+  setCalculatedMoney: (calcResult) => {
+    set(() => ({
+      calculatedMoney: calcResult,
+    }));
+  },
   selectedCurrency: "krw",
+  setSelectedCurrency: (newCurrency) => {
+    set(() => ({ selectedCurrency: newCurrency }));
+  },
   /**
    * @description userInputStore의 상태값들을 토대로 사용자가 입력한 금액이 지금은 얼마가 되었는지 계산
    */
@@ -60,7 +77,6 @@ const userInputStore = (set, get) => ({
         selectedMoney,
         selectedCoinInfo,
         selectedCurrency,
-        saveRecord,
       } = get();
       // API 요청을 통해 선택한 시점의 가격과 현재 가격을 가져옴
       const todayDate = new Date();
@@ -80,19 +96,7 @@ const userInputStore = (set, get) => ({
       ]);
       const [beforePrice, todayPrice] = coinPriceResponses;
       // calculatedMoney 를 계산: 오늘 가격 * (selectedMoney / 선택한 날짜의 가격)
-      const calculatedMoney = (
-        todayPrice *
-        (selectedMoney / beforePrice)
-      ).toFixed(2);
-      set({ calculatedMoney });
-      saveRecord(
-        selectedDate,
-        todayDate,
-        selectedMoney,
-        calculatedMoney,
-        selectedCoinInfo.name,
-        selectedCurrency
-      );
+      return (todayPrice * (selectedMoney / beforePrice)).toFixed(2);
     } catch (error) {
       throw new Error(error);
     }
@@ -111,7 +115,7 @@ const userInputStore = (set, get) => ({
     futureDate,
     pastMoney,
     futureMoney,
-    coinName,
+    coinInfo,
     currency
   ) => {
     // records 가 null이면 빈 배열로 시작
@@ -119,14 +123,17 @@ const userInputStore = (set, get) => ({
     // 새로운 레코드 생성
     const newRecord = {
       id: storedRecords.length,
-      coinName,
-      past: {
-        date: formatDateToString(pastDate),
-        money: formatMoneyToString(Math.round(pastMoney), currency),
+      coinInfo: {
+        name: coinInfo.name,
+        imageUrl: coinInfo.imageUrl,
       },
-      future: {
-        date: formatDateToString(futureDate),
-        money: formatMoneyToString(Math.round(futureMoney), currency),
+      before: {
+        dateString: formatDateToString(pastDate),
+        moneyString: formatMoneyToString(Math.round(pastMoney), currency),
+      },
+      after: {
+        dateString: formatDateToString(futureDate),
+        moneyString: formatMoneyToString(Math.round(futureMoney), currency),
       },
       currency,
     };

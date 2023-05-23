@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { colors, SButton, SText } from "@styles";
 
-const IncreaseMoneyButton = ({ money = 10000 }) => {
+const IncreaseMoneyButton = ({ money = 10000, onClick }) => {
   return (
     <S.Button
       type="button"
@@ -14,6 +14,7 @@ const IncreaseMoneyButton = ({ money = 10000 }) => {
       h={30}
       pd="6px 12px 6px 12px"
       bd={`1px solid ${colors.gray3}`}
+      onClick={onClick}
     >
       <S.ButtonText b3 white disableSelect>
         {`${money.toLocaleString("ko-KR")}원`}
