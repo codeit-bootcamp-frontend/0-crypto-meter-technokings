@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 /* eslint-disable operator-linebreak */
 /* eslint-disable no-bitwise */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { shallow } from "zustand/shallow";
 
