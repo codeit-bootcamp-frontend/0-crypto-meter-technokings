@@ -1,19 +1,45 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
+
+import CURRENCY_OPTIONS from "@/data/currencyOptions";
 
 import SearchHistoryPresenter from "./SearchHistoryPresenter";
 
-const SearchHistory = () => {
-  // todo: mock 대신 localStorage해서 get 받아올 것
-  // coinCurrency에 따라 다른 history를 받아야 함
+const SearchHistory = ({ currency }) => {
+  const handleDeleteHistoryClick = () => {};
+  const [showFilter, setShowFilter] = useState(false);
+  const [selectedFilterList, setSelectedFilterList] = useState([currency]);
 
-  const handleDeleteHistoryClick = () => {
-    // todo: localStorage 초기화
+  const getFilteredHistory = useCallback(() => {
+    if (!localStorage.getItem("records")) return [];
+    return JSON.parse(localStorage.getItem("records")).filter(
+      (record) =>
+        // eslint-disable-next-line implicit-arrow-linebreak
+        selectedFilterList.includes(record.currency)
+      // eslint-disable-next-line function-paren-newline
+    );
+  }, [selectedFilterList]);
+  const handleToggleCheckBox = (value) => {
+    let newList;
+    if (selectedFilterList.includes(value)) {
+      newList = selectedFilterList.filter((option) => option !== value);
+      setSelectedFilterList(newList);
+      return;
+    }
+    setSelectedFilterList((prev) => [...prev, value]);
   };
 
   return (
     <SearchHistoryPresenter
-      history={JSON.parse(localStorage.getItem("records")) ?? []}
+      history={getFilteredHistory()}
       onDelete={handleDeleteHistoryClick}
+      isFilterOpen={showFilter}
+      onClickFilter={() => {
+        setShowFilter((prev) => !prev);
+      }}
+      isFiltered={selectedFilterList.length !== CURRENCY_OPTIONS.length}
+      onChangeFilterOption={handleToggleCheckBox}
+      currency={currency}
+      selectedFilterList={selectedFilterList}
     />
   );
 };

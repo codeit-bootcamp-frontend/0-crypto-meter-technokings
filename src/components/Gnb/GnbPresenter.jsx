@@ -46,7 +46,7 @@ const GnbPresenter = ({
             <SText b3>검색기록</SText>
           </GnbButton>
         </S.ButtonWrapper>
-        {isHistoryOpen && <SearchHistory />}
+        {isHistoryOpen && <SearchHistory currency={selectedCurrency} />}
       </S.GnbWrapper>
     </S.Header>
   );

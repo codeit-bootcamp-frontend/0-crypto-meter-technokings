@@ -4,21 +4,22 @@ import styled from "styled-components";
 
 import { colors } from "@/styles";
 
-const SelectFilterIcon = () => {
+const SelectFilterIcon = ({ fill = colors.black }) => {
   return (
     <S.Svg
-      width="24"
-      height="24"
-      viewBox="0 0 23 24"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      isActive={fill !== colors.black}
     >
       <line
         x1="0.912162"
         y1="2.65546"
         x2="22.0878"
         y2="2.65546"
-        stroke={colors.black}
+        stroke={fill}
         strokeWidth="1.82432"
         strokeLinecap="round"
       />
@@ -27,7 +28,7 @@ const SelectFilterIcon = () => {
         y1="12.3851"
         x2="22.0878"
         y2="12.3851"
-        stroke={colors.black}
+        stroke={fill}
         strokeWidth="1.82432"
         strokeLinecap="round"
       />
@@ -36,13 +37,13 @@ const SelectFilterIcon = () => {
         y1="21.7905"
         x2="22.0878"
         y2="21.7905"
-        stroke={colors.black}
+        stroke={fill}
         strokeWidth="1.82432"
         strokeLinecap="round"
       />
-      <circle cx="7.5" cy="2.5" r="2.5" fill={colors.black} />
-      <circle cx="17.5" cy="12.5" r="2.5" fill={colors.black} />
-      <circle cx="4.5" cy="21.5" r="2.5" fill={colors.black} />
+      <circle cx="7.5" cy="2.5" r="2.5" fill={fill} />
+      <circle cx="17.5" cy="12.5" r="2.5" fill={fill} />
+      <circle cx="4.5" cy="21.5" r="2.5" fill={fill} />
     </S.Svg>
   );
 };
@@ -59,12 +60,12 @@ S.Svg = styled.svg`
   cursor: pointer;
 
   &:hover {
-    filter: opacity(0.7);
+    filter: ${(props) => (props.isActive ? "brightness(1.5)" : "opacity(0.5)")};
   }
 
   @media only screen and (max-width: 768px) {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
   }
 `;
 export default SelectFilterIcon;
