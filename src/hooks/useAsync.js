@@ -21,7 +21,7 @@ const useAsync = (asyncFunction) => {
     setError(null);
     try {
       const result = await asyncFunction(...args);
-      setData(result.data);
+      setData(result);
     } catch (error) {
       setError(error);
     } finally {

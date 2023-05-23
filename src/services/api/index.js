@@ -2,7 +2,10 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_COINGECKO_BASE_URL,
-  headers: { "x-cg-pro-api-key": import.meta.env.VITE_COINGECKO_API_KEY },
+  headers: {
+    "x-cg-pro-api-key": import.meta.env.VITE_COINGECKO_API_KEY,
+    "Access-Control-Allow-Credentials": "true",
+  },
   timeout: 5000,
 });
 
@@ -21,7 +24,7 @@ instance.interceptors.response.use(
  *
  * @returns {Promise} - 전역 암호화폐 시장 정보를 담고 있는 Promise 객체
  */
-const AxiosGlobal = () => {
+const getGlobal = () => {
   return instance.request({ url: "/global" });
 };
 
@@ -37,7 +40,7 @@ const AxiosGlobal = () => {
  *   - 인덱스 2: 7일 가격 변동 포함 여부
  * @returns {Promise} - 암호화폐 시장 정보를 담고 있는 Promise 객체
  */
-const AxiosMarkets = async (
+const getMarkets = async (
   currency,
   coinsPerPage,
   pageNum,
@@ -62,7 +65,7 @@ const AxiosMarkets = async (
  * @param {string} - 조회할 기간
  * @returns {Promise} - 암호화폐 시장 차트 정보를 담고 있는 Promise 객체
  */
-const AxiosMarketChart = async (coinId, currency, days) => {
+const getMarketChart = async (coinId, currency, days) => {
   return instance.request({
     url: `/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}`,
   });
@@ -75,7 +78,7 @@ const AxiosMarketChart = async (coinId, currency, days) => {
  * @param {string} - 조회할 날짜(ex. "21-05-2023")
  * @returns {Promise} - 암호화폐 정보를 담고 있는 Promise 객체
  */
-const AxiosHistory = async (coinId, date) => {
+const getHistory = async (coinId, date) => {
   return instance.request({
     url: `/coins/${coinId}/history?date=${date}`,
   });
@@ -87,16 +90,10 @@ const AxiosHistory = async (coinId, date) => {
  * @param {string} - 검색할 암호화폐 이름의 일부 또는 티커
  * @returns {Promise} - 암호화폐 검색 결과를 담고 있는 Promise 객체
  */
-const AxiosSearch = async (query) => {
+const getSearch = async (query) => {
   return instance.request({
     url: `/search?query=${query}`,
   });
 };
 
-export {
-  AxiosGlobal,
-  AxiosMarkets,
-  AxiosMarketChart,
-  AxiosHistory,
-  AxiosSearch,
-};
+export { getGlobal, getMarkets, getMarketChart, getHistory, getSearch };
