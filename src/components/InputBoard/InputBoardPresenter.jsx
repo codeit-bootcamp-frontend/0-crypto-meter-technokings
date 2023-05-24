@@ -93,6 +93,7 @@ const InputBoardPresenter = ({
                 selectedMoney={selectedMoney}
                 onChange={onChangeMoney}
                 isOpen={false}
+                selectedCurrency={selectedCurrency}
               />
               <S.IncreaseButtonListWrapper row sb full currency>
                 {INCREASE_MONEY_UNITS[selectedCurrency].map((unit) => (
