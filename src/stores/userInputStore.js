@@ -15,7 +15,13 @@ import formatMoneyToString from "@/utils/formatMoney";
 const getPriceAtDate = async (coinId, dateString, currency) => {
   const response = await getHistory(coinId, dateString);
   if (response.market_data === undefined) {
-    throw new Error(`${dateString}에 해당 코인 가격 정보가 없어요 ㅜㅜ`);
+    const parts = dateString.split("-");
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2];
+
+    const formattedDate = `${year}년 ${month}월 ${day}일`;
+    throw new Error(`${formattedDate}에 해당 코인 가격 정보가 없습니다.`);
   }
   const price = response.market_data.current_price[currency];
   return price.toFixed(2);

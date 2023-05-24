@@ -98,8 +98,38 @@ S.Dialog = styled.dialog`
   border-radius: 12px;
   padding: 80px 20px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.38);
+  animation: showModal 1s;
   &::backdrop {
     background: rgba(0, 0, 0, 0.5);
+  }
+
+  @keyframes showModal {
+    0% {
+      transform: scale(0);
+    }
+    60% {
+      transform: scale(1.1);
+    }
+    80% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  &.hide {
+    animation: hideModal 1s;
+  }
+  @keyframes hideModal {
+    0% {
+      transform: scale(1);
+    }
+    20% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(0);
+    }
   }
 `;
 export default InputBoard;
