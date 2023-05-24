@@ -1,18 +1,22 @@
 /* eslint-disable react/function-component-definition */
-import React, { useState } from "react";
+import React from "react";
 
 import SelectPresenter from "./SelectPresenter";
 
-const Select = ({ options, selectedIdx, onSelect }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const Select = ({
+  options,
+  selectedIdx,
+  onSelect,
+  isSelectOpen,
+  setIsSelectOpen,
+}) => {
   return (
     <SelectPresenter
-      isOpen={isOpen}
+      isOpen={isSelectOpen}
       options={options}
       selectedIdx={selectedIdx}
       onClick={() => {
-        setIsOpen((prev) => !prev);
+        setIsSelectOpen((prev) => !prev);
       }}
       onSelect={onSelect}
     />
