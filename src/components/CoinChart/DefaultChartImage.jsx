@@ -8,7 +8,7 @@ import { h3 } from "@styles/text.style";
 const DefaultChartImage = () => {
   return (
     <S.ChartWrapper flex full br={25} white>
-      <S.Inner pos="relative" pd="36px 48px 70px" maxW={910}>
+      <S.Inner pos="relative" pd="36px 0 100px 48px" maxW={910}>
         <S.NullTextWrapper>
           <SDiv />
           입력한 코인 정보가 없습니다.
@@ -44,10 +44,10 @@ S.Inner = styled(SDiv)`
   max-width: ${(props) => (props.maxW ? `${props.maxW}px` : "none")};
 
   @media only screen and (max-width: 1200px) {
-    padding: 36px 36px 0px;
+    padding: 36px 12px 0px;
   }
   @media only screen and (max-width: 768px) {
-    padding: 32px 20px 0px;
+    padding: 28px 4px 0px;
   }
 `;
 S.NullTextWrapper = styled(SDiv)`
