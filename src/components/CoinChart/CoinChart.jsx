@@ -5,10 +5,7 @@ import React, { useState } from "react";
 
 import { shallow } from "zustand/shallow";
 
-// import useAsync from "@/hooks/useAsync";
-// import useGetData, { useGetDataAll } from "@/hooks/useGetData";
 import useGetData from "@/hooks/useGetData";
-// import { getMarketChart } from "@/services/api";
 import useUserInputStore from "@/stores/userInputStore";
 import formatDateToString from "@/utils/formatDate";
 
@@ -16,7 +13,6 @@ import CoinChartPresenter from "./CoinChartPresenter";
 
 const CoinChart = () => {
   const [daysQuery, setDaysQuery] = useState("max");
-  // const [chartData, setChartData] = useState(null);
 
   const {
     calculatedMoney,
@@ -34,13 +30,6 @@ const CoinChart = () => {
     }),
     shallow
   );
-
-  // const {
-  //   data,
-  //   loading,
-  //   error,
-  //   callAsyncFunction: getMarketChartData,
-  // } = useAsync(getMarketChart);
 
   /**
    * api에서 받은 데이터를 가공하는 함수
@@ -80,7 +69,6 @@ const CoinChart = () => {
         tickPrice,
       };
     });
-    // setChartData(chart);
     return chart;
   };
 
@@ -139,26 +127,9 @@ const CoinChart = () => {
     isGreen,
   } = trimmUserStoreToChart();
 
-  // useEffect(() => {
-  //   getMarketChartData(selectedCoinInfo.id, selectedCurrency, daysQuery);
-  // }, [daysQuery]);
-
-  // useEffect(() => {
-  //   trimmMarketDataToChart(data, selectedCurrency, daysQuery);
-  // }, [data]);
-
   const suspenseData = useGetData(
     `/coins/${selectedCoinInfo.id}/market_chart?vs_currency=${selectedCurrency}&days=${daysQuery}`
   );
-
-  // const tempDataAll = useGetDataAll(
-  //   `/coins/${selectedCoinInfo.id}/market_chart?vs_currency=${selectedCurrency}&days=max`,
-  //   `/coins/${selectedCoinInfo.id}/market_chart?vs_currency=${selectedCurrency}&days=365`,
-  //   `/coins/${selectedCoinInfo.id}/market_chart?vs_currency=${selectedCurrency}&days=31`,
-  //   `/coins/${selectedCoinInfo.id}/market_chart?vs_currency=${selectedCurrency}&days=7`,
-  //   `/coins/${selectedCoinInfo.id}/market_chart?vs_currency=${selectedCurrency}&days=1`
-  // );
-
   return (
     <CoinChartPresenter
       coinName={selectedCoinInfo.name}
