@@ -4,6 +4,7 @@ import React from "react";
 import DROPDOWN_LIST from "@/data/dropdownList";
 import * as PAGE from "@/stores/mockData";
 import useUserInputStore from "@/stores/userInputStore";
+import scrollTop from "@/utils/scrollTop";
 
 import InputBoardPresenter from "./InputBoardPresenter";
 
@@ -63,6 +64,7 @@ const InputBoard = () => {
   };
 
   const handleSubmit = () => {
+    scrollTop();
     calculateMoney().then((res) => {
       setCalculatedMoney(res);
       saveRecord(
