@@ -22,30 +22,33 @@ const CoinChartPresenter = ({
   coinCurrency,
   chartData,
   onClickChip,
+  suspenseData,
 }) => {
-  // TODO: calculatedMoney === -1로 초기화 됐을 때 보여줄 loading animation 구현하기
-
   return (
-    <S.ChartWrapper col full br={25} white>
-      <S.Inner pos="relative">
-        <CoinChartHeader coinName={coinName} coinImageUrl={coinImageUrl} />
-        <CoinHistoryUserSelect
-          formattedDate={formattedDate}
-          trimmedUserSelectMoney={trimmedUserSelectMoney}
-          trimmedUserSelectCalcMoney={trimmedUserSelectCalcMoney}
-          toLocaleDate={toLocaleDate}
-          toLocaleTime={toLocaleTime}
-          isGray={isGray}
-          isGreen={isGreen}
-        />
-        <CoinChartArea
-          isGreen={isGreen}
-          coinCurrency={coinCurrency}
-          chartData={chartData}
-          onClickChip={onClickChip}
-        />
-      </S.Inner>
-    </S.ChartWrapper>
+    <div>
+      {suspenseData && (
+        <S.ChartWrapper col full br={25} white>
+          <S.Inner pos="relative">
+            <CoinChartHeader coinName={coinName} coinImageUrl={coinImageUrl} />
+            <CoinHistoryUserSelect
+              formattedDate={formattedDate}
+              trimmedUserSelectMoney={trimmedUserSelectMoney}
+              trimmedUserSelectCalcMoney={trimmedUserSelectCalcMoney}
+              toLocaleDate={toLocaleDate}
+              toLocaleTime={toLocaleTime}
+              isGray={isGray}
+              isGreen={isGreen}
+            />
+            <CoinChartArea
+              isGreen={isGreen}
+              coinCurrency={coinCurrency}
+              chartData={chartData}
+              onClickChip={onClickChip}
+            />
+          </S.Inner>
+        </S.ChartWrapper>
+      )}
+    </div>
   );
 };
 const S = {};
