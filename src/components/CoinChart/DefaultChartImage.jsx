@@ -8,7 +8,7 @@ import { h3 } from "@styles/text.style";
 const DefaultChartImage = () => {
   return (
     <S.ChartWrapper flex full br={25} white>
-      <S.Inner pos="relative" pd="36px 0 100px 48px" maxW={910}>
+      <S.Inner pos="relative" pd="36px 48px 100px" maxW={910}>
         <S.NullTextWrapper>
           <SDiv />
           입력한 코인 정보가 없습니다.
