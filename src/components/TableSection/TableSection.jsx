@@ -23,12 +23,13 @@ S.TableSectionWrapper = styled(SDiv)`
 
   @media only screen and (max-width: 1200px) {
     margin: 0;
-    padding: 36px 12px 60px;
+    padding: 36px 12px 56px;
     background-color: ${colors.white};
   }
 
   @media only screen and (max-width: 768px) {
     gap: 18px;
+    padding: 36px 4px 56px;
   }
 `;
 
