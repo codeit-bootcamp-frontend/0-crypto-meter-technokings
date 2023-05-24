@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 /**
  * 비동기 함수를 처리하고 해당 함수의 실행 결과와 상태를 관리하는 커스텀 훅
@@ -16,18 +16,21 @@ const useAsync = (asyncFunction) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const callAsyncFunction = async (...args) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const result = await asyncFunction(...args);
-      setData(result);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const callAsyncFunction = useCallback(
+    async (...args) => {
+      setLoading(true);
+      setError(null);
+      try {
+        const result = await asyncFunction(...args);
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [asyncFunction]
+  );
 
   return { data, loading, error, callAsyncFunction };
 };

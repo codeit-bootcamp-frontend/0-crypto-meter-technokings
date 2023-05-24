@@ -1,83 +1,62 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import mockMarkets from "@/data/mockMarkets";
+import { shallow } from "zustand/shallow";
+
+import useAsync from "@/hooks/useAsync";
+import useMarketData from "@/hooks/useMarketData";
+import { getGlobal, getMarkets } from "@/services/api";
+import useCoinStore from "@/stores/coinStore";
+import useUserInputStore from "@/stores/userInputStore";
 
 import TablePresenter from "./TablePresenter";
 
 const Table = () => {
-  const [pageNum, setPageNum] = useState(6);
-  const [sortKey, setSortKey] = useState("market_cap_rank");
+  const { selectedCurrency: currency } = useUserInputStore(
+    (state) => ({
+      selectedCurrency: state.selectedCurrency,
+    }),
+    shallow
+  );
+
+  const {
+    data: globalData,
+    loading: globalLoading,
+    error: globalError,
+    callAsyncFunction: getGlobalData,
+  } = useAsync(getGlobal);
+
+  const [pageNum, setPageNum] = useState(1);
+  const [endPageIdx, setEndPageIdx] = useState();
+
+  const { coins } = useMarketData(currency, pageNum);
+
+  useEffect(() => {
+    getGlobalData();
+  }, [getGlobalData]);
+
+  useEffect(() => {
+    if (globalData) {
+      setEndPageIdx(
+        Math.floor(globalData.data.active_cryptocurrencies / 30) + 1
+      );
+    }
+  }, [globalData]);
+
+  /// pagination 하기 전에 있던 코드들
+  const [sortKey, setSortKey] = useState("rank");
   const [isAscend, setIsAscend] = useState(true);
   const [sortStates, setSortStates] = useState({
-    market_cap_rank: "none",
-    name: "none",
-    current_price: "none",
-    fully_diluted_valuation: "none",
-    total_volume: "none",
-    price_change_percentage_1h_in_currency: "none",
-    price_change_percentage_24h_in_currency: "none",
-    price_change_percentage_7d_in_currency: "none",
+    rank: null,
+    name: null,
+    price: null,
+    marketCap: null,
+    volume24h: null,
+    change1h: null,
+    change24h: null,
+    change7d: null,
   });
 
-  // Todo
-  // ==== getPage(pageNum, currency)로 대체 =====
-  const mockDataSet = useMemo(
-    () =>
-      mockMarkets.map((mockMarket) => {
-        return {
-          market_cap_rank: mockMarket.market_cap_rank, // 화폐 순위
-          symbol: mockMarket.symbol, // 화폐 symbol
-          name: mockMarket.name, // 화폐 이름
-          image: mockMarket.image, // 화폐 이미지
-          current_price: mockMarket.current_price, // 화폐 가격
-          fully_diluted_valuation: mockMarket.fully_diluted_valuation, // 총 시가
-          total_volume: mockMarket.total_volume, // 24시간 거래량
-          price_change_percentage_1h_in_currency:
-            mockMarket.price_change_percentage_1h_in_currency, // 1시간 변동폭
-          price_change_percentage_24h_in_currency:
-            mockMarket.price_change_percentage_24h_in_currency, // 24시간 변동폭
-          price_change_percentage_7d_in_currency:
-            mockMarket.price_change_percentage_7d_in_currency, // 7일 변동폭
-        };
-      }),
-    []
-  );
-
-  const presentPageDataSet = mockDataSet.slice(
-    (pageNum - 1) * 30,
-    (pageNum - 1) * 30 + 30
-  );
-  // ================
-
-  const handleSortClick = (colKey) => {
-    if (colKey === sortKey && sortStates[colKey] !== "none") {
-      setIsAscend((prev) => !prev);
-    } else {
-      setSortKey(colKey);
-      setIsAscend(true);
-    }
-
-    const updatedSortStates = {
-      market_cap_rank: "none",
-      name: "none",
-      current_price: "none",
-      fully_diluted_valuation: "none",
-      total_volume: "none",
-      price_change_percentage_1h_in_currency: "none",
-      price_change_percentage_24h_in_currency: "none",
-      price_change_percentage_7d_in_currency: "none",
-    };
-    if (sortStates[colKey] === "none") {
-      updatedSortStates[colKey] = "ascend";
-    } else if (sortStates[colKey] === "ascend") {
-      updatedSortStates[colKey] = "descend";
-    } else {
-      updatedSortStates[colKey] = "ascend";
-    }
-    setSortStates(updatedSortStates);
-  };
-
-  const sortedDataSet = [...presentPageDataSet].sort((a, b) => {
+  const sortedCoins = [...coins].sort((a, b) => {
     // 1. 정렬 값이 문자열일 때
     if (sortKey === "name") {
       if (a[sortKey] > b[sortKey]) return isAscend ? 1 : -1;
@@ -89,32 +68,62 @@ const Table = () => {
     return isAscend ? a[sortKey] - b[sortKey] : b[sortKey] - a[sortKey];
   });
 
+  const handleSortClick = (colKey) => {
+    if (colKey === sortKey && sortStates[colKey] !== null) {
+      setIsAscend((prev) => !prev);
+    } else {
+      setSortKey(colKey);
+      setIsAscend(true);
+    }
+
+    const updatedSortStates = {
+      rank: null,
+      name: null,
+      price: null,
+      marketCap: null,
+      volume24h: null,
+      change1h: null,
+      change24h: null,
+      change7d: null,
+    };
+    if (sortStates[colKey] === null) {
+      updatedSortStates[colKey] = true;
+    } else if (sortStates[colKey] === true) {
+      updatedSortStates[colKey] = false;
+    } else {
+      updatedSortStates[colKey] = true;
+    }
+    setSortStates(updatedSortStates);
+  };
+
   const handleChangePageClick = (num) => {
     setPageNum(num);
     setSortStates({
-      market_cap_rank: "none",
-      name: "none",
-      current_price: "none",
-      fully_diluted_valuation: "none",
-      total_volume: "none",
-      price_change_percentage_1h_in_currency: "none",
-      price_change_percentage_24h_in_currency: "none",
-      price_change_percentage_7d_in_currency: "none",
+      rank: null,
+      name: null,
+      price: null,
+      marketCap: null,
+      volume24h: null,
+      change1h: null,
+      change24h: null,
+      change7d: null,
     });
     setIsAscend(true);
-    setSortKey("market_cap_rank");
+    setSortKey("rank");
   };
 
-  const handlePaginationClick = (direction, device) => {};
+  const handleClickChangePagination = () => {};
 
+  if (sortedCoins === []) return null;
   return (
     <TablePresenter
-      dataSet={sortedDataSet}
+      coins={sortedCoins}
       sortStates={sortStates}
       pageNum={pageNum}
       onSort={handleSortClick}
       onChangePage={handleChangePageClick}
-      onPagination={handlePaginationClick}
+      onPagination={handleClickChangePagination}
+      currency={currency}
     />
   );
 };
