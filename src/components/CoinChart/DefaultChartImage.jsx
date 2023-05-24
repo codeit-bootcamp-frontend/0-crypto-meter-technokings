@@ -8,7 +8,7 @@ import { h3 } from "@styles/text.style";
 const DefaultChartImage = () => {
   return (
     <S.ChartWrapper flex full br={25} white>
-      <S.Inner pos="relative" mg="36px 48px 70px" maxW={910}>
+      <S.Inner pos="relative" pd="36px 48px 70px" maxW={910}>
         <S.NullTextWrapper>
           <SDiv />
           입력한 코인 정보가 없습니다.
@@ -20,7 +20,7 @@ const DefaultChartImage = () => {
             <S.NullText h3>를 입력해보세요.</S.NullText>
           </SDiv>
         </S.NullTextWrapper>
-        <SDiv full pd="80px">
+        <SDiv full pdt={24}>
           <img
             src="/null_chart.png"
             alt="null chart"
@@ -44,22 +44,15 @@ S.Inner = styled(SDiv)`
   max-width: ${(props) => (props.maxW ? `${props.maxW}px` : "none")};
 
   @media only screen and (max-width: 1200px) {
-    marign: 36px 36px 0px;
+    padding: 36px 36px 0px;
   }
   @media only screen and (max-width: 768px) {
-    margin: 32px 20px 0px;
+    padding: 32px 20px 0px;
   }
 `;
 S.NullTextWrapper = styled(SDiv)`
   ${h3}
-  position: absolute;
-  top: 36px;
-  left: -12px;
   color: ${colors.gray6};
-
-  @media only screen and (max-width: 768px) {
-    left: 16px;
-  }
 `;
 S.NullText = styled(SText)``;
 
