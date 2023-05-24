@@ -7,11 +7,11 @@ import { SDiv, colors } from "@styles";
 const CoinChartLoader = ({ isGreen = true }) => {
   return (
     <S.ChartWrapper ct full br={25} white isGreen={isGreen}>
-      <SDiv col>
+      <S.LoaderWrapper ct>
         <svg>
-          <rect />
+          <circle cx="70" cy="70" r="70" />
         </svg>
-      </SDiv>
+      </S.LoaderWrapper>
     </S.ChartWrapper>
   );
 };
@@ -23,24 +23,43 @@ S.ChartWrapper = styled(SDiv)`
   max-height: 733px;
 
   & svg {
-    margin: 20px auto 0;
-    width: 100px;
-    height: 100px;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    animation: rotate 2s linear infinite;
   }
-  & svg rect {
-    width: 100px;
-    height: 100px;
+  & svg circle {
+    width: 100%;
+    height: 100%;
     fill: none;
-    stroke-width: 100px;
-    stroke: ${(props) => (props.isGreen ? colors.lightgreen : colors.lightred)};
-    stroke-dasharray: 100;
-    stroke-dashoffset: 50%;
-    animation: animate 1.5s linear infinite;
+    stroke-width: 10;
+    stroke: ${colors.lightgreen};
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    animation: animate 4s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes animate {
-    to {
-      stroke-dashoffset: 250%;
+    0%,
+    100% {
+      stroke-dashoffset: 440;
+    }
+    50% {
+      stroke-dashoffset: 0;
+    }
+    50.1% {
+      stroke-dashoffset: 880;
     }
   }
 
@@ -51,5 +70,7 @@ S.ChartWrapper = styled(SDiv)`
     height: 510px;
   }
 `;
+
+S.LoaderWrapper = styled(SDiv)``;
 
 export default CoinChartLoader;
