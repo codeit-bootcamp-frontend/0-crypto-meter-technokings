@@ -21,6 +21,7 @@ const INCREASE_MONEY_UNITS = {
 };
 const InputBoardPresenter = ({
   selectedCoinInfo,
+  onSelectOption,
   selectedDate,
   selectedMoney,
   selectedCurrency,
@@ -116,6 +117,7 @@ const InputBoardPresenter = ({
               onClick={() => {
                 setIsDropdownOpen((prev) => !prev);
               }}
+              onSelectOption={onSelectOption}
             />
           </S.InputArea>
           <S.SubmitArea ct>
