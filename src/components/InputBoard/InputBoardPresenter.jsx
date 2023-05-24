@@ -142,7 +142,9 @@ const InputBoardPresenter = ({
 const S = {};
 
 S.BoardWrapper = styled(SDiv)`
-  position: relative;
+  position: sticky;
+  top: 100px;
+  z-index: 29;
 
   width: 445px;
   max-height: 945px;
@@ -176,6 +178,10 @@ S.BoardWrapper = styled(SDiv)`
   @media only screen and (max-width: 1200px) {
     width: 100%;
     padding: 36px;
+    top: 90px;
+  }
+  @media only screen and (max-width: 768px) {
+    top: 76px;
   }
 `;
 
