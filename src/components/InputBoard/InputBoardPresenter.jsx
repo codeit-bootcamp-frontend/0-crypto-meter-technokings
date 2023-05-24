@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from "react";
 
@@ -14,8 +15,10 @@ import { MemoizedDropdown } from "./Dropdown/Dropdown";
 import IncreaseMoneyButton from "./IncreaseMoneyButton/IncreaseMoneyButton";
 import MoneyInput from "./MoneyInput/MoneyInput";
 
-const INCREASE_MONEY_UNITS = [5000, 10000, 50000, 100000];
-
+const INCREASE_MONEY_UNITS = {
+  krw: [5000, 10000, 50000, 100000],
+  usd: [5, 10, 50, 100],
+};
 const InputBoardPresenter = ({
   selectedCoinInfo,
   selectedDate,
@@ -91,11 +94,12 @@ const InputBoardPresenter = ({
                 onChange={onChangeMoney}
                 isOpen={false}
               />
-              <S.IncreaseButtonListWrapper row sb full>
-                {INCREASE_MONEY_UNITS.map((unit) => (
+              <S.IncreaseButtonListWrapper row sb full currency>
+                {INCREASE_MONEY_UNITS[selectedCurrency].map((unit) => (
                   <IncreaseMoneyButton
                     key={unit}
                     money={unit}
+                    currency={selectedCurrency}
                     onClick={() => {
                       onClickIncreaseMoney(unit);
                     }}
@@ -207,7 +211,10 @@ S.Br = styled.br`
 `;
 
 S.IncreaseButtonListWrapper = styled(SDiv)`
-  justify-content: space-around;
+  justify-content: ${(props) =>
+    // eslint-disable-next-line implicit-arrow-linebreak
+    props.currency === "krw" ? "space-around" : "flex-start"};
+  gap: ${(props) => (props.currency === "krw" ? "0" : "10px")};
   @media only screen and (max-width: 1200px) {
     justify-content: flex-start;
     gap: 8px;
@@ -235,7 +242,6 @@ S.MoneyText = styled(SText)`
     max-width: 80%;
   }
 `;
-
 S.BoardBody = styled(SDiv)``;
 S.SubmitArea = styled(SDiv)``;
 S.SubmitButton = styled(SButton)`

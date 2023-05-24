@@ -2,9 +2,10 @@ import React from "react";
 
 import styled from "styled-components";
 
+import formatMoneyToString from "@/utils/formatMoney";
 import { colors, SButton, SText } from "@styles";
 
-const IncreaseMoneyButton = ({ money = 10000, onClick }) => {
+const IncreaseMoneyButton = ({ money = 10000, currency, onClick }) => {
   return (
     <S.Button
       type="button"
@@ -17,7 +18,7 @@ const IncreaseMoneyButton = ({ money = 10000, onClick }) => {
       onClick={onClick}
     >
       <S.ButtonText b3 white disableSelect>
-        {`${money.toLocaleString("ko-KR")}원`}
+        {formatMoneyToString(money, currency)}
       </S.ButtonText>
     </S.Button>
   );
