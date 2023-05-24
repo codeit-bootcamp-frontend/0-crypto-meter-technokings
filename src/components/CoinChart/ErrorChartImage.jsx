@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { SDiv, colors } from "@styles";
-import { h3, s3 } from "@styles/text.style";
+import { h2, h4 } from "@styles/text.style";
 
 const ErrorChartImage = ({ isGreen = true }) => {
   return (
@@ -50,12 +50,12 @@ S.ChartWrapper = styled(SDiv)`
 `;
 
 S.NullTextWrapper = styled(SDiv)`
-  ${h3}
+  ${h2}
   color: ${colors.gray6};
   text-align: center;
 `;
 S.ReloadText = styled(SDiv)`
-  ${s3}
+  ${h4}
   color: ${colors.green};
   text-align: center;
 `;
