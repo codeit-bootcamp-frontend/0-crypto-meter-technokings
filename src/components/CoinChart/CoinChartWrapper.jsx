@@ -1,11 +1,13 @@
 import React, { Suspense, lazy } from "react";
 
+import { ErrorBoundary } from "react-error-boundary";
 import { shallow } from "zustand/shallow";
 
 import useUserInputStore from "@/stores/userInputStore";
 import DefaultChartImage from "@components/CoinChart/DefaultChartImage";
 
 import CoinChartLoader from "./CoinChartLoader";
+import ErrorChartImage from "./ErrorChartImage";
 
 const CoinChart = lazy(() => import("@components/CoinChart/CoinChart"));
 
@@ -20,9 +22,11 @@ const CoinChartWrapper = () => {
   return calculatedMoney === -1 ? (
     <DefaultChartImage />
   ) : (
-    <Suspense fallback={<CoinChartLoader />}>
-      <CoinChart />
-    </Suspense>
+    <ErrorBoundary fallback={<ErrorChartImage />}>
+      <Suspense fallback={<CoinChartLoader />}>
+        <CoinChart />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 

@@ -43,6 +43,13 @@ S.ChartWrapper = styled(SDiv)`
       stroke-dashoffset: 250%;
     }
   }
+
+  @media only screen and (max-width: 1200px) {
+    height: 616px;
+  }
+  @media only screen and (max-width: 768px) {
+    height: 510px;
+  }
 `;
 
 export default CoinChartLoader;
