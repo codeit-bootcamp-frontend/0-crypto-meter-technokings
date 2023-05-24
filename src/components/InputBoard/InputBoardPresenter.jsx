@@ -33,6 +33,7 @@ const InputBoardPresenter = ({
   const [isOpen, setIsOpen] = useState(false); // form 모달이 열렸는지
   const { mediaQuery } = useMediaQuery(1200); // 미디어쿼리 변화 감지
   const [isTablet, setIsTablet] = useState(mediaQuery.matches); // 태블릿 사이즈 이하인지
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     if (!isTablet) {
@@ -53,6 +54,7 @@ const InputBoardPresenter = ({
       br={24}
       pd="60px 40px 70px 40px"
       isOpen={isTablet && isOpen}
+      isLong={isDropdownOpen}
     >
       <S.BoardBody col ast full sb g={55}>
         <SHeading2>
@@ -111,6 +113,9 @@ const InputBoardPresenter = ({
             <MemoizedDropdown
               options={dropdownCoinOptionList}
               selected={selectedCoinInfo}
+              onClick={() => {
+                setIsDropdownOpen((prev) => !prev);
+              }}
             />
           </S.InputArea>
           <S.SubmitArea ct>
@@ -156,7 +161,7 @@ S.BoardWrapper = styled(SDiv)`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 189px;
+    gap: ${(props) => (props.isLong ? "189px" : "55px")};
 
     @media only screen and (max-width: 1200px) {
       display: ${(props) => (props.isOpen ? "flex" : "none")};
