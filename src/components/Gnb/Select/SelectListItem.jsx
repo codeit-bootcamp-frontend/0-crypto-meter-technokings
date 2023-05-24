@@ -8,11 +8,18 @@ import SDiv from "@/styles/micro-components/StyledDiv";
 import colors from "@styles/colors";
 import SText from "@styles/micro-components/StyledText";
 
-const SelectListItem = ({ option }) => {
-  const isSelected = option.value === "krw"; // TODO: zustand store에서 현재 선택된 화폐단위를 가져온다.
-
+const SelectListItem = ({ option, isSelected, onClick, onSelect }) => {
   return (
-    <S.ItemWrapper row ast pd="4px 26px 4px 8px" isSelected={isSelected}>
+    <S.ItemWrapper
+      row
+      ast
+      pd="4px 26px 4px 8px"
+      isSelected={isSelected}
+      onClick={() => {
+        onClick();
+        onSelect(option.value);
+      }}
+    >
       <S.Label b3 g9 mgr={2}>
         {option.name}
       </S.Label>

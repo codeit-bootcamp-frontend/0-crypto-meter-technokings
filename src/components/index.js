@@ -9,12 +9,12 @@ import TableSection from "@components/TableSection/TableSection";
 // 공통 컴포넌트
 import IncreaseMoneyButton from "@components/InputBoard/IncreaseMoneyButton/IncreaseMoneyButton";
 import SelectDurationChip from "@components/SelectDurationChip/SelectDurationChip";
-import Dropdown from "@components/InputBoard/Dropdown/Dropdown";
+import { MemoizedDropdown } from "@components/InputBoard/Dropdown/Dropdown";
 
 export {
   IncreaseMoneyButton,
   SelectDurationChip,
-  Dropdown,
+  MemoizedDropdown,
   Gnb,
   InputBoard,
   DefaultChartImage,

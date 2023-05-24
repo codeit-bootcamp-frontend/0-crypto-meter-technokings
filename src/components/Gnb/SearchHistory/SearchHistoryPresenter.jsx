@@ -2,11 +2,22 @@ import React from "react";
 
 import styled from "styled-components";
 
+import CURRENCY_OPTIONS from "@/data/currencyOptions";
+import SelectFilterIcon from "@components/SVGComponents/SelectFilterIcon";
 import { SButton, SDiv, SHeading4, SText, colors } from "@styles";
 
+import FilterOptionList from "./FilterOptionList/FilterOptionList";
 import SearchHistoryList from "./SearchHistoryList";
 
-const SearchHistoryPresenter = ({ history, onDelete }) => {
+const SearchHistoryPresenter = ({
+  history,
+  isFilterOpen,
+  onDelete,
+  onClickFilter,
+  onChangeFilterOption,
+  isFiltered,
+  selectedFilterList,
+}) => {
   return (
     <S.SearchHistoryWrapper
       br={16}
@@ -15,11 +26,22 @@ const SearchHistoryPresenter = ({ history, onDelete }) => {
       bg={colors.white}
     >
       <S.HistoryHeader row sb act h={64} pdl={28} pdr={28}>
+        <S.FilterIconWrapper mgr={37.5} onClick={onClickFilter}>
+          <SelectFilterIcon fill={isFiltered ? "#0D6BFF" : colors.black} />
+          {isFilterOpen && (
+            <FilterOptionList
+              onClickOutside={onClickFilter}
+              selectedOptions={selectedFilterList}
+              options={CURRENCY_OPTIONS}
+              onChangeOption={onChangeFilterOption}
+            />
+          )}
+        </S.FilterIconWrapper>
         <SHeading4>검색 기록</SHeading4>
         <SButton onClick={onDelete}>
-          <SText b3 g7>
-            기록 모두 지우기
-          </SText>
+          <S.ClearText b3 g7>
+            기록 지우기
+          </S.ClearText>
         </SButton>
       </S.HistoryHeader>
       <SearchHistoryList history={history} />
@@ -57,4 +79,13 @@ S.HistoryHeader = styled(SDiv)`
   }
 `;
 
+S.FilterIconWrapper = styled(SDiv)`
+  position: relative;
+`;
+
+S.ClearText = styled(SText)`
+  &:hover {
+    filter: brightness(0.2);
+  }
+`;
 export default SearchHistoryPresenter;

@@ -6,7 +6,7 @@ import useUserInputStore from "@/stores/userInputStore";
 
 import DropdownPresenter from "./DropdownPresenter";
 
-const Dropdown = ({ options, selected }) => {
+export const Dropdown = ({ options, selected }) => {
   // isOpen 상태 빼고 전부 InputBoard에서 Dropdown한테 props로 넘기기
   const [isOpen, setIsOpen] = useState(false);
   const { setSelectedCoinInfo } = useUserInputStore((state) => ({
@@ -26,4 +26,4 @@ const Dropdown = ({ options, selected }) => {
   );
 };
 
-export default Dropdown;
+export const MemoizedDropdown = React.memo(Dropdown);

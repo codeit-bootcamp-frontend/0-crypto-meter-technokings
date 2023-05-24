@@ -8,7 +8,9 @@ const useOutsideClick = (ref, callback) => {
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleClick);
+    setTimeout(() => {
+      document.addEventListener("click", handleClick);
+    }, 0);
 
     return () => {
       document.removeEventListener("click", handleClick);

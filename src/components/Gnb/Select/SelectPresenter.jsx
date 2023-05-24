@@ -13,7 +13,13 @@ import SText from "@styles/micro-components/StyledText";
 
 import SelectList from "./SelectList";
 
-const SelectPresenter = ({ isOpen, options, selectedOption, onClick }) => {
+const SelectPresenter = ({
+  isOpen,
+  options,
+  selectedIdx,
+  onClick,
+  onSelect,
+}) => {
   return (
     <S.SelectWrapper>
       <S.SelectHead
@@ -30,13 +36,13 @@ const SelectPresenter = ({ isOpen, options, selectedOption, onClick }) => {
         <S.LabelWrapper row sb act h={18}>
           <SDiv row act>
             <S.Label b3 g8 mgr={2}>
-              {selectedOption.name}
+              {options[selectedIdx].name}
             </S.Label>
             <S.Label b3 g8>
               (
             </S.Label>
             <SText b3 g8>
-              {`${selectedOption.symbol}`}
+              {`${options[selectedIdx].symbol}`}
             </SText>
             <S.Label b3 g8>
               )
@@ -50,7 +56,14 @@ const SelectPresenter = ({ isOpen, options, selectedOption, onClick }) => {
           />
         </S.LabelWrapper>
       </S.SelectHead>
-      {isOpen && <SelectList options={options} />}
+      {isOpen && (
+        <SelectList
+          options={options}
+          onSelect={onSelect}
+          onClick={onClick}
+          selectedIdx={selectedIdx}
+        />
+      )}
     </S.SelectWrapper>
   );
 };
@@ -97,11 +110,6 @@ SelectPresenter.propTypes = {
       value: PropTypes.string,
     })
   ).isRequired,
-  selectedOption: PropTypes.shape({
-    name: PropTypes.string,
-    symbol: PropTypes.string,
-    value: PropTypes.string,
-  }).isRequired,
 };
 
 export default SelectPresenter;

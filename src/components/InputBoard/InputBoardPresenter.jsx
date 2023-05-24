@@ -10,7 +10,7 @@ import FilterIcon from "@components/SVGComponents/FilterIcon";
 import { SDiv, SButton, SText, colors, SHeading2 } from "@styles";
 
 import DateInput from "./DateInput/DateInput";
-import Dropdown from "./Dropdown/Dropdown";
+import { MemoizedDropdown } from "./Dropdown/Dropdown";
 import IncreaseMoneyButton from "./IncreaseMoneyButton/IncreaseMoneyButton";
 import MoneyInput from "./MoneyInput/MoneyInput";
 
@@ -103,7 +103,7 @@ const InputBoardPresenter = ({
                 ))}
               </S.IncreaseButtonListWrapper>
             </SDiv>
-            <Dropdown
+            <MemoizedDropdown
               options={dropdownCoinOptionList}
               selected={selectedCoinInfo}
             />
