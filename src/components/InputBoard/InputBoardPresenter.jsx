@@ -60,10 +60,10 @@ const InputBoardPresenter = ({
           </SText>
           에
           <S.Br second />
-          <SText white mgb={7}>
+          <S.MoneyText white mgb={7}>
             {formatMoneyToString(selectedMoney, selectedCurrency)}
-          </SText>
-          으로&nbsp;
+          </S.MoneyText>
+          <SText mgb={7}>으로&nbsp;</SText>
           <S.Br third />
           <SText white>{selectedCoinInfo.name}</SText>을 샀다면,
         </SHeading2>
@@ -222,6 +222,20 @@ S.InputArea = styled(SDiv)`
     margin-bottom: 56px;
   }
 `;
+
+S.MoneyText = styled(SText)`
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  @media only screen and (max-width: 1200px) {
+    max-width: 57%;
+  }
+  @media only screen and (max-width: 768px) {
+    max-width: 80%;
+  }
+`;
+
 S.BoardBody = styled(SDiv)``;
 S.SubmitArea = styled(SDiv)``;
 S.SubmitButton = styled(SButton)`
