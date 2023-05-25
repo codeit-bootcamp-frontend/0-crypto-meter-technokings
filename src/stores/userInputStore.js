@@ -65,6 +65,20 @@ const userInputStore = (set, get) => ({
   setSelectedCurrency: (newCurrency) => {
     set(() => ({ selectedCurrency: newCurrency }));
   },
+  isResetClicked: 1,
+  setIsResetClicked: () => {
+    set((state) => {
+      const prev = state.isResetClicked;
+      return { isResetClicked: prev + 1 };
+    });
+  },
+  isCurrencyChanged: 1,
+  setIsCurrencyChanged: () => {
+    set((state) => {
+      const prev = state.isCurrencyChanged;
+      return { isCurrencyChanged: prev + 1 };
+    });
+  },
   /**
    * @description userInputStore의 상태값들을 토대로 사용자가 입력한 금액이 지금은 얼마가 되었는지 계산
    */

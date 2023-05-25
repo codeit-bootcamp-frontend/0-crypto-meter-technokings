@@ -11,9 +11,11 @@ const Gnb = () => {
     selectedCurrency,
     setSelectedCurrency,
     resetAll,
-    setSelectedMoney,
+    // setSelectedMoney,
     setCalculatedMoney,
     calculatedMoney,
+    setIsResetClicked,
+    setIsCurrencyChanged,
   } = useUserInputStore((state) => ({
     selectedCurrency: state.selectedCurrency,
     setSelectedCurrency: state.setSelectedCurrency,
@@ -21,17 +23,21 @@ const Gnb = () => {
     setSelectedMoney: state.setSelectedMoney,
     setCalculatedMoney: state.setCalculatedMoney,
     calculatedMoney: state.calculatedMoney,
+    setIsResetClicked: state.setIsResetClicked,
+    setIsCurrencyChanged: state.setIsCurrencyChanged,
   }));
   const handleHistoryClick = () => {
     setIsHistoryOpen((prev) => !prev);
   };
   const handleResetClick = () => {
+    setIsResetClicked();
     resetAll();
     scrollTop();
   };
   const handleSelectCurrency = (newCurrency) => {
     setSelectedCurrency(newCurrency);
-    setSelectedMoney(0);
+    setIsCurrencyChanged();
+    // setSelectedMoney(0);
     if (calculatedMoney !== -1) {
       setCalculatedMoney(0);
     }
