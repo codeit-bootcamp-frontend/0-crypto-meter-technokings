@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import styled, { css } from "styled-components";
 
+import useMediaQuery from "@/hooks/useMediaQuery";
 import createKaKaoShareButton from "@/services/kakao/share.kakao";
 import FacebookLogo from "@components/SVGComponents/FacebookLogo";
 import KakaoLogo from "@components/SVGComponents/KakaoLogo";
@@ -10,6 +11,8 @@ import { SButton, SDiv, SText } from "@styles";
 import colors from "@styles/colors";
 
 const CoinChartHeader = ({ coinName, coinImageUrl }) => {
+  const { mediaQuery: tabletMediaQuery } = useMediaQuery(1200);
+  const [isTablet, setIsTablet] = useState(tabletMediaQuery.matches);
   const [copied, setCopied] = useState(false);
 
   const handleClickShareFacebook = () => {
@@ -35,8 +38,12 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
     createKaKaoShareButton();
   }, []);
 
+  useEffect(() => {
+    setIsTablet(tabletMediaQuery.matches);
+  }, [tabletMediaQuery.matches]);
+
   return (
-    <S.Header sb pdb={32}>
+    <S.Header sb pdb={32} copied={copied} isTablet={isTablet}>
       <SDiv act row g={10}>
         <S.LogoWrapper w={30} mobW={24} h={30} mobH={24}>
           <S.LogoImg src={coinImageUrl} alt={coinName} />
@@ -68,7 +75,6 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
         </S.ShareButton>
         <S.ShareButton
           type="button"
-          copied={copied}
           w={19}
           h={18}
           mobW={14.5}
@@ -83,9 +89,37 @@ const CoinChartHeader = ({ coinName, coinImageUrl }) => {
 };
 
 const S = {};
-
 S.Header = styled(SDiv)`
   border-bottom: 1px solid ${colors.gray9};
+
+  ${(props) => {
+    return (
+      props.copied &&
+      css`
+        &::before {
+          content: "copied!";
+          position: absolute;
+          top: ${!props.isTablet ? "15px" : "10px"};
+          right: ${!props.isTablet ? "30px" : "-5px"};
+          background: ${colors.black};
+          padding: 4px 8px;
+          border-radius: 20px;
+          font-size: 10px;
+          color: white;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          top: ${!props.isTablet ? "31px" : "26px"};
+          right: ${!props.isTablet ? "50px" : "15px"};
+          width: 6px;
+          height: 6px;
+          background: ${colors.black};
+          transform: rotate(45deg);
+        }
+      `
+    );
+  }}
 
   @media only screen and (max-width: 768px) {
     padding-bottom: 1.8rem;
@@ -116,34 +150,6 @@ S.IconWrapper = styled(SDiv)`
   }
 `;
 S.ShareButton = styled(SButton)`
-  ${(props) => {
-    return (
-      props.copied &&
-      css`
-        &::before {
-          content: "copied!";
-          position: absolute;
-          top: -20px;
-          right: -20px;
-          background: ${colors.black};
-          padding: 4px 8px;
-          border-radius: 20px;
-          font-size: 10px;
-          color: white;
-        }
-        &::after {
-          content: "";
-          position: absolute;
-          top: -4.5px;
-          right: 0px;
-          width: 6px;
-          height: 6px;
-          background: ${colors.black};
-          transform: rotate(45deg);
-        }
-      `
-    );
-  }}
   & svg {
     width: 100%;
     height: 100%;
