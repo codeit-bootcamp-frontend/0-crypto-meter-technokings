@@ -30,7 +30,7 @@ const GnbPresenter = ({
 
   return (
     <S.Header isOpen={isHistoryOpen || isSelectOpen}>
-      <S.GnbWrapper row sb act h={100} pdl={57} pdr={60}>
+      <S.GnbWrapper row sb act h={80} pdl={57} pdr={60}>
         <MainLogo isMobile={isMobile} />
         <S.ButtonWrapper row g={16}>
           <GnbButton onClick={onResetClick} isHistoryOpen={false}>

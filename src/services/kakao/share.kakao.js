@@ -12,7 +12,7 @@ const createKaKaoShareButton = () => {
       content: {
         title: "Cryptometer Technokings",
         description: "#거물급투자자 #카카오 #Cryptometer",
-        imageUrl: "https://cryptometer-technokings.netlify.app/favicon.svg",
+        imageUrl: "https://i.ibb.co/tsdspp7/favicon.webp",
         link: {
           mobileWebUrl: window.location.href,
           webUrl: window.location.href,

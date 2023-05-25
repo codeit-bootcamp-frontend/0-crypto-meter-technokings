@@ -8,7 +8,7 @@ import useOutsideClick from "@/hooks/useOutsideClick";
 import DropdownHandleIcon from "@components/SVGComponents/DropdownHandleIcon";
 import { SDiv, SText, colors } from "@styles";
 import { disableSelect } from "@styles/block.style";
-import { b1, g9, white } from "@styles/text.style";
+import { b1, g9, white, black } from "@styles/text.style";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -78,11 +78,19 @@ const DateInput = ({ selectedDate, onChange }) => {
     setIsOpen(false);
   });
 
+  useEffect(() => {
+    if (inputWrapperRef.current) {
+      const input = inputWrapperRef.current.querySelector("input");
+      input.setAttribute("inputmode", "none");
+    }
+  }, []);
+
   return (
     <S.InputWrapper onClick={handleClickInputWrapper} ref={inputWrapperRef}>
       <SDiv row sb>
         <S.DatePickerWrapper>
           <DatePicker
+            // className="noSelect"
             todayButton="오늘 날짜"
             ref={datePickerRef}
             selected={selectedDate}
@@ -160,11 +168,16 @@ S.DatePickerWrapper = styled(SDiv)`
     ${disableSelect}
     background: transparent;
     border: none;
-
+    width: 80%;
     @media only screen and (max-width: 1200px) {
       ${g9}
+      ${black}
     }
   }
+  /* input:focus {
+    outline: none !important;
+  } */
+
   .react-datepicker__navigation {
     top: 10px;
     width: 24px;

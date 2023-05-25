@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from "react";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 import formatDateToString from "@/utils/formatDate";
@@ -53,7 +53,7 @@ const InputBoardPresenter = ({
       sb
       bg={colors.gray9}
       br={24}
-      pd="60px 40px 70px 40px"
+      pd="36px 40px 50px 40px"
       isOpen={isTablet && isOpen}
       isLong={isDropdownOpen}
     >
@@ -71,7 +71,10 @@ const InputBoardPresenter = ({
           </S.MoneyText>
           <SText mgb={7}>으로&nbsp;</SText>
           <S.Br third />
-          <SText white>{selectedCoinInfo.name}</SText>을 샀다면,
+          <S.CoinText white mgb={7}>
+            {selectedCoinInfo.name}
+          </S.CoinText>
+          <SText mgb={7}>을 샀다면,</SText>
         </SHeading2>
         <S.Overlay
           show={isTablet && isOpen}
@@ -98,7 +101,12 @@ const InputBoardPresenter = ({
                 isOpen={false}
                 selectedCurrency={selectedCurrency}
               />
-              <S.IncreaseButtonListWrapper row sb full currency>
+              <S.IncreaseButtonListWrapper
+                row
+                sb
+                full
+                currency={selectedCurrency}
+              >
                 {INCREASE_MONEY_UNITS[selectedCurrency].map((unit) => (
                   <IncreaseMoneyButton
                     key={unit}
@@ -155,17 +163,39 @@ const S = {};
 
 S.BoardWrapper = styled(SDiv)`
   position: sticky;
-  top: 100px;
+  top: 80px;
   z-index: 29;
 
   width: 445px;
+  min-width: 445px;
   max-height: 945px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 100px);
+
+  &::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: ${colors.gray2};
+  }
 
   form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: ${(props) => (props.isLong ? "189px" : "55px")};
+    gap: 48px;
 
     @media only screen and (max-width: 1200px) {
       display: ${(props) => (props.isOpen ? "flex" : "none")};
@@ -189,6 +219,8 @@ S.BoardWrapper = styled(SDiv)`
 
   @media only screen and (max-width: 1200px) {
     width: 100%;
+    height: auto;
+    min-width: auto;
     padding: 36px;
     top: 90px;
   }
@@ -225,10 +257,13 @@ S.Br = styled.br`
 `;
 
 S.IncreaseButtonListWrapper = styled(SDiv)`
-  justify-content: ${(props) =>
+  ${(props) =>
     // eslint-disable-next-line implicit-arrow-linebreak
-    props.currency === "krw" ? "space-around" : "flex-start"};
-  gap: ${(props) => (props.currency === "krw" ? "0" : "10px")};
+    props.currency === "usd" &&
+    css`
+      justify-content: center;
+    `};
+  gap: 10px;
   @media only screen and (max-width: 1200px) {
     justify-content: flex-start;
     gap: 8px;
@@ -256,7 +291,24 @@ S.MoneyText = styled(SText)`
     max-width: 80%;
   }
 `;
-S.BoardBody = styled(SDiv)``;
+S.CoinText = styled(SText)`
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: pre;
+  @media only screen and (max-width: 1200px) {
+    max-width: 57%;
+  }
+  @media only screen and (max-width: 768px) {
+    max-width: 80%;
+  }
+`;
+S.BoardBody = styled(SDiv)`
+  span {
+    font-family: "Pretendard-SemiBold";
+  }
+`;
 S.SubmitArea = styled(SDiv)``;
 S.SubmitButton = styled(SButton)`
   @media only screen and (max-width: 1200px) {

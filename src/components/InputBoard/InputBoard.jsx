@@ -36,17 +36,31 @@ const InputBoard = () => {
     saveRecord: state.saveRecord,
     resetAll: state.resetAll,
   }));
+  const [inputMoney, setInputMoney] = useState(0);
+  const [inputDate, setInputDate] = useState(() => {
+    const today = new Date();
+    const fiveYearsAgo = new Date(today.toLocaleDateString());
+
+    fiveYearsAgo.setFullYear(today.getFullYear() - 5);
+    return fiveYearsAgo;
+  });
+  const [inputCoin, setInputCoin] = useState({
+    id: "bitcoin",
+    name: "Bitcoin",
+    imageUrl:
+      "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+  });
   const [errorMsg, setErrorMsg] = useState("");
   const modalRef = useRef(null);
 
   const increaseMoney = (inc) => {
-    setSelectedMoney(selectedMoney + Number(inc));
+    setInputMoney(inputMoney + Number(inc));
   };
 
   const handleSubmit = () => {
-    scrollTop();
-    calculateMoney()
+    calculateMoney(inputCoin, inputMoney, inputDate)
       .then((res) => {
+        scrollTop();
         setCalculatedMoney(res);
         saveRecord(
           selectedDate,
@@ -56,6 +70,9 @@ const InputBoard = () => {
           selectedCoinInfo,
           selectedCurrency
         );
+        setSelectedCoinInfo(inputCoin);
+        setSelectedMoney(inputMoney);
+        setSelectedDate(inputDate);
       })
       .catch((err) => {
         modalRef.current?.showModal();
@@ -65,16 +82,16 @@ const InputBoard = () => {
   };
   useOutsideClick(modalRef, () => {});
   const InputBordPresenterProps = {
-    selectedCoinInfo,
-    selectedDate,
-    selectedMoney,
+    selectedCoinInfo: inputCoin,
+    selectedDate: inputDate,
+    selectedMoney: inputMoney,
     selectedCurrency,
     dropdownCoinOptionList: DROPDOWN_LIST,
     onSubmit: handleSubmit,
-    onChangeMoney: setSelectedMoney,
+    onChangeMoney: setInputMoney,
     onClickIncreaseMoney: increaseMoney,
-    onChangeDate: setSelectedDate,
-    onSelectOption: setSelectedCoinInfo,
+    onChangeDate: setInputDate,
+    onSelectOption: setInputCoin,
   };
   return (
     <>

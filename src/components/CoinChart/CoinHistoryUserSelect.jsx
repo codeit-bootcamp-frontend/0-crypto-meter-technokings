@@ -18,11 +18,11 @@ const CoinHistoryUserSelect = ({
       <S.TopText s1 black>
         {`${formattedDate}에 ${trimmedUserSelectMoney}로 샀다면 오늘`}
       </S.TopText>
-      <S.MiddleText h1 mgt={8}>
-        <SText mgr={4} g5={isGray} green={isGreen} red={!isGreen}>
+      <S.MiddleText mgt={8}>
+        <SText h1 g5={isGray} green={isGreen} red={!isGreen}>
           {trimmedUserSelectCalcMoney}
         </SText>
-        입니다.
+        <S.Ellipsis h1>&nbsp;입니다.</S.Ellipsis>
       </S.MiddleText>
       <S.BottomText mgt={9} c1 g6>
         {`(${toLocaleDate} ${toLocaleTime} 기준)`}
@@ -50,6 +50,7 @@ S.TopText = styled(SText)`
   }
 `;
 S.MiddleText = styled(SText)`
+  font-family: "Pretendard-Bold";
   display: flex;
   align-items: center;
   font-weight: 700;
@@ -74,4 +75,8 @@ S.BottomText = styled(SText)`
   }
 `;
 
+S.Ellipsis = styled(SText)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 export default CoinHistoryUserSelect;

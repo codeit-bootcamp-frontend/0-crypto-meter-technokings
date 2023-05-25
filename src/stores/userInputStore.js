@@ -66,24 +66,19 @@ const userInputStore = (set, get) => ({
   /**
    * @description userInputStore의 상태값들을 토대로 사용자가 입력한 금액이 지금은 얼마가 되었는지 계산
    */
-  calculateMoney: async () => {
-    const { selectedDate, selectedMoney, selectedCoinInfo, selectedCurrency } =
-      get();
+  calculateMoney: async (inputCoin, inputMoney, inputDate) => {
+    const { selectedCurrency } = get();
     // API 요청을 통해 선택한 시점의 가격과 현재 가격을 가져옴
     const todayDate = new Date();
-    const querifiedSelectedDate = formatDateToString(selectedDate, true); // dd-MM-yyyy 형태로 포맷
+    const querifiedSelectedDate = formatDateToString(inputDate, true); // dd-MM-yyyy 형태로 포맷
     const querifiedTodayDate = formatDateToString(todayDate, true);
     const coinPriceResponses = await Promise.all([
-      getPriceAtDate(
-        selectedCoinInfo.id,
-        querifiedSelectedDate,
-        selectedCurrency
-      ),
-      getPriceAtDate(selectedCoinInfo.id, querifiedTodayDate, selectedCurrency),
+      getPriceAtDate(inputCoin.id, querifiedSelectedDate, selectedCurrency),
+      getPriceAtDate(inputCoin.id, querifiedTodayDate, selectedCurrency),
     ]);
     const [beforePrice, todayPrice] = coinPriceResponses;
     // calculatedMoney 를 계산: 오늘 가격 * (selectedMoney / 선택한 날짜의 가격)
-    return Number((todayPrice * (selectedMoney / beforePrice)).toFixed(2));
+    return Number((todayPrice * (inputMoney / beforePrice)).toFixed(2));
   },
   /**
    * @param {Date} pastDate 사용자 입력 과거 날짜
