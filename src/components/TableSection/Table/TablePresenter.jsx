@@ -31,11 +31,11 @@ const TablePresenter = ({
     setIsTablet(tabletMediaQuery.matches);
   }, [tabletMediaQuery.matches]);
 
-  let colWidth = [57, 200, 182, 209, 209, 146, 140, 140];
+  let colWidth = [57, 175, 135, 209, 209, 146, 140, 140];
   if (isMobile) {
-    colWidth = [26, 114, 167, 177, 177, 120, 120, 120];
+    colWidth = [26, 150, 130, 177, 177, 120, 120, 120];
   } else if (isTablet) {
-    colWidth = [38, 159, 182, 209, 209, 146, 140, 140];
+    colWidth = [38, 175, 135, 209, 209, 146, 140, 140];
   }
 
   const colInfos = [
@@ -99,8 +99,22 @@ S.TableWrapper = styled(SDiv)`
 
   border-top: 1px solid ${colors.gray9};
 
+  &::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+  }
+
   &::-webkit-scrollbar {
-    display: none;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: ${colors.gray2};
   }
 `;
 
