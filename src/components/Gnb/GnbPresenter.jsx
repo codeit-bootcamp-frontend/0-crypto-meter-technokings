@@ -6,7 +6,7 @@ import CURRENCY_OPTIONS from "@/data/currencyOptions";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import MainLogo from "@components/SVGComponents/MainLogo";
 import RestoreIcon from "@components/SVGComponents/RestoreIcon";
-import { SDiv, SText } from "@styles";
+import { SDiv, SText, colors } from "@styles";
 
 import GnbButton from "./GnbButton";
 import SearchHistory from "./SearchHistory/SearchHistory";
@@ -22,12 +22,14 @@ const GnbPresenter = ({
   const { mediaQuery: mobileMediaQuery } = useMediaQuery(768);
   const [isMobile, setIsMobile] = useState(mobileMediaQuery.matches);
 
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
+
   useEffect(() => {
     setIsMobile(mobileMediaQuery.matches);
   }, [mobileMediaQuery.matches]);
 
   return (
-    <S.Header>
+    <S.Header isOpen={isHistoryOpen || isSelectOpen}>
       <S.GnbWrapper row sb act h={100} pdl={57} pdr={60}>
         <MainLogo isMobile={isMobile} />
         <S.ButtonWrapper row g={16}>
@@ -41,6 +43,8 @@ const GnbPresenter = ({
               (option) => option.value === selectedCurrency
             )}
             onSelect={onSelectOption}
+            isSelectOpen={isSelectOpen}
+            setIsSelectOpen={setIsSelectOpen}
           />
           <GnbButton onClick={onHistoryClick} isHistoryOpen={isHistoryOpen}>
             <SText b3>검색기록</SText>
@@ -59,17 +63,24 @@ S.Header = styled.header`
   position: sticky;
   top: 0;
   z-index: 30;
+  @media only screen and (max-width: 1200px) {
+    z-index: ${(props) => (props.isOpen ? 31 : 29)};
+  }
 `;
 
 S.GnbWrapper = styled(SDiv)`
   background-color: #f5f8f9;
   @media only screen and (max-width: 1200px) {
-    padding: 0;
-    background-color: transparent;
+    height: 90px;
+    padding-right: 24px;
+    padding-left: 28px;
+    background-color: ${colors.white};
   }
 
   @media only screen and (max-width: 768px) {
-    height: 68px;
+    height: 76px;
+    padding-right: 20px;
+    padding-left: 24px;
   }
 `;
 

@@ -12,9 +12,7 @@ const App = () => {
     <S.AppWrapper>
       <Gnb />
       <S.Contents>
-        <S.InputWrapper>
-          <InputBoard />
-        </S.InputWrapper>
+        <InputBoard />
         <S.ContentsWrapper col g={24}>
           <CoinChartWrapper />
           <TableSection />
@@ -29,30 +27,27 @@ const S = {};
 S.AppWrapper = styled(SDiv)`
   width: 100%;
   max-width: calc(1379px + 445px + 24px);
-  margin: 0 auto 46px;
-  @media only screen and (max-width: 1200px) {
-    max-width: calc(100% - 48px);
-  }
+  margin: 0 auto;
 `;
 
 S.Contents = styled(SDiv)`
   display: flex;
   align-items: start;
   gap: 24px;
+  padding-left: 36px;
+  padding-right: 36px;
+  padding-bottom: 46px;
 
   @media only screen and (max-width: 1200px) {
+    padding-top: 10px;
+    padding-right: 24px;
+    padding-left: 24px;
     align-items: stretch;
     flex-direction: column;
-    margin-top: 10px;
   }
-`;
-
-S.InputWrapper = styled(SDiv)`
-  position: sticky;
-  top: 100px;
-  z-index: 29;
   @media only screen and (max-width: 768px) {
-    top: 66px;
+    padding-right: 16px;
+    padding-left: 16px;
   }
 `;
 
