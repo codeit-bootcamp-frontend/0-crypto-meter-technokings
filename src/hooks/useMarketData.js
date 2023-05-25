@@ -20,9 +20,9 @@ const coinsNumPerPage = Number(import.meta.env.VITE_COINS_PER_PAGE);
  */
 const useMarketData = (currency, pageNum) => {
   const [coins, setCoins] = useState([]);
-  const { addPage, checkCache, getPageSlice } = useCoinStore(
+  const { addPageToCache, checkCache, getPageSlice } = useCoinStore(
     (state) => ({
-      addPage: state.addPage,
+      addPageToCache: state.addPageToCache,
       checkCache: state.checkCache,
       getPageSlice: state.getPageSlice,
     }),
@@ -72,13 +72,21 @@ const useMarketData = (currency, pageNum) => {
         change7d: item.price_change_percentage_7d_in_currency,
       }));
       setPrevData(data);
-      addPage(trimmedMarketData, paginationNum, currency);
+      addPageToCache(trimmedMarketData, paginationNum, currency);
       const startIdx = Math.floor(((pageNum % 6) - 1) * coinsNumPerPage);
       setCoins(
         getPageSlice(paginationNum, currency, startIdx, coinsNumPerPage)
       );
     }
-  }, [addPage, currency, data, getPageSlice, pageNum, paginationNum, prevData]);
+  }, [
+    addPageToCache,
+    currency,
+    data,
+    getPageSlice,
+    pageNum,
+    paginationNum,
+    prevData,
+  ]);
 
   return { coins };
 };
