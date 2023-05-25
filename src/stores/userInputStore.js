@@ -38,13 +38,15 @@ const userInputStore = (set, get) => ({
   setSelectedCoinInfo: (newCoinInfo) => {
     set(() => ({ selectedCoinInfo: newCoinInfo }));
   },
-  // default: 5년 전 오늘 날짜
+  // default: PAST_YEARS년 전 오늘 날짜
   selectedDate: (() => {
     const today = new Date();
-    const fiveYearsAgo = new Date(today.toLocaleDateString());
+    const defaultDate = new Date(today.toLocaleDateString());
 
-    fiveYearsAgo.setFullYear(today.getFullYear() - 5);
-    return fiveYearsAgo;
+    defaultDate.setFullYear(
+      today.getFullYear() - Number(import.meta.env.VITE_PAST_YEARS)
+    );
+    return defaultDate;
   })(),
   setSelectedDate: (newDate) => {
     set(() => ({ selectedDate: newDate }));
@@ -137,9 +139,9 @@ const userInputStore = (set, get) => ({
       },
       selectedDate: (() => {
         const today = new Date();
-        const fiveYearsAgo = new Date(today.toLocaleDateString());
-        fiveYearsAgo.setFullYear(today.getFullYear() - 5);
-        return fiveYearsAgo;
+        const defaultDate = new Date(today.toLocaleDateString());
+        defaultDate.setFullYear(today.getFullYear() - 5);
+        return defaultDate;
       })(),
       selectedMoney: 0,
       calculatedMoney: -1,
