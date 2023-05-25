@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from "react";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 import formatDateToString from "@/utils/formatDate";
@@ -101,7 +101,12 @@ const InputBoardPresenter = ({
                 isOpen={false}
                 selectedCurrency={selectedCurrency}
               />
-              <S.IncreaseButtonListWrapper row sb full currency>
+              <S.IncreaseButtonListWrapper
+                row
+                sb
+                full
+                currency={selectedCurrency}
+              >
                 {INCREASE_MONEY_UNITS[selectedCurrency].map((unit) => (
                   <IncreaseMoneyButton
                     key={unit}
@@ -164,8 +169,26 @@ S.BoardWrapper = styled(SDiv)`
   width: 445px;
   min-width: 445px;
   max-height: 945px;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 86vh;
+
+  &::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: ${colors.gray2};
+  }
 
   form {
     width: 100%;
@@ -232,10 +255,13 @@ S.Br = styled.br`
 `;
 
 S.IncreaseButtonListWrapper = styled(SDiv)`
-  justify-content: ${(props) =>
+  ${(props) =>
     // eslint-disable-next-line implicit-arrow-linebreak
-    props.currency === "krw" ? "space-around" : "flex-start"};
-  gap: ${(props) => (props.currency === "krw" ? "0" : "10px")};
+    props.currency === "usd" &&
+    css`
+      justify-content: center;
+    `};
+  gap: 10px;
   @media only screen and (max-width: 1200px) {
     justify-content: flex-start;
     gap: 8px;
