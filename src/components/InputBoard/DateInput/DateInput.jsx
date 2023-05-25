@@ -83,6 +83,7 @@ const DateInput = ({ selectedDate, onChange }) => {
       <SDiv row sb>
         <S.DatePickerWrapper>
           <DatePicker
+            todayButton="오늘 날짜"
             ref={datePickerRef}
             selected={selectedDate}
             dateFormat="yyyy년 MM월 dd일"
@@ -91,6 +92,11 @@ const DateInput = ({ selectedDate, onChange }) => {
             }}
             minDate={new Date("2013-04-28")}
             maxDate={new Date()}
+            peekNextMonth
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="scroll"
+            withPortal
           />
         </S.DatePickerWrapper>
         <SDiv ct>
@@ -159,10 +165,66 @@ S.DatePickerWrapper = styled(SDiv)`
       ${g9}
     }
   }
-
+  .react-datepicker__navigation {
+    top: 10px;
+    width: 24px;
+    height: 24px;
+  }
+  .react-datepicker__header__dropdown,
+  .react-datepicker__header__dropdown--scroll {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    font-size: small;
+  }
   .react-datepicker-popper {
     padding-top: 0px !important;
     top: 10px !important;
+  }
+  .react-datepicker__today-button {
+    height: 60px;
+    font-size: large;
+    background: ${colors.lightgreen};
+    padding: 18px 0;
+    color: ${colors.green};
+    text-align: center;
+    transition: all 0.4s ease;
+  }
+  .react-datepicker__today-button:hover {
+    background: ${colors.green};
+    color: ${colors.white};
+  }
+  .react-datepicker__month-container {
+    width: 100%;
+  }
+  .react-datepicker {
+    width: 88vw;
+    max-width: 450px;
+    @media only screen and (max-width: 430px) {
+      width: 80vw;
+    }
+  }
+  .react-datepicker__current-month,
+  .react-datepicker__current-month--hasYearDropdown,
+  .react-datepicker__current-month--hasMonthDropdown {
+    font-size: large;
+    height: 2em;
+    padding-top: 0.2em;
+  }
+  .react-datepicker__portal .react-datepicker__day-name,
+  .react-datepicker__portal .react-datepicker__day,
+  .react-datepicker__portal .react-datepicker__time-name {
+    width: 12%;
+    max-width: 50px;
+    font-size: 2em;
+  }
+  .react-datepicker__navigation--next {
+    right: 8%;
+  }
+  .react-datepicker__navigation--previous {
+    left: 8%;
   }
 `;
 

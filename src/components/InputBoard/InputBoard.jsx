@@ -1,43 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
+import React, { useRef, useState } from "react";
+
+import styled from "styled-components";
 
 import DROPDOWN_LIST from "@/data/dropdownList";
-import * as PAGE from "@/stores/mockData";
+import useOutsideClick from "@/hooks/useOutsideClick";
 import useUserInputStore from "@/stores/userInputStore";
+import scrollTop from "@/utils/scrollTop";
 
 import InputBoardPresenter from "./InputBoardPresenter";
-
-// eslint-disable-next-line no-unused-vars
-const mockAxiosMarkets = (currency, coinsPerPage, pageNum, order) => {
-  // eslint-disable-next-line max-len
-  // 'BASE_URL/coins/markets?vs_currency=krw&order=market_cap_desc&per_page=180&page=2&sparkline=false&locale=en'
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      // 파라미터 받은대로 요청 후 가져옴
-      resolve(PAGE[`${currency}_${pageNum}`]);
-    }, 500);
-  });
-};
-/**
- * @param {number} pageNum 페이지네이션 넘버 (180개 단위 페이지)
- * @param {number} coinsPerPage 페이지 당 가져올 코인 갯수(180)
- * @param {string} currency 선택한 화폐 단위
- * @returns axios get 요청으로 가져온 180개 코인 리스트 반환
- */
-// eslint-disable-next-line no-unused-vars
-const getCoinsByPage = async (pageNum, coinsPerPage, currency) => {
-  const response = await mockAxiosMarkets(
-    currency,
-    coinsPerPage,
-    pageNum,
-    "market_cap_desc"
-  );
-  return response;
-};
 
 const InputBoard = () => {
   const {
     selectedCoinInfo,
+    setSelectedCoinInfo,
     selectedDate,
     setSelectedDate,
     selectedMoney,
@@ -46,8 +22,10 @@ const InputBoard = () => {
     calculateMoney,
     setCalculatedMoney,
     saveRecord,
+    resetAll,
   } = useUserInputStore((state) => ({
     selectedCoinInfo: state.selectedCoinInfo,
+    setSelectedCoinInfo: state.setSelectedCoinInfo,
     selectedDate: state.selectedDate,
     setSelectedDate: state.setSelectedDate,
     selectedMoney: state.selectedMoney,
@@ -56,26 +34,36 @@ const InputBoard = () => {
     calculateMoney: state.calculateMoney,
     setCalculatedMoney: state.setCalculatedMoney,
     saveRecord: state.saveRecord,
+    resetAll: state.resetAll,
   }));
+  const [errorMsg, setErrorMsg] = useState("");
+  const modalRef = useRef(null);
 
   const increaseMoney = (inc) => {
     setSelectedMoney(selectedMoney + Number(inc));
   };
 
   const handleSubmit = () => {
-    calculateMoney().then((res) => {
-      setCalculatedMoney(res);
-      saveRecord(
-        selectedDate,
-        new Date(),
-        selectedMoney,
-        res,
-        selectedCoinInfo,
-        selectedCurrency
-      );
-    });
+    scrollTop();
+    calculateMoney()
+      .then((res) => {
+        setCalculatedMoney(res);
+        saveRecord(
+          selectedDate,
+          new Date(),
+          selectedMoney,
+          res,
+          selectedCoinInfo,
+          selectedCurrency
+        );
+      })
+      .catch((err) => {
+        modalRef.current?.showModal();
+        setErrorMsg(err.message);
+        resetAll();
+      });
   };
-
+  useOutsideClick(modalRef, () => {});
   const InputBordPresenterProps = {
     selectedCoinInfo,
     selectedDate,
@@ -86,8 +74,62 @@ const InputBoard = () => {
     onChangeMoney: setSelectedMoney,
     onClickIncreaseMoney: increaseMoney,
     onChangeDate: setSelectedDate,
+    onSelectOption: setSelectedCoinInfo,
   };
-  return <InputBoardPresenter {...InputBordPresenterProps} />;
+  return (
+    <>
+      <InputBoardPresenter {...InputBordPresenterProps} />
+      <S.Dialog
+        ref={modalRef}
+        onClick={() => {
+          modalRef.current.close();
+        }}
+      >
+        {errorMsg}
+      </S.Dialog>
+    </>
+  );
 };
 
+const S = {};
+
+S.Dialog = styled.dialog`
+  border: none;
+  border-radius: 12px;
+  padding: 80px 20px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.38);
+  animation: showModal 1s;
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  @keyframes showModal {
+    0% {
+      transform: scale(0);
+    }
+    60% {
+      transform: scale(1.1);
+    }
+    80% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  &.hide {
+    animation: hideModal 1s;
+  }
+  @keyframes hideModal {
+    0% {
+      transform: scale(1);
+    }
+    20% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+`;
 export default InputBoard;

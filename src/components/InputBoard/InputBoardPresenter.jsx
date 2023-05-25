@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from "react";
 
@@ -14,10 +15,13 @@ import { MemoizedDropdown } from "./Dropdown/Dropdown";
 import IncreaseMoneyButton from "./IncreaseMoneyButton/IncreaseMoneyButton";
 import MoneyInput from "./MoneyInput/MoneyInput";
 
-const INCREASE_MONEY_UNITS = [5000, 10000, 50000, 100000];
-
+const INCREASE_MONEY_UNITS = {
+  krw: [5000, 10000, 50000, 100000],
+  usd: [5, 10, 50, 100],
+};
 const InputBoardPresenter = ({
   selectedCoinInfo,
+  onSelectOption,
   selectedDate,
   selectedMoney,
   selectedCurrency,
@@ -30,6 +34,7 @@ const InputBoardPresenter = ({
   const [isOpen, setIsOpen] = useState(false); // form 모달이 열렸는지
   const { mediaQuery } = useMediaQuery(1200); // 미디어쿼리 변화 감지
   const [isTablet, setIsTablet] = useState(mediaQuery.matches); // 태블릿 사이즈 이하인지
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     if (!isTablet) {
@@ -50,6 +55,7 @@ const InputBoardPresenter = ({
       br={24}
       pd="60px 40px 70px 40px"
       isOpen={isTablet && isOpen}
+      isLong={isDropdownOpen}
     >
       <S.BoardBody col ast full sb g={55}>
         <SHeading2>
@@ -60,10 +66,10 @@ const InputBoardPresenter = ({
           </SText>
           에
           <S.Br second />
-          <SText white mgb={7}>
+          <S.MoneyText white mgb={7}>
             {formatMoneyToString(selectedMoney, selectedCurrency)}
-          </SText>
-          으로&nbsp;
+          </S.MoneyText>
+          <SText mgb={7}>으로&nbsp;</SText>
           <S.Br third />
           <SText white>{selectedCoinInfo.name}</SText>을 샀다면,
         </SHeading2>
@@ -90,12 +96,14 @@ const InputBoardPresenter = ({
                 selectedMoney={selectedMoney}
                 onChange={onChangeMoney}
                 isOpen={false}
+                selectedCurrency={selectedCurrency}
               />
-              <S.IncreaseButtonListWrapper row sb full>
-                {INCREASE_MONEY_UNITS.map((unit) => (
+              <S.IncreaseButtonListWrapper row sb full currency>
+                {INCREASE_MONEY_UNITS[selectedCurrency].map((unit) => (
                   <IncreaseMoneyButton
                     key={unit}
                     money={unit}
+                    currency={selectedCurrency}
                     onClick={() => {
                       onClickIncreaseMoney(unit);
                     }}
@@ -106,6 +114,10 @@ const InputBoardPresenter = ({
             <MemoizedDropdown
               options={dropdownCoinOptionList}
               selected={selectedCoinInfo}
+              onClick={() => {
+                setIsDropdownOpen((prev) => !prev);
+              }}
+              onSelectOption={onSelectOption}
             />
           </S.InputArea>
           <S.SubmitArea ct>
@@ -153,7 +165,7 @@ S.BoardWrapper = styled(SDiv)`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 189px;
+    gap: ${(props) => (props.isLong ? "189px" : "55px")};
 
     @media only screen and (max-width: 1200px) {
       display: ${(props) => (props.isOpen ? "flex" : "none")};
@@ -213,7 +225,10 @@ S.Br = styled.br`
 `;
 
 S.IncreaseButtonListWrapper = styled(SDiv)`
-  justify-content: space-around;
+  justify-content: ${(props) =>
+    // eslint-disable-next-line implicit-arrow-linebreak
+    props.currency === "krw" ? "space-around" : "flex-start"};
+  gap: ${(props) => (props.currency === "krw" ? "0" : "10px")};
   @media only screen and (max-width: 1200px) {
     justify-content: flex-start;
     gap: 8px;
@@ -226,6 +241,19 @@ S.InputArea = styled(SDiv)`
   }
   @media only screen and (max-width: 768px) {
     margin-bottom: 56px;
+  }
+`;
+
+S.MoneyText = styled(SText)`
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  @media only screen and (max-width: 1200px) {
+    max-width: 57%;
+  }
+  @media only screen and (max-width: 768px) {
+    max-width: 80%;
   }
 `;
 S.BoardBody = styled(SDiv)``;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import useUserInputStore from "@/stores/userInputStore";
+import scrollTop from "@/utils/scrollTop";
 
 import GnbPresenter from "./GnbPresenter";
 
@@ -24,6 +25,10 @@ const Gnb = () => {
   const handleHistoryClick = () => {
     setIsHistoryOpen((prev) => !prev);
   };
+  const handleResetClick = () => {
+    resetAll();
+    scrollTop();
+  };
   const handleSelectCurrency = (newCurrency) => {
     setSelectedCurrency(newCurrency);
     setSelectedMoney(0);
@@ -35,7 +40,7 @@ const Gnb = () => {
   return (
     <GnbPresenter
       isHistoryOpen={isHistoryOpen}
-      onResetClick={resetAll}
+      onResetClick={handleResetClick}
       onHistoryClick={handleHistoryClick}
       selectedCurrency={selectedCurrency}
       onSelectOption={handleSelectCurrency}

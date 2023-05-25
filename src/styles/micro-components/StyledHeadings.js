@@ -11,6 +11,7 @@ const SHeading1 = styled.h1`
 const SHeading2 = styled.h2`
   ${h2}
   ${g5}
+  width: 100%;
 `;
 
 const SHeading3 = styled.h3`

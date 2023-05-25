@@ -1,22 +1,9 @@
 import { create } from "zustand";
 
+import { getHistory } from "@/services/api";
 import formatDateToString from "@/utils/formatDate";
 import formatMoneyToString from "@/utils/formatMoney";
 
-import { MOCK_HISTORY_DATA_AFTER, MOCK_HISTORY_DATA_BEFORE } from "./mockData";
-
-const mockAxiosHistory = (coinId, date) => {
-  // https://api.coingecko.com/api/v3/coins/bitcoin/history?date=30-12-2022
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        date === "21-05-2023"
-          ? MOCK_HISTORY_DATA_AFTER
-          : MOCK_HISTORY_DATA_BEFORE
-      );
-    }, 500);
-  });
-};
 /**
  *
  * @param {number} coinId
@@ -26,7 +13,16 @@ const mockAxiosHistory = (coinId, date) => {
  * @returns 해당 코인의 해당 날짜의 가격을 화폐단위로 리턴
  */
 const getPriceAtDate = async (coinId, dateString, currency) => {
-  const response = await mockAxiosHistory(coinId, dateString);
+  const response = await getHistory(coinId, dateString);
+  if (response.market_data === undefined) {
+    const parts = dateString.split("-");
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2];
+
+    const formattedDate = `${year}년 ${month}월 ${day}일`;
+    throw new Error(`${formattedDate}에 해당 코인 가격 정보가 없습니다.`);
+  }
   const price = response.market_data.current_price[currency];
   return price.toFixed(2);
 };
@@ -71,35 +67,23 @@ const userInputStore = (set, get) => ({
    * @description userInputStore의 상태값들을 토대로 사용자가 입력한 금액이 지금은 얼마가 되었는지 계산
    */
   calculateMoney: async () => {
-    try {
-      const {
-        selectedDate,
-        selectedMoney,
-        selectedCoinInfo,
-        selectedCurrency,
-      } = get();
-      // API 요청을 통해 선택한 시점의 가격과 현재 가격을 가져옴
-      const todayDate = new Date();
-      const querifiedSelectedDate = formatDateToString(selectedDate, true); // dd-MM-yyyy 형태로 포맷
-      const querifiedTodayDate = formatDateToString(todayDate, true);
-      const coinPriceResponses = await Promise.all([
-        getPriceAtDate(
-          selectedCoinInfo.id,
-          querifiedSelectedDate,
-          selectedCurrency
-        ),
-        getPriceAtDate(
-          selectedCoinInfo.id,
-          querifiedTodayDate,
-          selectedCurrency
-        ),
-      ]);
-      const [beforePrice, todayPrice] = coinPriceResponses;
-      // calculatedMoney 를 계산: 오늘 가격 * (selectedMoney / 선택한 날짜의 가격)
-      return (todayPrice * (selectedMoney / beforePrice)).toFixed(2);
-    } catch (error) {
-      throw new Error(error);
-    }
+    const { selectedDate, selectedMoney, selectedCoinInfo, selectedCurrency } =
+      get();
+    // API 요청을 통해 선택한 시점의 가격과 현재 가격을 가져옴
+    const todayDate = new Date();
+    const querifiedSelectedDate = formatDateToString(selectedDate, true); // dd-MM-yyyy 형태로 포맷
+    const querifiedTodayDate = formatDateToString(todayDate, true);
+    const coinPriceResponses = await Promise.all([
+      getPriceAtDate(
+        selectedCoinInfo.id,
+        querifiedSelectedDate,
+        selectedCurrency
+      ),
+      getPriceAtDate(selectedCoinInfo.id, querifiedTodayDate, selectedCurrency),
+    ]);
+    const [beforePrice, todayPrice] = coinPriceResponses;
+    // calculatedMoney 를 계산: 오늘 가격 * (selectedMoney / 선택한 날짜의 가격)
+    return (todayPrice * (selectedMoney / beforePrice)).toFixed(2);
   },
   /**
    * @param {Date} pastDate 사용자 입력 과거 날짜

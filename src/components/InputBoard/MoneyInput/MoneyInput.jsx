@@ -5,12 +5,8 @@ import styled, { css } from "styled-components";
 import { SDiv, SText, colors } from "@styles";
 import { b1, white } from "@styles/text.style";
 
-const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
-  const selectedCurrency = {
-    name: "원",
-    symbol: "₩",
-    value: "krw",
-  };
+const MoneyInput = ({ isOpen, onChange, selectedMoney, selectedCurrency }) => {
+  const currencyLabel = selectedCurrency === "krw" ? "원 (₩)" : "USD ($)";
 
   const [showInput, setShowInput] = useState(true);
   const inputRef = useRef(null);
@@ -57,7 +53,7 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney }) => {
         </S.InputValueWrapper>
         <SDiv ct>
           <S.LabelText b1 white disableSelect>
-            {`${selectedCurrency.name} (${selectedCurrency.symbol})`}
+            {currencyLabel}
           </S.LabelText>
         </SDiv>
       </SDiv>
