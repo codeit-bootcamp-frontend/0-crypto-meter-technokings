@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 
+import imageNotExist from "@/assets/imageNotExist.svg";
 import formatMoneyToString from "@/utils/formatMoney";
 import { SDiv, SText, colors } from "@styles";
 
@@ -14,6 +15,11 @@ const TableRow = ({ coin, currency }) => {
     }
     return null;
   };
+  const [imageSrc, setImageSrc] = useState(coin.image);
+
+  const handleImageError = () => {
+    setImageSrc(imageNotExist);
+  };
 
   return (
     <S.BodyRow>
@@ -25,7 +31,11 @@ const TableRow = ({ coin, currency }) => {
       <td>
         <S.NameWrapper row act g={12}>
           <S.ImageWrapper w={30} h={30}>
-            <img src={coin.image} alt={`${coin.name} 이미지`} />
+            <img
+              src={imageSrc}
+              alt={`${coin.symbol}`}
+              onError={handleImageError}
+            />
           </S.ImageWrapper>
           <S.NameTextWrapper col g={4}>
             <SText s2 black>
@@ -78,7 +88,6 @@ const S = {};
 
 S.BodyRow = styled.tr`
   height: 73px;
-
   border-bottom: 1px solid ${colors.gray2};
 
   td:nth-child(n + 3) > span {

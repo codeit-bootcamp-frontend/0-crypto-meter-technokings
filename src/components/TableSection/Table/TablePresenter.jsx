@@ -95,7 +95,7 @@ const TablePresenter = ({
 const S = {};
 S.TableWrapper = styled(SDiv)`
   position: relative;
-  overflow-x: auto;
+  overflow: auto hidden;
 
   border-top: 1px solid ${colors.gray9};
 
@@ -138,44 +138,29 @@ S.Table = styled.table`
     left: ${(props) => `${props.firstColWidth}px`};
   }
 
-  th:nth-child(2)::before,
-  th:nth-child(2)::after,
-  td:nth-child(2)::before,
-  td:nth-child(2)::after,
-  tr:last-child td:first-child::before,
-  tr:last-child td:first-child::after {
-    @media only screen and (max-width: 1900px) {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  th:nth-child(2)::before,
-  td:nth-child(2)::before,
-  tr:last-child td:first-child::before {
-    z-index: -5;
-    background-color: ${colors.white};
-  }
-
   th:nth-child(2)::after,
   td:nth-child(2)::after {
-    border-right: 1px solid ${colors.black};
-    z-index: -10;
-    filter: blur(4px);
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -30px;
+    bottom: -1px;
+    width: 30px;
+    pointer-events: none;
+
+    box-shadow: inset 15px 0 8px -8px rgba(5, 5, 5, 0.06);
   }
 
-  tr:last-child td:nth-child(-n + 2)::after {
-    border-bottom: 1px solid ${colors.black};
-    z-index: -10;
-    filter: blur(4px);
-  }
+  tr:last-child td:nth-child(-n + 2)::before {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: -1px;
+    height: 30px;
+    pointer-events: none;
 
-  @media only screen and (max-width: 768px) {
-    margin-bottom: 13px;
+    box-shadow: inset 0 15px 8px -8px rgba(5, 5, 5, 0.06);
   }
 `;
 
