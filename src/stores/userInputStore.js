@@ -83,7 +83,7 @@ const userInputStore = (set, get) => ({
     ]);
     const [beforePrice, todayPrice] = coinPriceResponses;
     // calculatedMoney 를 계산: 오늘 가격 * (selectedMoney / 선택한 날짜의 가격)
-    return (todayPrice * (selectedMoney / beforePrice)).toFixed(2);
+    return Number((todayPrice * (selectedMoney / beforePrice)).toFixed(2));
   },
   /**
    * @param {Date} pastDate 사용자 입력 과거 날짜
