@@ -7,10 +7,7 @@ import { SDiv, SText, colors } from "@styles";
 
 import PriceChange from "./PriceChange/PriceChange";
 
-const TableRow = ({ data }) => {
-  // Todo: zustand로 화폐 다루기
-  const currency = "krw";
-
+const TableRow = ({ coin, currency }) => {
   const calculateTradedCoins = (totalVolume, currentPrice) => {
     if (totalVolume && currentPrice) {
       return Math.round(totalVolume / currentPrice);
@@ -22,68 +19,56 @@ const TableRow = ({ data }) => {
     <S.BodyRow>
       <td>
         <SText b3 g6>
-          {data.market_cap_rank}
+          {coin.rank}
         </SText>
       </td>
       <td>
         <S.NameWrapper row act g={12}>
           <S.ImageWrapper w={30} h={30}>
-            <img src={data.image} alt={`${data.name} 이미지`} />
+            <img src={coin.image} alt={`${coin.name} 이미지`} />
           </S.ImageWrapper>
           <S.NameTextWrapper col g={4}>
             <SText s2 black>
-              {data.name}
+              {coin.name}
             </SText>
             <SText c3 g5>
-              {data.symbol.toUpperCase()}
+              {coin.symbol.toUpperCase()}
             </SText>
           </S.NameTextWrapper>
         </S.NameWrapper>
       </td>
       <td>
         <SText b3 g8>
-          {formatMoneyToString(data.current_price, currency, true)}
+          {formatMoneyToString(coin.price, currency, true)}
         </SText>
       </td>
       <td>
         <SText b2 g8>
-          {formatMoneyToString(data.fully_diluted_valuation, currency, true)}
+          {formatMoneyToString(coin.marketCap, currency, true)}
         </SText>
       </td>
       <td>
         <S.VolumeTextWrapper col g={4}>
           <SText right b2 g8>
-            {formatMoneyToString(data.total_volume, currency, true)}
+            {formatMoneyToString(coin.volume24h, currency, true)}
           </SText>
           <SText right c3 g5>
             {Intl.NumberFormat().format(
-              calculateTradedCoins(data.total_volume, data.current_price)
+              calculateTradedCoins(coin.volume24h, coin.price)
             )}
             &nbsp;
-            {data.symbol.toUpperCase()}
+            {coin.symbol.toUpperCase()}
           </SText>
         </S.VolumeTextWrapper>
       </td>
       <td>
-        <PriceChange
-          change={
-            Math.round(data.price_change_percentage_1h_in_currency * 100) / 100
-          }
-        />
+        <PriceChange change={Math.round(coin.change1h * 100) / 100} />
       </td>
       <td>
-        <PriceChange
-          change={
-            Math.round(data.price_change_percentage_24h_in_currency * 100) / 100
-          }
-        />
+        <PriceChange change={Math.round(coin.change24h * 100) / 100} />
       </td>
       <td>
-        <PriceChange
-          change={
-            Math.round(data.price_change_percentage_7d_in_currency * 100) / 100
-          }
-        />
+        <PriceChange change={Math.round(coin.change7d * 100) / 100} />
       </td>
     </S.BodyRow>
   );

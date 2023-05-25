@@ -15,14 +15,13 @@ const coinStore = (set, get) => ({
     return false;
   },
   /**
-   * @param {number} pageNum 페이지 번호
-   * @param {string} currency 화폐단위
-   * @returns coinDB의 pageNum_currency 페이지(코인 리스트)를 반환
+   *
+   * @param {number} pageNum slice할 페이지(180개 단위) 번호
+   * @param {string} currency 화폐 단위
+   * @param {number} startIdx 페이지 slice의 시작 인덱스
+   * @param {number} length 가져올 페이지 slice의 길이
+   * @returns 페이지 번호에서 시작 인덱스부터 길이에 해당하는 페이지 슬라이스를 반환
    */
-  getPage: (pageNum, currency) => {
-    const { coinDB } = get();
-    return coinDB[`${currency}_${pageNum}`];
-  },
   getPageSlice: (pageNum, currency, startIdx, length) => {
     const { coinDB } = get();
     return coinDB[`${currency}_${pageNum}`].slice(startIdx, startIdx + length);

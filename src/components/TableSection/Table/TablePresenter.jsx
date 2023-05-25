@@ -10,12 +10,13 @@ import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
 const TablePresenter = ({
-  dataSet,
+  coins,
   sortStates,
   pageNum,
   onSort,
   onChangePage,
-  onPagination,
+  currency,
+  endPageNum,
 }) => {
   const { mediaQuery: mobileMediaQuery } = useMediaQuery(768);
   const { mediaQuery: tabletMediaQuery } = useMediaQuery(1200);
@@ -38,22 +39,22 @@ const TablePresenter = ({
   }
 
   const colInfos = [
-    { colName: "#", colKey: "market_cap_rank" },
+    { colName: "#", colKey: "rank" },
     { colName: "화폐 이름", colKey: "name" },
-    { colName: "가격", colKey: "current_price" },
-    { colName: "총 시가", colKey: "fully_diluted_valuation" },
-    { colName: "24시간 거래량", colKey: "total_volume" },
+    { colName: "가격", colKey: "price" },
+    { colName: "총 시가", colKey: "marketCap" },
+    { colName: "24시간 거래량", colKey: "volume24h" },
     {
       colName: "1시간 변동폭",
-      colKey: "price_change_percentage_1h_in_currency",
+      colKey: "change1h",
     },
     {
       colName: "24시간 변동폭",
-      colKey: "price_change_percentage_24h_in_currency",
+      colKey: "change24h",
     },
     {
       colName: "7일 변동폭",
-      colKey: "price_change_percentage_7d_in_currency",
+      colKey: "change7d",
     },
   ];
 
@@ -75,8 +76,8 @@ const TablePresenter = ({
             </S.HeadRow>
           </thead>
           <tbody>
-            {dataSet.map((data) => (
-              <TableRow key={data.symbol} data={data} />
+            {coins.map((coin) => (
+              <TableRow key={coin.id} coin={coin} currency={currency} />
             ))}
           </tbody>
         </S.Table>
@@ -84,8 +85,8 @@ const TablePresenter = ({
       <Pagination
         pageNum={pageNum}
         onChangePage={onChangePage}
-        onPagination={onPagination}
         isMobile={isMobile}
+        endPageNum={endPageNum}
       />
     </>
   );
@@ -129,7 +130,7 @@ S.Table = styled.table`
   td:nth-child(2)::after,
   tr:last-child td:first-child::before,
   tr:last-child td:first-child::after {
-    @media only screen and (max-width: 1456px) {
+    @media only screen and (max-width: 1900px) {
       content: "";
       position: absolute;
       top: 0;
