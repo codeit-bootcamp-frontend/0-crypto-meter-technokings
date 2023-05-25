@@ -220,6 +220,7 @@ S.BoardWrapper = styled(SDiv)`
   @media only screen and (max-width: 1200px) {
     width: 100%;
     height: auto;
+    min-width: auto;
     padding: 36px;
     top: 90px;
   }
