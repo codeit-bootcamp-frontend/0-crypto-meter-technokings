@@ -31,9 +31,9 @@ const coinStore = (set, get) => ({
    * @param {number} pageNum coinDB에 저장할 페이지(180개 단위) 번호
    * @param {string} currency 화폐 단위
    * @description 파라미터로 받은 정보를 coinDB에 저장
-   * @example addPage(newCoinListFromApiCall, 3, selectedCurrency) -> "krw_3" : [...] 으로 coinDb에 저장
+   * @example addPageToCache(newCoinListFromApiCall, 3, selectedCurrency)->"krw_3":[...]으로 DB에 저장
    */
-  addPage: (coinList, pageNum, currency) => {
+  addPageToCache: (coinList, pageNum, currency) => {
     set(
       produce((draft) => {
         // eslint-disable-next-line no-param-reassign
