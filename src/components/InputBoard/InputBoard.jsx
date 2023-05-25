@@ -41,7 +41,9 @@ const InputBoard = () => {
     const today = new Date();
     const fiveYearsAgo = new Date(today.toLocaleDateString());
 
-    fiveYearsAgo.setFullYear(today.getFullYear() - 5);
+    fiveYearsAgo.setFullYear(
+      today.getFullYear() - import.meta.env.VITE_PAST_YEARS
+    );
     return fiveYearsAgo;
   });
   const [inputCoin, setInputCoin] = useState({
