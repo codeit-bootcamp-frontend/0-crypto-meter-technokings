@@ -163,14 +163,15 @@ const S = {};
 
 S.BoardWrapper = styled(SDiv)`
   position: sticky;
-  top: 100px;
+  top: 80px;
   z-index: 29;
 
   width: 445px;
   min-width: 445px;
   max-height: 945px;
   overflow-y: auto;
-  height: 86vh;
+  overflow-x: hidden;
+  height: calc(100vh - 100px);
 
   &::-webkit-scrollbar-button {
     width: 0;
