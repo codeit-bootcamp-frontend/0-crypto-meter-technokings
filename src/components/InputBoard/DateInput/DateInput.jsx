@@ -168,6 +168,7 @@ S.DatePickerWrapper = styled(SDiv)`
     ${disableSelect}
     background: transparent;
     border: none;
+    width: 80%;
     @media only screen and (max-width: 1200px) {
       ${g9}
       ${black}

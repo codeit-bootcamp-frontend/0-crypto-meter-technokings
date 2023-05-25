@@ -304,7 +304,11 @@ S.CoinText = styled(SText)`
     max-width: 80%;
   }
 `;
-S.BoardBody = styled(SDiv)``;
+S.BoardBody = styled(SDiv)`
+  span {
+    font-family: "Pretendard-SemiBold";
+  }
+`;
 S.SubmitArea = styled(SDiv)``;
 S.SubmitButton = styled(SButton)`
   @media only screen and (max-width: 1200px) {

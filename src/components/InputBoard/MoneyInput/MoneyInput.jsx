@@ -110,6 +110,7 @@ S.Input = styled.input`
   display: ${(props) => (props.show ? "inline-block" : "none")};
   ${b1}
   background-color: transparent;
+  width: 80%;
   ${white}
   border: none;
   &::placeholder {
