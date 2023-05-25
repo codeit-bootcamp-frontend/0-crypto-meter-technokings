@@ -20,10 +20,10 @@ const INCREASE_MONEY_UNITS = {
   usd: [5, 10, 50, 100],
 };
 const InputBoardPresenter = ({
-  selectedCoinInfo,
+  inputCoinInfo,
   onSelectOption,
-  selectedDate,
-  selectedMoney,
+  inputDate,
+  inputMoney,
   selectedCurrency,
   dropdownCoinOptionList,
   onSubmit,
@@ -62,17 +62,17 @@ const InputBoardPresenter = ({
           <SText mgb={7}> 내가 만약&nbsp;</SText>
           <S.Br first />
           <SText white mgb={7}>
-            {formatDateToString(selectedDate)}
+            {formatDateToString(inputDate)}
           </SText>
           에
           <S.Br second />
           <S.MoneyText white mgb={7}>
-            {formatMoneyToString(selectedMoney, selectedCurrency)}
+            {formatMoneyToString(inputMoney, selectedCurrency)}
           </S.MoneyText>
           <SText mgb={7}>으로&nbsp;</SText>
           <S.Br third />
           <S.CoinText white mgb={7}>
-            {selectedCoinInfo.name}
+            {inputCoinInfo.name}
           </S.CoinText>
           <SText mgb={7}>을 샀다면,</SText>
         </SHeading2>
@@ -91,12 +91,12 @@ const InputBoardPresenter = ({
         >
           <S.InputArea col g={25} full>
             <DateInput
-              selectedDate={selectedDate} // TODO: historyDate를 받아온다.
+              selectedDate={inputDate} // TODO: historyDate를 받아온다.
               onChange={onChangeDate}
             />
             <SDiv col act g={12}>
               <MoneyInput
-                selectedMoney={selectedMoney}
+                selectedMoney={inputMoney}
                 onChange={onChangeMoney}
                 isOpen={false}
                 selectedCurrency={selectedCurrency}
@@ -121,7 +121,7 @@ const InputBoardPresenter = ({
             </SDiv>
             <MemoizedDropdown
               options={dropdownCoinOptionList}
-              selected={selectedCoinInfo}
+              selected={inputCoinInfo}
               onClick={() => {
                 setIsDropdownOpen((prev) => !prev);
               }}

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import styled from "styled-components";
 
@@ -22,7 +22,8 @@ const InputBoard = () => {
     calculateMoney,
     setCalculatedMoney,
     saveRecord,
-    resetAll,
+    isResetClicked,
+    isCurrencyChanged,
   } = useUserInputStore((state) => ({
     selectedCoinInfo: state.selectedCoinInfo,
     setSelectedCoinInfo: state.setSelectedCoinInfo,
@@ -35,6 +36,8 @@ const InputBoard = () => {
     setCalculatedMoney: state.setCalculatedMoney,
     saveRecord: state.saveRecord,
     resetAll: state.resetAll,
+    isResetClicked: state.isResetClicked,
+    isCurrencyChanged: state.isCurrencyChanged,
   }));
   const [inputMoney, setInputMoney] = useState(0);
   const [inputDate, setInputDate] = useState(() => {
@@ -58,7 +61,24 @@ const InputBoard = () => {
   const increaseMoney = (inc) => {
     setInputMoney(inputMoney + Number(inc));
   };
+  const resetInput = () => {
+    setInputCoin({
+      id: "bitcoin",
+      name: "Bitcoin",
+      imageUrl:
+        "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+    });
+    setInputDate(() => {
+      const today = new Date();
+      const fiveYearsAgo = new Date(today.toLocaleDateString());
 
+      fiveYearsAgo.setFullYear(
+        today.getFullYear() - Number(import.meta.env.VITE_PAST_YEARS)
+      );
+      return fiveYearsAgo;
+    });
+    setInputMoney(0);
+  };
   const handleSubmit = () => {
     calculateMoney(inputCoin, inputMoney, inputDate)
       .then((res) => {
@@ -79,14 +99,13 @@ const InputBoard = () => {
       .catch((err) => {
         modalRef.current?.showModal();
         setErrorMsg(err.message);
-        resetAll();
       });
   };
   useOutsideClick(modalRef, () => {});
   const InputBordPresenterProps = {
-    selectedCoinInfo: inputCoin,
-    selectedDate: inputDate,
-    selectedMoney: inputMoney,
+    inputCoinInfo: inputCoin,
+    inputDate,
+    inputMoney,
     selectedCurrency,
     dropdownCoinOptionList: DROPDOWN_LIST,
     onSubmit: handleSubmit,
@@ -95,6 +114,21 @@ const InputBoard = () => {
     onChangeDate: setInputDate,
     onSelectOption: setInputCoin,
   };
+  useEffect(() => {
+    setInputDate(selectedDate);
+  }, [selectedDate]);
+  useEffect(() => {
+    setInputMoney(selectedMoney);
+  }, [selectedMoney]);
+  useEffect(() => {
+    setInputCoin(selectedCoinInfo);
+  }, [selectedCoinInfo]);
+  useEffect(() => {
+    resetInput();
+  }, [isResetClicked]);
+  useEffect(() => {
+    setInputMoney(0);
+  }, [isCurrencyChanged]);
   return (
     <>
       <InputBoardPresenter {...InputBordPresenterProps} />
