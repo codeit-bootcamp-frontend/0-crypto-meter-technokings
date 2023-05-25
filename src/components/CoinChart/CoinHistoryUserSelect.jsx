@@ -22,7 +22,7 @@ const CoinHistoryUserSelect = ({
         <SText mgr={4} g5={isGray} green={isGreen} red={!isGreen}>
           {trimmedUserSelectCalcMoney}
         </SText>
-        입니다.
+        <S.Ellipsis> 입니다.</S.Ellipsis>
       </S.MiddleText>
       <S.BottomText mgt={9} c1 g6>
         {`(${toLocaleDate} ${toLocaleTime} 기준)`}
@@ -74,4 +74,8 @@ S.BottomText = styled(SText)`
   }
 `;
 
+S.Ellipsis = styled(SText)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 export default CoinHistoryUserSelect;

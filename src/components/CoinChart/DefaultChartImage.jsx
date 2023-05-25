@@ -2,6 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 
+import NullChart from "@/assets/null_chart.webp";
 import { SDiv, SText, colors } from "@styles";
 import { h3 } from "@styles/text.style";
 
@@ -22,7 +23,7 @@ const DefaultChartImage = () => {
         </S.NullTextWrapper>
         <SDiv full pdt={24}>
           <img
-            src="/null_chart.png"
+            src={NullChart}
             alt="null chart"
             style={{ maxWidth: "100%", height: "auto", display: "block" }}
           />

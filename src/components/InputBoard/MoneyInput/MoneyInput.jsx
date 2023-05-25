@@ -10,7 +10,12 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney, selectedCurrency }) => {
 
   const [showInput, setShowInput] = useState(true);
   const inputRef = useRef(null);
-
+  const handleInputLength = (object) => {
+    if (object.value.length > object.maxLength) {
+      // eslint-disable-next-line no-param-reassign
+      object.value = object.value.slice(0, object.maxLength);
+    }
+  };
   useEffect(() => {
     if (showInput && inputRef.current) {
       inputRef.current.focus();
@@ -26,11 +31,15 @@ const MoneyInput = ({ isOpen, onChange, selectedMoney, selectedCurrency }) => {
     <S.InputWrapper isOpen={isOpen}>
       <SDiv row sb>
         <S.Input
+          name="money"
           type="number"
-          min="1"
+          min="0"
+          maxLength={13}
+          onInput={(e) => {
+            handleInputLength(e.target);
+          }}
           ct
           placeholder={new Intl.NumberFormat().format(selectedMoney)}
-          value={selectedMoney}
           onChange={(e) => {
             onChange(Number(e.target.value));
           }}

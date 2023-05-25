@@ -53,7 +53,7 @@ const InputBoardPresenter = ({
       sb
       bg={colors.gray9}
       br={24}
-      pd="60px 40px 70px 40px"
+      pd="36px 40px 50px 40px"
       isOpen={isTablet && isOpen}
       isLong={isDropdownOpen}
     >
@@ -71,7 +71,10 @@ const InputBoardPresenter = ({
           </S.MoneyText>
           <SText mgb={7}>으로&nbsp;</SText>
           <S.Br third />
-          <SText white>{selectedCoinInfo.name}</SText>을 샀다면,
+          <S.CoinText white mgb={7}>
+            {selectedCoinInfo.name}
+          </S.CoinText>
+          <SText mgb={7}>을 샀다면,</SText>
         </SHeading2>
         <S.Overlay
           show={isTablet && isOpen}
@@ -159,13 +162,16 @@ S.BoardWrapper = styled(SDiv)`
   z-index: 29;
 
   width: 445px;
+  min-width: 445px;
   max-height: 945px;
+  overflow-y: scroll;
+  height: 86vh;
 
   form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: ${(props) => (props.isLong ? "189px" : "55px")};
+    gap: 48px;
 
     @media only screen and (max-width: 1200px) {
       display: ${(props) => (props.isOpen ? "flex" : "none")};
@@ -189,6 +195,7 @@ S.BoardWrapper = styled(SDiv)`
 
   @media only screen and (max-width: 1200px) {
     width: 100%;
+    height: auto;
     padding: 36px;
     top: 90px;
   }
@@ -249,6 +256,19 @@ S.MoneyText = styled(SText)`
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: bottom;
+  @media only screen and (max-width: 1200px) {
+    max-width: 57%;
+  }
+  @media only screen and (max-width: 768px) {
+    max-width: 80%;
+  }
+`;
+S.CoinText = styled(SText)`
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: pre;
   @media only screen and (max-width: 1200px) {
     max-width: 57%;
   }

@@ -85,13 +85,13 @@ const CoinChart = () => {
       selectedCurrency === "usd"
         ? `$${
             Number.isInteger(calculatedMoney)
-              ? (calculatedMoney >> 0).toLocaleString("ko-KR")
-              : calculatedMoney.toFixed(2).toLocaleString("ko-KR")
+              ? calculatedMoney.toLocaleString("ko-KR")
+              : calculatedMoney.toLocaleString("ko-KR")
           }`
         : `${
             Number.isInteger(calculatedMoney)
-              ? (calculatedMoney >> 0).toLocaleString("ko-KR")
-              : calculatedMoney.toFixed(2).toLocaleString("ko-KR")
+              ? calculatedMoney.toLocaleString("ko-KR")
+              : calculatedMoney.toLocaleString("ko-KR")
           }원`;
 
     const currentTime = new Date();
