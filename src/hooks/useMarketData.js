@@ -59,6 +59,7 @@ const useMarketData = (currency, pageNum) => {
   useEffect(() => {
     if (data && prevData !== data) {
       const trimmedMarketData = data.map((item) => ({
+        id: item.id,
         rank: item.market_cap_rank,
         symbol: item.symbol,
         name: item.name,

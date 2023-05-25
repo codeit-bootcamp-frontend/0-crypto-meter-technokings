@@ -2,11 +2,11 @@
 /* eslint-disable react/function-component-definition */
 import React from "react";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import colors from "@/styles/colors";
 
-const NextIcon = () => {
+const NextIcon = ({ disabled }) => {
   return (
     <S.Svg
       width="12"
@@ -14,6 +14,7 @@ const NextIcon = () => {
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      disabled={disabled}
     >
       <path
         fillRule="evenodd"
@@ -24,7 +25,11 @@ const NextIcon = () => {
     </S.Svg>
   );
 };
-
+const hoverBrightness = css`
+  &:hover {
+    filter: brightness(4);
+  }
+`;
 const S = {};
 
 S.Svg = styled.svg`
@@ -34,10 +39,7 @@ S.Svg = styled.svg`
   display: -webkit-flex;
   display: flex;
 
-  @media only screen and (max-width: 768px) {
-    width: 12px;
-    height: 12px;
-  }
+  ${(props) => !props.disabled && hoverBrightness}
 `;
 
 export default NextIcon;

@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { shallow } from "zustand/shallow";
 
 import useAsync from "@/hooks/useAsync";
 import useMarketData from "@/hooks/useMarketData";
-import { getGlobal, getMarkets } from "@/services/api";
-import useCoinStore from "@/stores/coinStore";
+import { getGlobal } from "@/services/api";
 import useUserInputStore from "@/stores/userInputStore";
 
 import TablePresenter from "./TablePresenter";
@@ -26,7 +25,7 @@ const Table = () => {
   } = useAsync(getGlobal);
 
   const [pageNum, setPageNum] = useState(1);
-  const [endPageIdx, setEndPageIdx] = useState();
+  const [endPageNum, setEndPageNum] = useState(37);
 
   const { coins } = useMarketData(currency, pageNum);
 
@@ -36,13 +35,12 @@ const Table = () => {
 
   useEffect(() => {
     if (globalData) {
-      setEndPageIdx(
-        Math.floor(globalData.data.active_cryptocurrencies / 30) + 1
+      setEndPageNum(
+        Math.floor((globalData.data.active_cryptocurrencies - 1) / 30) + 1
       );
     }
   }, [globalData]);
 
-  /// pagination 하기 전에 있던 코드들
   const [sortKey, setSortKey] = useState("rank");
   const [isAscend, setIsAscend] = useState(true);
   const [sortStates, setSortStates] = useState({
@@ -112,8 +110,6 @@ const Table = () => {
     setSortKey("rank");
   };
 
-  const handleClickChangePagination = () => {};
-
   if (sortedCoins === []) return null;
   return (
     <TablePresenter
@@ -122,8 +118,8 @@ const Table = () => {
       pageNum={pageNum}
       onSort={handleSortClick}
       onChangePage={handleChangePageClick}
-      onPagination={handleClickChangePagination}
       currency={currency}
+      endPageNum={endPageNum}
     />
   );
 };

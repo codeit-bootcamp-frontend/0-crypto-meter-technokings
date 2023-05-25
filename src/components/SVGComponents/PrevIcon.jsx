@@ -2,11 +2,11 @@
 /* eslint-disable react/function-component-definition */
 import React from "react";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import colors from "@/styles/colors";
 
-const PrevIcon = () => {
+const PrevIcon = ({ disabled }) => {
   return (
     <S.Svg
       width="12"
@@ -14,6 +14,7 @@ const PrevIcon = () => {
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      disabled={disabled}
     >
       <path
         fillRule="evenodd"
@@ -25,6 +26,12 @@ const PrevIcon = () => {
   );
 };
 
+const hoverBrightness = css`
+  &:hover {
+    filter: brightness(4);
+  }
+`;
+
 const S = {};
 
 S.Svg = styled.svg`
@@ -33,6 +40,8 @@ S.Svg = styled.svg`
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+
+  ${(props) => !props.disabled && hoverBrightness}
 `;
 
 export default PrevIcon;

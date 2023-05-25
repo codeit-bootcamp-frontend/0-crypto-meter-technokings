@@ -15,8 +15,8 @@ const TablePresenter = ({
   pageNum,
   onSort,
   onChangePage,
-  onPagination,
   currency,
+  endPageNum,
 }) => {
   const { mediaQuery: mobileMediaQuery } = useMediaQuery(768);
   const { mediaQuery: tabletMediaQuery } = useMediaQuery(1200);
@@ -77,7 +77,7 @@ const TablePresenter = ({
           </thead>
           <tbody>
             {coins.map((coin) => (
-              <TableRow key={coin.symbol} coin={coin} currency={currency} />
+              <TableRow key={coin.id} coin={coin} currency={currency} />
             ))}
           </tbody>
         </S.Table>
@@ -85,8 +85,8 @@ const TablePresenter = ({
       <Pagination
         pageNum={pageNum}
         onChangePage={onChangePage}
-        onPagination={onPagination}
         isMobile={isMobile}
+        endPageNum={endPageNum}
       />
     </>
   );
@@ -130,7 +130,7 @@ S.Table = styled.table`
   td:nth-child(2)::after,
   tr:last-child td:first-child::before,
   tr:last-child td:first-child::after {
-    @media only screen and (max-width: 1456px) {
+    @media only screen and (max-width: 1900px) {
       content: "";
       position: absolute;
       top: 0;
