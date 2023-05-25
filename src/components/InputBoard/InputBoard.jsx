@@ -42,7 +42,7 @@ const InputBoard = () => {
     const fiveYearsAgo = new Date(today.toLocaleDateString());
 
     fiveYearsAgo.setFullYear(
-      today.getFullYear() - import.meta.env.VITE_PAST_YEARS
+      today.getFullYear() - Number(import.meta.env.VITE_PAST_YEARS)
     );
     return fiveYearsAgo;
   });
