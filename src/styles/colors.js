@@ -15,10 +15,12 @@ const colors = {
   gray8: "#262A38",
   gray9: "#161C2F",
   black: "#0B0E1B",
+  tooltip: "rgba(29, 29, 29, 0.9)",
   green_gradient:
     "linear-gradient(180.34deg, rgba(0, 166, 97, 0.5) 0.29%, rgba(9, 177, 76, 0) 99.52%)",
   red_gradient:
     "linear-gradient(180deg, rgba(253, 73, 61, 0.5) 0%, rgba(253, 73, 61, 0) 100%)",
+  background: "#f8f5f9",
 };
 
 export default colors;
