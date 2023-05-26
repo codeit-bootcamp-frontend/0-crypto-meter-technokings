@@ -73,7 +73,7 @@ const useMarketData = (currency, pageNum) => {
       }));
       setPrevData(data);
       addPageToCache(trimmedMarketData, paginationNum, currency);
-      const startIdx = Math.floor(((pageNum % 6) - 1) * coinsNumPerPage);
+      const startIdx = Math.floor(((pageNum - 1) % 6) * coinsNumPerPage);
       setCoins(
         getPageSlice(paginationNum, currency, startIdx, coinsNumPerPage)
       );
