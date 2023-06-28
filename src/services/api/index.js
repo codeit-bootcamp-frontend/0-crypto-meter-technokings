@@ -3,7 +3,6 @@ import axios from "axios";
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_COINGECKO_BASE_URL,
   headers: {
-    "x-cg-pro-api-key": import.meta.env.VITE_COINGECKO_API_KEY,
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Credentials": "true",
   },
