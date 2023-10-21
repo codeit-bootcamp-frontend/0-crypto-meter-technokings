@@ -16,7 +16,7 @@
 
 ### Demo
 
-[CryptoMeter](https://dev--cryptometer-technokings.netlify.app/)
+[CryptoMeter](https://cryptometer-technokings.netlify.app/)
 
 
 
